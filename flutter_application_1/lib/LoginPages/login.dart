@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors, unnecessary_new
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/pages/forgot-password.dart';
-import 'package:flutter_application_1/pages/registration.dart';
+import 'package:flutter_application_1/LoginPages/forgot-password.dart';
+import 'package:flutter_application_1/LoginPages/registration.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
