@@ -2,6 +2,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/LoginPages/forgot-password.dart';
 import 'package:flutter_application_1/LoginPages/registration.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+enum LoginError {
+  invalidEmail,
+  userNotFound,
+  incorrectPassword,
+}
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -13,6 +21,17 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   bool HidePassword = true;
   bool? isChecked = false;
+  LoginError? error;
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,6 +100,7 @@ class _LoginPageState extends State<LoginPage> {
                           borderRadius: BorderRadius.circular(10.0),
                         ),
                         child: TextField(
+                          controller: emailController,
                           decoration: InputDecoration(
                             border: InputBorder.none,
                             prefixIcon: Icon(
@@ -95,6 +115,16 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                     ),
+                    if (error != null) ...[
+                      Text(
+                        "error message",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.normal,
+                          fontSize: 17.0,
+                        ),
+                      )
+                    ]
                   ],
                 ),
 
@@ -125,6 +155,7 @@ class _LoginPageState extends State<LoginPage> {
                           borderRadius: BorderRadius.circular(10.0),
                         ),
                         child: TextField(
+                          controller: passwordController,
                           decoration: InputDecoration(
                             suffixIcon: GestureDetector(
                               onTap: () {
@@ -217,7 +248,7 @@ class _LoginPageState extends State<LoginPage> {
                           backgroundColor: Color.fromARGB(255, 181, 156, 255),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(50))),
-                      onPressed: () {},
+                      onPressed: signIn,
                       child: Text(
                         'SIGN IN',
                         textAlign: TextAlign.center,
@@ -267,5 +298,26 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
+  }
+
+  Future signIn() async {
+    try {
+      final loginstate = await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
+      );
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found.') {
+        error = LoginError.userNotFound;
+        print('No user found');
+      } else if (e.code == 'wrong-password') {
+        error = LoginError.incorrectPassword;
+        print('Wrong password.');
+      } else if (e.code == 'invalid-email') {
+        error = LoginError.invalidEmail;
+        print('Invalid email');
+      }
+      setState(() {});
+    }
   }
 }
