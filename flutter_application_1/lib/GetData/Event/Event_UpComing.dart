@@ -30,7 +30,7 @@ class _EventUPState extends State<EventUP> {
             }
 
             return Padding(
-              padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
+              padding: const EdgeInsets.fromLTRB(8, 10, 8, 0),
               child: Container(
                 height: 228,
                 child: Column(
