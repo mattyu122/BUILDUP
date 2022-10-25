@@ -39,10 +39,10 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: new AppBar(
-        toolbarHeight: 42,
-        backgroundColor: Color.fromARGB(255, 119, 20, 244),
-      ),
+      // appBar: new AppBar(
+      //   toolbarHeight: 42,
+      //   backgroundColor: Color.fromARGB(255, 119, 20, 244),
+      // ),
       body: _pages[_selecIndex],
       drawer: const NavigationDrawer(),
       bottomNavigationBar: Container(
@@ -56,10 +56,6 @@ class _HomePageState extends State<HomePage> {
               tabBackgroundColor: Colors.grey.shade900,
               gap: 8,
               padding: EdgeInsets.all(15),
-
-              // onTabChange: (index) {
-              //   print(index);
-              // },
               onTabChange: _navigate,
               tabs: const [
                 GButton(

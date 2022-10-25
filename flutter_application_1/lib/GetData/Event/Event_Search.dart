@@ -1,7 +1,7 @@
-import 'package:flutter/cupertino.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_application_1/services/E_serarch.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_application_1/services/Firebase_service.dart';
 
 class EventSearch extends StatefulWidget {
   const EventSearch({super.key});
@@ -11,6 +11,24 @@ class EventSearch extends StatefulWidget {
 }
 
 class _EventSearchState extends State<EventSearch> {
+  FirebaseService _service = FirebaseService();
+  PostSearch _search = PostSearch();
+  static List<EPosts> eposts = [];
+  @override
+  void initState() {
+    // TODO: implement initState
+    _service.post.get().then((QuerySnapshot snapshot) {
+      snapshot.docs.forEach((doc) {
+        setState(() {
+          eposts.add(
+            EPosts(document: doc, title: doc['PostN'], date: doc['PostD']),
+          );
+        });
+      });
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -36,6 +54,12 @@ class _EventSearchState extends State<EventSearch> {
               margin: EdgeInsets.only(left: 5),
               width: 300,
               child: TextField(
+                onTap: () {
+                  _search.serach(
+                    context: context,
+                    EpostList: eposts,
+                  );
+                },
                 decoration: InputDecoration(
                   border: InputBorder.none,
                   hintText: "Search Event",

@@ -30,7 +30,7 @@ class _EventCatState extends State<EventCat> {
             }
 
             return Padding(
-              padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
+              padding: const EdgeInsets.fromLTRB(8, 10, 8, 0),
               child: Container(
                 height: 135,
                 child: Column(

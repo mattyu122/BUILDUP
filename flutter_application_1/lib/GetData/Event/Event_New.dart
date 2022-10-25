@@ -3,14 +3,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/services/Firebase_service.dart';
 
-class EventTOP extends StatefulWidget {
-  const EventTOP({super.key});
+class EventNEW extends StatefulWidget {
+  const EventNEW({super.key});
 
   @override
-  State<EventTOP> createState() => _EventTOPState();
+  State<EventNEW> createState() => _EventNEWState();
 }
 
-class _EventTOPState extends State<EventTOP> {
+class _EventNEWState extends State<EventNEW> {
   @override
   Widget build(BuildContext context) {
     FirebaseService _service = FirebaseService();
@@ -26,7 +26,7 @@ class _EventTOPState extends State<EventTOP> {
             }
 
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return Text("");
+              return Text("Loading");
             }
 
             return Padding(
@@ -41,7 +41,7 @@ class _EventTOPState extends State<EventTOP> {
                       children: [
                         Expanded(
                             child: Text(
-                          ' Top Rated',
+                          ' New Events',
                           style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
