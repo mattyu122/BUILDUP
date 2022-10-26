@@ -302,7 +302,7 @@ class _LoginPageState extends State<LoginPage> {
 
   Future signIn() async {
     try {
-      final loginstate = await FirebaseAuth.instance.signInWithEmailAndPassword(
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: emailController.text.trim(),
         password: passwordController.text.trim(),
       );

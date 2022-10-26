@@ -1,7 +1,9 @@
 // ignore_for_file: prefer_const_constructors, unnecessary_new
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_application_1/DataModel/userAccount.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -256,9 +258,25 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   Future signUp() async {
-    await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: emailController.text.trim(),
-        password: passwordController.text.trim());
+    try {
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: emailController.text.trim(),
+          password: passwordController.text.trim());
+      UserAccount newUser = UserAccount(
+          id: FirebaseAuth.instance.currentUser?.uid,
+          userName: "matt",
+          email: emailController.text.trim(),
+          joinedEvent: []);
+      await FirebaseFirestore.instance
+          .collection("user")
+          .doc(FirebaseAuth.instance.currentUser?.uid)
+          .set(newUser.toMap());
+      if (mounted) {
+        Navigator.of(context).pop();
+      }
+    } on FirebaseAuthException catch (e) {
+      print(e);
+    }
     return;
   }
 }

@@ -36,6 +36,7 @@ class FirstPage extends StatelessWidget {
             stream: FirebaseAuth.instance.userChanges(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
+                print(snapshot.data);
                 return const HomePage();
               } else {
                 return const LoginPage();
