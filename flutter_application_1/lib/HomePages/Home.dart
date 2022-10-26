@@ -1,4 +1,5 @@
 // ignore_for_file: prefer_const_constructors, unnecessary_new
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
@@ -224,13 +225,17 @@ class NavigationDrawer extends StatelessWidget {
                   fontSize: 15.0,
                 ),
               ),
-              onTap: () {
-                Navigator.of(context).pushReplacement(MaterialPageRoute(
-                  builder: (context) => const LoginPage(),
-                ));
-              },
+              onTap: signOut,
             ),
           ],
         ),
       );
+}
+
+Future signOut() async {
+  try {
+    await FirebaseAuth.instance.signOut();
+  } on FirebaseAuthException catch (e) {
+    print(e);
+  }
 }
