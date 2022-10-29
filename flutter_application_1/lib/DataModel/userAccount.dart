@@ -6,12 +6,13 @@ class UserAccount {
   final String userName;
   final String email;
   final List<EventPost>? joinedEvent;
-
+  final List<String> contactID;
   UserAccount({
     this.id,
     required this.userName,
     required this.email,
     required this.joinedEvent,
+    required this.contactID,
   });
 
   Map<String, dynamic> toMap() {
@@ -24,6 +25,7 @@ class UserAccount {
       'userName': userName,
       'email': email,
       'joinedEvent': joinedEventList,
+      'contactID': contactID,
     };
   }
 
@@ -31,11 +33,13 @@ class UserAccount {
       : id = userAccountMap["id"],
         userName = userAccountMap["userName"],
         email = userAccountMap["email"],
-        joinedEvent = userAccountMap["userAccountMap"];
+        joinedEvent = userAccountMap["joinedEvent"],
+        contactID = userAccountMap["contactID"];
 
   UserAccount.fromDocumentSnapshot(DocumentSnapshot<Map<String, dynamic>> doc)
       : id = doc.id,
         userName = doc.data()!["userName"],
         email = doc.data()!["email"],
-        joinedEvent = doc.data()?["joinedEvent"].cast<EventPost>();
+        joinedEvent = doc.data()?["joinedEvent"].cast<EventPost>(),
+        contactID = doc.data()?['contactID'].cast<String>();
 }
