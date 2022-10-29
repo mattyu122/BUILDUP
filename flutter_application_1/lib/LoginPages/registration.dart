@@ -263,10 +263,12 @@ class _RegisterPageState extends State<RegisterPage> {
           email: emailController.text.trim(),
           password: passwordController.text.trim());
       UserAccount newUser = UserAccount(
-          id: FirebaseAuth.instance.currentUser?.uid,
-          userName: "matt",
-          email: emailController.text.trim(),
-          joinedEvent: []);
+        id: FirebaseAuth.instance.currentUser?.uid,
+        userName: "matt",
+        email: emailController.text.trim(),
+        joinedEvent: [],
+        contactID: [],
+      );
       await FirebaseFirestore.instance
           .collection("user")
           .doc(FirebaseAuth.instance.currentUser?.uid)

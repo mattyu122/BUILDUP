@@ -19,13 +19,17 @@ class EventPost {
       this.joinedAccount});
 
   Map<String, dynamic> toMap() {
+    List<Map<String, dynamic>> joinedAccountList = [];
+    for (var i = 0; i < joinedAccount!.length; i++) {
+      joinedAccountList.add(joinedAccount![i].toMap());
+    }
     return {
       'postName': postName,
       'hostName': hostName,
       'location': location,
       'expectedNumber': expectedNumber,
       'joinedNumber': joinedNumber,
-      'joinedAccount': joinedAccount
+      'joinedAccount': joinedAccountList
     };
   }
 
@@ -45,5 +49,5 @@ class EventPost {
         location = doc.data()!['location'],
         expectedNumber = doc.data()!['expectedNumber'],
         joinedNumber = doc.data()!['joinedNumber'],
-        joinedAccount = doc.data()!['joinedAccount'];
+        joinedAccount = doc.data()!['joinedAccount'].cast<UserAccount>();
 }

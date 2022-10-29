@@ -23,7 +23,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _selecIndex = 0;
-
   void _navigate(int index) {
     setState(() {
       _selecIndex = index;
