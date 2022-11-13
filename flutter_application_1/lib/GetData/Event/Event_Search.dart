@@ -21,7 +21,11 @@ class _EventSearchState extends State<EventSearch> {
       snapshot.docs.forEach((doc) {
         setState(() {
           eposts.add(
-            EPosts(document: doc, title: doc['PostN'], date: doc['PostD']),
+            EPosts(
+                document: doc,
+                title: doc['PostN'],
+                date: doc['PostD'],
+                photo: doc['PostP']),
           );
         });
       });
