@@ -2,14 +2,22 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/GetData/Event/Event_Sreen_details.dart';
+import 'package:provider/provider.dart';
 import 'package:search_page/search_page.dart';
 import '../GetData/Event/Event_Hit.dart';
+import '../GetData/Event/Provider.dart';
 
 class EPosts {
   final String title;
   final String date;
+  final String photo;
   final DocumentSnapshot document;
-  EPosts({required this.title, required this.date, required this.document});
+  EPosts(
+      {required this.title,
+      required this.date,
+      required this.document,
+      required this.photo});
 }
 
 class PostSearch {
@@ -21,17 +29,17 @@ class PostSearch {
         items: EpostList,
 
         barTheme: ThemeData(
-          // iconTheme: const IconThemeData(color: Colors.white),
+          // iconTheme: const IconThemeData(color: Color.fromARGB(255, 250, 0, 0)),
           colorScheme: ColorScheme.fromSwatch(
-            primarySwatch: Colors.grey,
+            primarySwatch: Colors.deepPurple,
           ),
           scaffoldBackgroundColor: Colors.black,
           textTheme: Theme.of(context)
               .textTheme
-              .apply(bodyColor: Color.fromARGB(255, 255, 255, 255)),
+              .apply(bodyColor: Color.fromARGB(255, 0, 0, 0)),
           inputDecorationTheme: InputDecorationTheme(
             hintStyle: TextStyle(
-              color: Colors.white,
+              color: Color.fromARGB(255, 255, 254, 254),
               fontSize: 20,
             ),
             focusedErrorBorder: InputBorder.none,
@@ -50,6 +58,9 @@ class PostSearch {
             // ignore: prefer_const_literals_to_create_immutables
             children: [
               // EventUP(),
+              // SizedBox(
+              //   height: 1,
+              // ),
               EventTOP(),
             ],
           )),
@@ -67,9 +78,83 @@ class PostSearch {
           epost.title,
         ],
         // sort: (a, b) => a.compareTo(b),
-        builder: (epost) => ListTile(
-          title: Text(epost.title),
-        ),
+        builder: (epost) {
+          var _provider = Provider.of<EpostProvider>(context);
+          return InkWell(
+            onTap: () {
+              _provider.getEpostDetails(epost.document);
+              Navigator.pushNamed(context, EventSreenDetails.id);
+            },
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 2,
+                ),
+                Container(
+                  height: 120,
+                  width: MediaQuery.of(context).size.width,
+                  child: Card(
+                    elevation: 4,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Container(
+                            width: 150,
+                            height: 150,
+                            child: Image.network(epost.photo),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Column(
+                                children: [
+                                  Text(
+                                    'Titel : ${epost.title}',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 17),
+                                  )
+                                ],
+                              ),
+                              Column(
+                                children: [
+                                  Text(
+                                    'Host by : ',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 17),
+                                  )
+                                ],
+                              ),
+                              Column(
+                                children: [
+                                  Text(
+                                    'Exp : ${epost.date}',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 17),
+                                  )
+                                ],
+                              )
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
       ),
     );
   }

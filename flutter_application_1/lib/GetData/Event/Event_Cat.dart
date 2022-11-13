@@ -1,6 +1,9 @@
 // ignore_for_file: prefer_const_constructors, unnecessary_new
+import 'dart:ffi';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/GetData/Event/Event_CatSreen.dart';
 import 'package:flutter_application_1/services/Firebase_service.dart';
 
 class EventCat extends StatefulWidget {
@@ -50,7 +53,9 @@ class _EventCatState extends State<EventCat> {
                         SizedBox(
                           height: 32,
                           child: TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.pushNamed(context, EventCatSreen.id);
+                            },
                             child: Row(
                               children: const [
                                 Text('See All',

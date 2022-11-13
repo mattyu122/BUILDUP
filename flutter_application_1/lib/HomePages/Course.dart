@@ -1,6 +1,13 @@
 // ignore_for_file: prefer_const_constructors, unnecessary_new
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/GetData/Event/Event_Cat.dart';
+import 'package:flutter_application_1/GetData/Event/Event_Hit.dart';
+import 'package:flutter_application_1/GetData/Event/Event_New.dart';
+import 'package:flutter_application_1/GetData/Event/Event_UpComing.dart';
+import 'package:flutter_application_1/GetData/Event/Event_Search.dart';
+import 'package:flutter_application_1/HomePages/Home.dart';
+import 'package:flutter_application_1/services/E_serarch.dart';
 import 'package:flutter_application_1/services/Firebase_service.dart';
 
 class CoursePage extends StatefulWidget {
@@ -11,82 +18,82 @@ class CoursePage extends StatefulWidget {
 }
 
 class _CoursePageState extends State<CoursePage> {
+  FirebaseService _service = FirebaseService();
+  PostSearch _search = PostSearch();
+  static List<EPosts> eposts = [];
   @override
+  void initState() {
+    // TODO: implement initState
+    _service.post.get().then((QuerySnapshot snapshot) {
+      snapshot.docs.forEach((doc) {
+        setState(() {
+          eposts.add(
+            EPosts(
+                document: doc,
+                title: doc['PostN'],
+                date: doc['PostD'],
+                photo: doc['PostP']),
+          );
+        });
+      });
+    });
+    super.initState();
+  }
+
   Widget build(BuildContext context) {
-    FirebaseService _service = FirebaseService();
-
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Container(
-        child: FutureBuilder<QuerySnapshot>(
-          future: _service.cat.get(),
-          builder:
-              (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-            if (snapshot.hasError) {
-              return Text('Something went wrong');
-            }
-
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return Text("Loading");
-            }
-
-            return Container(
-              height: 200,
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Expanded(
-                          child: Text(
-                        'Categories',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 15.0,
-                        ),
-                      )),
-                      TextButton(
-                        onPressed: () {},
-                        child: Row(
-                          children: [
-                            Text('See All',
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 15.0,
-                                )),
-                            Icon(
-                              Icons.arrow_forward_ios,
-                              size: 12,
-                              color: Colors.black,
-                            )
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                  Expanded(
-                    child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: snapshot.data?.docs.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          var doc = snapshot.data?.docs[index];
-                          return Container(
-                            child: Column(
-                              children: [
-                                Image.network(doc!['catP']),
-                                Text(doc['catN'])
-                              ],
-                            ),
-                          );
-                        }),
-                  )
-                ],
+    return Scaffold(
+        floatingActionButton: FloatingActionButton.extended(
+            backgroundColor: Color.fromARGB(255, 119, 20, 244),
+            icon: Icon(Icons.event_note),
+            onPressed: () {},
+            label: Text(
+              "Create",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 15.0,
               ),
-            );
-          },
+            )),
+        drawer: const NavigationDrawer(),
+        appBar: new AppBar(
+          backgroundColor: Color.fromARGB(255, 119, 20, 244),
+          iconTheme: IconThemeData(
+              color: Color.fromARGB(255, 255, 255, 255), size: 30),
+          centerTitle: true,
+          actions: [
+            IconButton(
+              onPressed: () {
+                _search.serach(
+                  context: context,
+                  EpostList: eposts,
+                );
+              },
+              icon: Icon(
+                Icons.search,
+              ),
+            )
+          ],
+          title: Text('COURSE',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 25.0,
+              )),
+          toolbarHeight: 56,
         ),
-      ),
-    );
+        backgroundColor: Colors.black,
+        body: SafeArea(
+            child: SingleChildScrollView(
+          child: Column(
+            children: [
+              // SizedBox(height: 15),
+              // // EventSearch(),
+              // SizedBox(height: 5),
+              EventCat(),
+              EventUP(),
+              EventTOP(),
+              EventNEW(),
+            ],
+          ),
+        )));
   }
 }

@@ -1,7 +1,10 @@
 // ignore_for_file: prefer_const_constructors, unnecessary_new
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/GetData/Event/Event_Sreen_details.dart';
+import 'package:flutter_application_1/GetData/Event/Provider.dart';
 import 'package:flutter_application_1/services/Firebase_service.dart';
+import 'package:provider/provider.dart';
 
 class EventUP extends StatefulWidget {
   const EventUP({super.key});
@@ -13,6 +16,7 @@ class EventUP extends StatefulWidget {
 class _EventUPState extends State<EventUP> {
   @override
   Widget build(BuildContext context) {
+    var _provider = Provider.of<EpostProvider>(context);
     FirebaseService _service = FirebaseService();
 
     return Center(
@@ -86,7 +90,11 @@ class _EventUPState extends State<EventUP> {
                               child: Row(
                                 children: [
                                   InkWell(
-                                    onTap: () {},
+                                    onTap: () {
+                                      _provider.getEpostDetails(doc);
+                                      Navigator.pushNamed(
+                                          context, EventSreenDetails.id);
+                                    },
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: ClipRect(

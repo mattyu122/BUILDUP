@@ -2,6 +2,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/GetData/Event/Event_Cat.dart';
+import 'package:flutter_application_1/GetData/Event/Event_CatSreen.dart';
+import 'package:flutter_application_1/GetData/Event/Event_Create.dart';
 import 'package:flutter_application_1/GetData/Event/Event_Hit.dart';
 import 'package:flutter_application_1/GetData/Event/Event_New.dart';
 import 'package:flutter_application_1/GetData/Event/Event_UpComing.dart';
@@ -28,7 +30,11 @@ class _EventPageState extends State<EventPage> {
       snapshot.docs.forEach((doc) {
         setState(() {
           eposts.add(
-            EPosts(document: doc, title: doc['PostN'], date: doc['PostD']),
+            EPosts(
+                document: doc,
+                title: doc['PostN'],
+                date: doc['PostD'],
+                photo: doc['PostP']),
           );
         });
       });
@@ -38,6 +44,19 @@ class _EventPageState extends State<EventPage> {
 
   Widget build(BuildContext context) {
     return Scaffold(
+        floatingActionButton: FloatingActionButton.extended(
+            backgroundColor: Color.fromARGB(255, 119, 20, 244),
+            icon: Icon(Icons.layers),
+            onPressed: () {
+              Navigator.pushNamed(context, EventCreate.id);
+            },
+            label: Text(
+              "Create",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 15.0,
+              ),
+            )),
         drawer: const NavigationDrawer(),
         appBar: new AppBar(
           backgroundColor: Color.fromARGB(255, 119, 20, 244),
@@ -61,7 +80,7 @@ class _EventPageState extends State<EventPage> {
               style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
-                fontSize: 30.0,
+                fontSize: 25.0,
               )),
           toolbarHeight: 56,
         ),
