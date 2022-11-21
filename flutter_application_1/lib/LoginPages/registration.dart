@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_application_1/DataModel/contactUser.dart';
 import 'package:flutter_application_1/DataModel/userAccount.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -262,12 +263,14 @@ class _RegisterPageState extends State<RegisterPage> {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: emailController.text.trim(),
           password: passwordController.text.trim());
+      ContactUser newContact = ContactUser(
+          userName: "matt1", email: "matt1@gmail.com", icon: "icon", id: "id");
       UserAccount newUser = UserAccount(
         id: FirebaseAuth.instance.currentUser?.uid,
-        userName: "matt",
+        userName: emailController.text.trim(),
         email: emailController.text.trim(),
         joinedEvent: [],
-        contactID: [],
+        contactUser: [newContact],
       );
       await FirebaseFirestore.instance
           .collection("user")

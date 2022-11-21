@@ -1,31 +1,28 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_application_1/DataModel/EventPosts.dart';
+import 'package:flutter_application_1/DataModel/contactUser.dart';
 
 class UserAccount {
   final String? id;
   final String userName;
   final String email;
   final List<EventPost>? joinedEvent;
-  final List<String> contactID;
+  final List<ContactUser>? contactUser;
   UserAccount({
     this.id,
     required this.userName,
     required this.email,
     required this.joinedEvent,
-    required this.contactID,
+    required this.contactUser,
   });
 
   Map<String, dynamic> toMap() {
-    List<Map<String, dynamic>> joinedEventList = [];
-    for (var i = 0; i < joinedEvent!.length; i++) {
-      joinedEventList.add(joinedEvent![i].toMap());
-    }
     return {
       'id': id,
       'userName': userName,
       'email': email,
-      'joinedEvent': joinedEventList,
-      'contactID': contactID,
+      'joinedEvent': joinedEvent!.map((i) => i.toMap()).toList(),
+      'contactUser': contactUser!.map((i) => i.toMap()).toList(),
     };
   }
 
@@ -33,13 +30,15 @@ class UserAccount {
       : id = userAccountMap["id"],
         userName = userAccountMap["userName"],
         email = userAccountMap["email"],
-        joinedEvent = userAccountMap["joinedEvent"],
-        contactID = userAccountMap["contactID"];
+        joinedEvent = List<EventPost>.from(userAccountMap['joinedEvent']
+            .map((e) => EventPost.fromMap(e))), //["joinedEvent"],
+        contactUser = List<ContactUser>.from(userAccountMap['contactUser'].map(
+            (d) => ContactUser.fromMap(d))); // userAccountMap["contactUser"];
 
   UserAccount.fromDocumentSnapshot(DocumentSnapshot<Map<String, dynamic>> doc)
-      : id = doc.id,
+      : id = doc.data()!["id"],
         userName = doc.data()!["userName"],
         email = doc.data()!["email"],
-        joinedEvent = doc.data()?["joinedEvent"].cast<EventPost>(),
-        contactID = doc.data()?['contactID'].cast<String>();
+        joinedEvent = doc.data()!["joinedEvent"].cast<EventPost>(),
+        contactUser = doc.data()!['contactUser'].cast<ContactUser>();
 }

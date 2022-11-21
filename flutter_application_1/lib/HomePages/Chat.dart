@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_application_1/DataModel/userAccount.dart';
+import 'package:flutter_application_1/DataModel/contactUser.dart';
 import 'package:flutter_application_1/DrawerPages/Setting.dart';
 import 'package:flutter_application_1/HomePages/Home.dart';
 
@@ -16,7 +17,8 @@ class ChatPage extends StatefulWidget {
 }
 
 class _ChatPageState extends State<ChatPage> {
-  List<String>? contactIDList = []; //List of contactID(user ID)
+  List<ContactUser> contactIDList = []; //List of contactID(user ID)
+  late UserAccount currentUser;
   String? receiverId;
   final userId = FirebaseAuth.instance.currentUser?.uid;
   retrieveUserAccount() async {
@@ -24,10 +26,19 @@ class _ChatPageState extends State<ChatPage> {
         .collection('user')
         .doc(userId)
         .get()
-        .then((value) => UserAccount.fromDocumentSnapshot(value));
-    contactIDList = user.contactID;
+        .then(
+            (value) => {currentUser = UserAccount.fromDocumentSnapshot(value)});
+    currentUser.contactUser!.forEach((element) {
+      contactIDList.add(ContactUser(
+          userName: element.userName,
+          email: element.email,
+          icon: element.icon,
+          id: element.id));
+    });
+    print("dsafdsa");
+    print(contactIDList);
     // receiverId = contactIDList?[0] ?? null;
-    print(user.toMap());
+    //print(user.toMap());
     // print(receiverId);
   }
 
@@ -73,12 +84,13 @@ class _ChatPageState extends State<ChatPage> {
         backgroundColor: Colors.black,
         body: SafeArea(
           child: SingleChildScrollView(
-            child: StreamBuilder<List<String>>(
+            child: StreamBuilder<List<ContactUser>>(
               stream: FirebaseFirestore.instance
                   .collection('user')
                   .doc(userId)
                   .snapshots()
-                  .map((snapshot) => List<String>.from(snapshot['contactID'])),
+                  .map((snapshot) =>
+                      List<ContactUser>.from(snapshot['contactUser'])),
               builder: (context, snapshot) {
                 switch (snapshot.connectionState) {
                   case ConnectionState.waiting:
