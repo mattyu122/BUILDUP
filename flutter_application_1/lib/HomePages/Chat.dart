@@ -16,17 +16,19 @@ class ChatPage extends StatefulWidget {
 }
 
 class _ChatPageState extends State<ChatPage> {
-  List<String> contactIDList = [];
+  List<String>? contactIDList = []; //List of contactID(user ID)
+  String? receiverId;
   final userId = FirebaseAuth.instance.currentUser?.uid;
   retrieveUserAccount() async {
-    // final user = await FirebaseFirestore.instance
-    //     .collection('user')
-    //     .doc(userId)
-    //     .get()
-    //     .then((value) => UserAccount.fromDocumentSnapshot(value));
-    // contactIDList = user.contactID;
-    // print(user.toMap());
-    // print(contactIDList);
+    final user = await FirebaseFirestore.instance
+        .collection('user')
+        .doc(userId)
+        .get()
+        .then((value) => UserAccount.fromDocumentSnapshot(value));
+    contactIDList = user.contactID;
+    // receiverId = contactIDList?[0] ?? null;
+    print(user.toMap());
+    // print(receiverId);
   }
 
   @override
@@ -42,36 +44,61 @@ class _ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const NavigationDrawer(),
-      appBar: new AppBar(
-        backgroundColor: Color.fromARGB(255, 119, 20, 244),
-        iconTheme:
-            IconThemeData(color: Color.fromARGB(255, 255, 255, 255), size: 30),
-        centerTitle: true,
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => const SetPage(),
-              ));
-            },
-            icon: Icon(
-              Icons.settings,
+        drawer: const NavigationDrawer(),
+        appBar: new AppBar(
+          backgroundColor: Color.fromARGB(255, 119, 20, 244),
+          iconTheme: IconThemeData(
+              color: Color.fromARGB(255, 255, 255, 255), size: 30),
+          centerTitle: true,
+          actions: [
+            IconButton(
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const SetPage(),
+                ));
+              },
+              icon: Icon(
+                Icons.settings,
+              ),
+            )
+          ],
+          title: Text('CHAT',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 25.0,
+              )),
+          toolbarHeight: 56,
+        ),
+        backgroundColor: Colors.black,
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: StreamBuilder<List<String>>(
+              stream: FirebaseFirestore.instance
+                  .collection('user')
+                  .doc(userId)
+                  .snapshots()
+                  .map((snapshot) => List<String>.from(snapshot['contactID'])),
+              builder: (context, snapshot) {
+                switch (snapshot.connectionState) {
+                  case ConnectionState.waiting:
+                    return Center(child: CircularProgressIndicator());
+                  default:
+                    if (snapshot.hasError) {
+                      print("error");
+                      print(snapshot.error);
+                    } else {
+                      final users = snapshot.data;
+                      print("fetched users id");
+                      print(users);
+                    }
+                    return Column(
+                      children: [],
+                    );
+                }
+              },
             ),
-          )
-        ],
-        title: Text('CHAT',
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-              fontSize: 25.0,
-            )),
-        toolbarHeight: 56,
-      ),
-      backgroundColor: Colors.black,
-      body: SafeArea(
-        child: SingleChildScrollView(),
-      ),
-    );
+          ),
+        ));
   }
 }
