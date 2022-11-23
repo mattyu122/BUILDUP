@@ -59,7 +59,7 @@ class _NewMessageWidgetState extends State<SendNewMessageWidget> {
 
   @override
   Widget build(BuildContext context) => Container(
-        color: Colors.white,
+        color: Color.fromARGB(255, 0, 0, 0),
         padding: EdgeInsets.all(8),
         child: Row(
           children: <Widget>[
@@ -72,10 +72,9 @@ class _NewMessageWidgetState extends State<SendNewMessageWidget> {
                 decoration: InputDecoration(
                   filled: true,
                   fillColor: Colors.grey[100],
-                  labelText: 'Type your message',
                   border: OutlineInputBorder(
-                    borderSide: BorderSide(width: 0),
-                    gapPadding: 10,
+                    borderSide: BorderSide(width: 4),
+                    gapPadding: 3,
                     borderRadius: BorderRadius.circular(25),
                   ),
                 ),
@@ -91,7 +90,7 @@ class _NewMessageWidgetState extends State<SendNewMessageWidget> {
                 padding: const EdgeInsets.all(8),
                 decoration: const BoxDecoration(
                   shape: BoxShape.circle,
-                  color: Colors.blue,
+                  color: Color.fromARGB(255, 96, 24, 212),
                 ),
                 child: const Icon(Icons.send, color: Colors.white),
               ),

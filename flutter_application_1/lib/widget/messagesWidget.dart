@@ -49,25 +49,27 @@ class _MessagesWidgetState extends State<MessagesWidget> {
             if (snapshot.hasError) {
               return buildText('Something Went Wrong Try later');
             } else if (snapshot.hasData) {
-              // final messages = snapshot.data!.docs
-              //     .map((e) => Message(
-              //         senderId: e['senderId'],
-              //         receiverId: e['receiverId'],
-              //         message: e['message'],
-              //         createdAt: e['createdAt']))
-              //     .toList();
+              final messages = snapshot.data!.docs
+                  .map((e) => Message(
+                      senderId: e['senderId'],
+                      receiverId: e['receiverId'],
+                      message: e['message'],
+                      createdAt: e['createdAt']))
+                  .toList();
               return snapshot.data!.docs.isEmpty
                   ? buildText('Say Hi.. to ${currentChatUser.userName}')
                   : ListView.builder(
                       physics: const BouncingScrollPhysics(),
                       reverse: true,
-                      itemCount: snapshot.data!.docs.length,
+                      itemCount: messages.length, //snapshot.data!.docs.length,
                       itemBuilder: (context, index) {
                         //final message = snapshot.data!.docs[index]['message'];
                         return MessageWidget(
-                          message: snapshot.data!.docs[index]['message'],
-                          isMe: snapshot.data!.docs[index]['senderId'] ==
-                              FirebaseAuth.instance.currentUser!.uid,
+                          message: messages[index]
+                              .message, //snapshot.data!.docs[index]['message'],
+                          isMe: messages[index].senderId ==
+                              FirebaseAuth.instance.currentUser!
+                                  .uid, //snapshot.data!.docs[index]['senderId'] ==
                         );
                       },
                     );

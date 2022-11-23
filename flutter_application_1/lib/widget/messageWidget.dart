@@ -20,11 +20,14 @@ class MessageWidget extends StatelessWidget {
       mainAxisAlignment: isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
       children: <Widget>[
         Container(
-          padding: const EdgeInsets.all(16),
-          margin: const EdgeInsets.all(16),
-          constraints: const BoxConstraints(maxWidth: 140),
+          padding: const EdgeInsets.all(8),
+          margin: const EdgeInsets.all(4),
+          constraints: const BoxConstraints(maxWidth: 170),
           decoration: BoxDecoration(
-            color: isMe ? Colors.grey[100] : Theme.of(context).accentColor,
+            color: isMe
+                ? const Color.fromARGB(255, 104, 46, 170)
+                : const Color.fromARGB(
+                    255, 10, 0, 1), //Theme.of(context).accentColor,
             borderRadius: isMe
                 ? borderRadius
                     .subtract(const BorderRadius.only(bottomRight: radius))
@@ -43,7 +46,9 @@ class MessageWidget extends StatelessWidget {
         children: <Widget>[
           Text(
             message,
-            style: TextStyle(color: isMe ? Colors.black : Colors.white),
+            style: TextStyle(
+                color:
+                    isMe ? Color.fromARGB(255, 255, 255, 255) : Colors.white),
             textAlign: isMe ? TextAlign.end : TextAlign.start,
           ),
         ],
