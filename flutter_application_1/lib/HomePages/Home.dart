@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
-import 'package:flutter_application_1/HomePages/Chat.dart';
+import 'package:flutter_application_1/HomePages/Chatspage.dart';
 import 'package:flutter_application_1/HomePages/Course.dart';
 import 'package:flutter_application_1/HomePages/Event.dart';
 import 'package:flutter_application_1/HomePages/Profile.dart';
@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   final List<Widget> _pages = [
-    ChatPage(),
+    Chatspage(),
     CoursePage(),
     EventPage(),
     ProfilePage(),
