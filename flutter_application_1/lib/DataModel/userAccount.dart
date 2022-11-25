@@ -35,10 +35,4 @@ class UserAccount {
         contactUser = List<ContactUser>.from(userAccountMap['contactUser'].map(
             (d) => ContactUser.fromMap(d))); // userAccountMap["contactUser"];
 
-  UserAccount.fromDocumentSnapshot(DocumentSnapshot<Map<String, dynamic>> doc)
-      : id = doc.data()!["id"],
-        userName = doc.data()!["userName"],
-        email = doc.data()!["email"],
-        joinedEvent = doc.data()!["joinedEvent"].cast<EventPost>(),
-        contactUser = doc.data()!['contactUser'].cast<ContactUser>();
 }

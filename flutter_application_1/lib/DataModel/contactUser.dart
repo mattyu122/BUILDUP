@@ -25,10 +25,4 @@ class ContactUser {
         userName = contactUserMap["userName"],
         email = contactUserMap["email"],
         icon = contactUserMap["icon"];
-
-  ContactUser.fromDocumentSnapshot(DocumentSnapshot<Map<String, dynamic>> doc)
-      : id = doc.id,
-        userName = doc.data()!["userName"],
-        email = doc.data()!["email"],
-        icon = doc.data()!['icon'];
 }

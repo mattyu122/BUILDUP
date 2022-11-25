@@ -317,7 +317,7 @@ class _LoginPageState extends State<LoginPage> {
         error = LoginError.invalidEmail;
         print('Invalid email');
       }
-      setState(() {});
     }
+    setState(() {});
   }
 }

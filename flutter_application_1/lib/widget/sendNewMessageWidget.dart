@@ -59,8 +59,8 @@ class _NewMessageWidgetState extends State<SendNewMessageWidget> {
 
   @override
   Widget build(BuildContext context) => Container(
-        color: Color.fromARGB(255, 0, 0, 0),
-        padding: EdgeInsets.all(8),
+        color: const Color.fromARGB(255, 0, 0, 0),
+        padding: const EdgeInsets.all(8),
         child: Row(
           children: <Widget>[
             Expanded(
@@ -73,7 +73,7 @@ class _NewMessageWidgetState extends State<SendNewMessageWidget> {
                   filled: true,
                   fillColor: Colors.grey[100],
                   border: OutlineInputBorder(
-                    borderSide: BorderSide(width: 4),
+                    borderSide: const BorderSide(width: 4),
                     gapPadding: 3,
                     borderRadius: BorderRadius.circular(25),
                   ),

@@ -2,9 +2,13 @@
 
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_application_1/DataModel/EventPosts.dart';
 
 class EventCreate extends StatefulWidget {
   static const String id = 'Event-Create-Post-screen';
@@ -15,10 +19,40 @@ class EventCreate extends StatefulWidget {
 
 class _EventCreateState extends State<EventCreate> {
   final _formKey = GlobalKey<FormState>();
-
-  validate() {
+  final titleController = TextEditingController();
+  final dateController = TextEditingController();
+  final priceController = TextEditingController();
+  final locationController = TextEditingController();
+  final categoryController = TextEditingController();
+  final participantNumberController = TextEditingController();
+  final descriptionController = TextEditingController();
+  validate() async {
     if (_formKey.currentState!.validate()) {
       print('object');
+      final number = int.parse(participantNumberController.text);
+      EventPost newEvent = EventPost(
+          PostD: dateController.text == ""
+              ? "To be confirmed"
+              : dateController.text,
+          price: priceController.text == ""
+              ? "To be confirmed"
+              : priceController.text,
+          location: locationController.text == ""
+              ? "To be confirmed"
+              : locationController.text,
+          PostL: 0,
+          description: descriptionController.text,
+          PostN: titleController.text,
+          category: categoryController.text,
+          hostName: FirebaseAuth.instance.currentUser!.email!,
+          expectedNumber: number,
+          joinedNumber: 0,
+          joinedAccount: [],
+          createAt: DateTime.now().toString());
+      await FirebaseFirestore.instance
+          .collection('EventPost')
+          .add(newEvent.toMap())
+          .then((value) => {});
     }
   }
 
@@ -61,6 +95,7 @@ class _EventCreateState extends State<EventCreate> {
                     height: 10,
                   ),
                   TextFormField(
+                      controller: titleController,
                       style: TextStyle(fontSize: 17, color: Colors.white),
                       decoration: InputDecoration(
                           labelText: 'Title',
@@ -95,6 +130,7 @@ class _EventCreateState extends State<EventCreate> {
                     height: 12,
                   ),
                   TextFormField(
+                      controller: dateController,
                       style: TextStyle(fontSize: 17, color: Colors.white),
                       decoration: InputDecoration(
                           labelText: 'Date',
@@ -129,9 +165,10 @@ class _EventCreateState extends State<EventCreate> {
                     height: 12,
                   ),
                   TextFormField(
+                      controller: priceController,
                       style: TextStyle(fontSize: 17, color: Colors.white),
                       decoration: InputDecoration(
-                          labelText: 'Pirce',
+                          labelText: 'Price',
                           labelStyle: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
@@ -163,6 +200,7 @@ class _EventCreateState extends State<EventCreate> {
                     height: 12,
                   ),
                   TextFormField(
+                      controller: locationController,
                       style: TextStyle(fontSize: 17, color: Colors.white),
                       decoration: InputDecoration(
                           labelText: 'Location',
@@ -197,6 +235,7 @@ class _EventCreateState extends State<EventCreate> {
                     height: 12,
                   ),
                   TextFormField(
+                      controller: categoryController,
                       style: TextStyle(fontSize: 17, color: Colors.white),
                       decoration: InputDecoration(
                           labelText: 'Category',
@@ -231,6 +270,7 @@ class _EventCreateState extends State<EventCreate> {
                     height: 12,
                   ),
                   TextFormField(
+                      controller: participantNumberController,
                       style: TextStyle(fontSize: 17, color: Colors.white),
                       decoration: InputDecoration(
                           labelText: 'Participant/s',
@@ -342,6 +382,7 @@ class _EventCreateState extends State<EventCreate> {
                               // borderRadius: BorderRadius.circular(5.0),
                               ),
                           child: TextFormField(
+                              controller: descriptionController,
                               maxLines: 30,
                               style:
                                   TextStyle(fontSize: 17, color: Colors.white),
@@ -408,31 +449,31 @@ class _EventCreateState extends State<EventCreate> {
                   SizedBox(
                     height: 20,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 0.0),
-                    child: Container(
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            fixedSize: const Size(395, 50),
-                            backgroundColor: Color.fromARGB(255, 181, 156, 255),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10))),
-                        onPressed: () {},
-                        child: Text(
-                          'UPLOAD IMAGE',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Color.fromARGB(255, 255, 255, 255),
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20.0,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
+                  // Padding(
+                  //   padding: const EdgeInsets.symmetric(horizontal: 0.0),
+                  //   child: Container(
+                  //     child: ElevatedButton(
+                  //       style: ElevatedButton.styleFrom(
+                  //           fixedSize: const Size(395, 50),
+                  //           backgroundColor: Color.fromARGB(255, 181, 156, 255),
+                  //           shape: RoundedRectangleBorder(
+                  //               borderRadius: BorderRadius.circular(10))),
+                  //       onPressed: () {},
+                  //       child: Text(
+                  //         'UPLOAD IMAGE', //Images should be saved into firebase storage database(not firestore)
+                  //         textAlign: TextAlign.center,
+                  //         style: TextStyle(
+                  //           color: Color.fromARGB(255, 255, 255, 255),
+                  //           fontWeight: FontWeight.bold,
+                  //           fontSize: 20.0,
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
+                  // SizedBox(
+                  //   height: 20,
+                  // ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 0.0),
                     child: Container(
@@ -446,7 +487,7 @@ class _EventCreateState extends State<EventCreate> {
                           validate();
                         },
                         child: Text(
-                          'UPLOAD EVENT POST',
+                          'Create Post',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Color.fromARGB(255, 255, 255, 255),
