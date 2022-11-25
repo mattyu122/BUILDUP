@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, unnecessary_new
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/DataModel/EventPosts.dart';
 import 'package:flutter_application_1/GetData/Event/Event_Sreen_details.dart';
 import 'package:flutter_application_1/GetData/Event/Provider.dart';
 import 'package:flutter_application_1/services/Firebase_service.dart';
@@ -93,7 +94,8 @@ class _EventTOPState extends State<EventTOP> {
                                     onTap: () {
                                       _provider.getEpostDetails(doc);
                                       Navigator.pushNamed(
-                                          context, EventSreenDetails.id);
+                                          context, EventSreenDetails.id,
+                                          arguments: doc as EventPost);
                                     },
                                     child: Container(
                                       width: 200,

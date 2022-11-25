@@ -25,10 +25,4 @@ class Message {
         receiverId = messageMap["receiverId"],
         message = messageMap["message"],
         createdAt = messageMap["createdAt"];
-
-  Message.fromDocumentSnapshot(DocumentSnapshot<Map<String, dynamic>> doc)
-      : senderId = doc.data()!["senderId"],
-        receiverId = doc.data()!["receiverId"],
-        message = doc.data()!["message"],
-        createdAt = doc.data()!["createdAt"];
 }

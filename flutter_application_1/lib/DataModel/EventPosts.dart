@@ -2,52 +2,64 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_application_1/DataModel/userAccount.dart';
 
 class EventPost {
-  final String? id;
-  final String postName;
+  final String PostN;
   final String hostName;
-  final String location;
+  final String? PostD;
+  final int PostL;
+  final String? PostP;
+  final String? price;
+  final String category;
+  final String? location;
+  final String? description;
   final int expectedNumber;
   final int joinedNumber;
   final List<UserAccount>? joinedAccount;
+  final String createAt;
   EventPost(
-      {this.id,
-      required this.postName,
+      {required this.PostN,
+      required this.category,
       required this.hostName,
-      required this.location,
       required this.expectedNumber,
       required this.joinedNumber,
-      this.joinedAccount});
+      required this.PostL,
+      this.PostD,
+      this.PostP,
+      this.location,
+      this.description,
+      this.price,
+      this.joinedAccount,
+      required this.createAt});
 
   Map<String, dynamic> toMap() {
-    List<Map<String, dynamic>> joinedAccountList = [];
-    for (var i = 0; i < joinedAccount!.length; i++) {
-      joinedAccountList.add(joinedAccount![i].toMap());
-    }
     return {
-      'postName': postName,
+      'title': PostN,
+      'PostD': PostD,
+      'price': price,
+      'PostL': PostL,
+      'PostP': PostP,
+      'category': category,
+      'description': description,
       'hostName': hostName,
       'location': location,
       'expectedNumber': expectedNumber,
       'joinedNumber': joinedNumber,
-      'joinedAccount': joinedAccountList
+      'createAt': createAt,
+      'joinedAccount': joinedAccount!.map((i) => i.toMap()).toList(),
     };
   }
 
   EventPost.fromMap(Map<String, dynamic> eventPostMap)
-      : id = eventPostMap["id"],
-        postName = eventPostMap["postName"],
+      : PostN = eventPostMap["PostN"],
+        PostD = eventPostMap['PostD'],
+        price = eventPostMap['price'],
+        PostL = eventPostMap['PostL'],
+        PostP = eventPostMap['PostP'],
+        category = eventPostMap['category'],
+        description = eventPostMap['description'],
         hostName = eventPostMap["hostName"],
         location = eventPostMap["location"],
         expectedNumber = eventPostMap["expectedNumber"],
         joinedNumber = eventPostMap["joinedNumber"],
+        createAt = eventPostMap['createAt'],
         joinedAccount = eventPostMap["joinedAccount"];
-
-  EventPost.fromDocumentSnapshot(DocumentSnapshot<Map<String, dynamic>> doc)
-      : id = doc.id,
-        postName = doc.data()!['postName'],
-        hostName = doc.data()!['hostName'],
-        location = doc.data()!['location'],
-        expectedNumber = doc.data()!['expectedNumber'],
-        joinedNumber = doc.data()!['joinedNumber'],
-        joinedAccount = doc.data()!['joinedAccount'].cast<UserAccount>();
 }
