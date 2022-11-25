@@ -8,8 +8,16 @@ class UserAccount {
   final String email;
   final List<EventPost>? joinedEvent;
   final List<ContactUser>? contactUser;
+  final String? major;
+  final String? introduction;
+  final int? gender;
+  final String? tags;
   UserAccount({
     this.id,
+    this.major,
+    this.introduction,
+    this.gender,
+    this.tags,
     required this.userName,
     required this.email,
     required this.joinedEvent,
@@ -23,6 +31,10 @@ class UserAccount {
       'email': email,
       'joinedEvent': joinedEvent!.map((i) => i.toMap()).toList(),
       'contactUser': contactUser!.map((i) => i.toMap()).toList(),
+      'major': major,
+      'introduction': introduction,
+      'gender': gender,
+      'tags': tags,
     };
   }
 
@@ -33,6 +45,9 @@ class UserAccount {
         joinedEvent = List<EventPost>.from(userAccountMap['joinedEvent']
             .map((e) => EventPost.fromMap(e))), //["joinedEvent"],
         contactUser = List<ContactUser>.from(userAccountMap['contactUser'].map(
-            (d) => ContactUser.fromMap(d))); // userAccountMap["contactUser"];
-
+            (d) => ContactUser.fromMap(d))), // userAccountMap["contactUser"];
+        major = userAccountMap['major'],
+        introduction = userAccountMap['introduction'],
+        gender = userAccountMap['gender'],
+        tags = userAccountMap['tags'];
 }

@@ -1,5 +1,9 @@
 // ignore_for_file: prefer_const_constructors, unnecessary_new
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/DataModel/userAccount.dart';
 import 'package:flutter_application_1/DrawerPages/Setting.dart';
 import 'package:flutter_application_1/HomePages/Home.dart';
 
@@ -11,13 +15,29 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  late final UserAccount currentUserInfo;
+  bool saved = false;
   int selected = 0;
-
+  final nameController = TextEditingController();
+  final majorController = TextEditingController();
+  final introductionController = TextEditingController();
+  final tagsController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-
-  validate() {
+  validate() async {
     if (_formKey.currentState!.validate()) {
       print('object');
+      await FirebaseFirestore.instance
+          .collection('user')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .update({
+        'userName': nameController.text.trim(),
+        'major': majorController.text.trim(),
+        'introduction': introductionController.text.trim(),
+        'gender': selected,
+        'tags': tagsController.text.trim(),
+      }).then((value) => setState(() {
+                saved = true;
+              }));
     }
   }
 
@@ -55,6 +75,28 @@ class _ProfilePageState extends State<ProfilePage> {
         ],
       ),
     );
+  }
+
+  void fetchUserInfo() async {
+    await FirebaseFirestore.instance
+        .collection('user')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .get()
+        .then(
+            (value) => {currentUserInfo = UserAccount.fromMap(value.data()!)});
+    setState(() {
+      nameController.text = currentUserInfo.userName;
+      majorController.text = currentUserInfo.major ?? '';
+      introductionController.text = currentUserInfo.introduction ?? '';
+      tagsController.text = currentUserInfo.tags ?? '';
+      selected = currentUserInfo.gender ?? 0;
+    });
+  }
+
+  @override
+  void initState() {
+    fetchUserInfo();
+    super.initState();
   }
 
   @override
@@ -138,7 +180,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 25.0),
                         child: Text(
-                          'xxxxxxx@gmail.com',
+                          FirebaseAuth.instance.currentUser!.email!,
                           style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
@@ -181,6 +223,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               // borderRadius: BorderRadius.circular(10.0),
                               ),
                           child: TextFormField(
+                              controller: nameController,
                               style:
                                   TextStyle(fontSize: 17, color: Colors.black),
                               decoration: InputDecoration(
@@ -252,6 +295,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               // borderRadius: BorderRadius.circular(10.0),
                               ),
                           child: TextFormField(
+                              controller: majorController,
                               style:
                                   TextStyle(fontSize: 17, color: Colors.black),
                               decoration: InputDecoration(
@@ -316,38 +360,39 @@ class _ProfilePageState extends State<ProfilePage> {
                         child: Container(
                           decoration: BoxDecoration(),
                           child: TextFormField(
-                              maxLines: 30,
-                              style:
-                                  TextStyle(fontSize: 17, color: Colors.black),
-                              decoration: InputDecoration(
-                                  contentPadding:
-                                      EdgeInsets.fromLTRB(10, 10, 10, 10),
-                                  filled: true, //<-- SEE HERE
-                                  fillColor: Color.fromARGB(255, 181, 156, 255),
-                                  constraints: BoxConstraints.tightFor(
-                                      width: 380, height: 200),
-                                  enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(10.0),
-                                      borderSide: BorderSide(
-                                          color: Color.fromARGB(
-                                              255, 181, 156, 255),
-                                          width: 2)),
-                                  focusedBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(10.0),
-                                      borderSide: BorderSide(
-                                          color:
-                                              Color.fromARGB(255, 119, 20, 244),
-                                          width: 2)),
-                                  errorBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(10.0),
-                                      borderSide: BorderSide(
-                                          color: Colors.red, width: 2))),
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return 'Please complete required flied';
-                                }
-                                return null;
-                              }),
+                            controller: introductionController,
+                            maxLines: 30,
+                            style: TextStyle(fontSize: 17, color: Colors.black),
+                            decoration: InputDecoration(
+                                contentPadding:
+                                    EdgeInsets.fromLTRB(10, 10, 10, 10),
+                                filled: true, //<-- SEE HERE
+                                fillColor: Color.fromARGB(255, 181, 156, 255),
+                                constraints: BoxConstraints.tightFor(
+                                    width: 380, height: 200),
+                                enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                    borderSide: BorderSide(
+                                        color:
+                                            Color.fromARGB(255, 181, 156, 255),
+                                        width: 2)),
+                                focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                    borderSide: BorderSide(
+                                        color:
+                                            Color.fromARGB(255, 119, 20, 244),
+                                        width: 2)),
+                                errorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                    borderSide: BorderSide(
+                                        color: Colors.red, width: 2))),
+                            // validator: (value) {
+                            //   if (value!.isEmpty) {
+                            //     return 'Please complete required flied';
+                            //   }
+                            //   return null;
+                            // }
+                          ),
                         ),
                       ),
                     ],
@@ -436,38 +481,39 @@ class _ProfilePageState extends State<ProfilePage> {
                         child: Container(
                           decoration: BoxDecoration(),
                           child: TextFormField(
-                              maxLines: 30,
-                              style:
-                                  TextStyle(fontSize: 17, color: Colors.black),
-                              decoration: InputDecoration(
-                                  contentPadding:
-                                      EdgeInsets.fromLTRB(10, 10, 10, 10),
-                                  filled: true, //<-- SEE HERE
-                                  fillColor: Color.fromARGB(255, 181, 156, 255),
-                                  constraints: BoxConstraints.tightFor(
-                                      width: 380, height: 200),
-                                  enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(10.0),
-                                      borderSide: BorderSide(
-                                          color: Color.fromARGB(
-                                              255, 181, 156, 255),
-                                          width: 2)),
-                                  focusedBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(10.0),
-                                      borderSide: BorderSide(
-                                          color:
-                                              Color.fromARGB(255, 119, 20, 244),
-                                          width: 2)),
-                                  errorBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(10.0),
-                                      borderSide: BorderSide(
-                                          color: Colors.red, width: 2))),
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return 'Please complete required flied';
-                                }
-                                return null;
-                              }),
+                            controller: tagsController,
+                            maxLines: 30,
+                            style: TextStyle(fontSize: 17, color: Colors.black),
+                            decoration: InputDecoration(
+                                contentPadding:
+                                    EdgeInsets.fromLTRB(10, 10, 10, 10),
+                                filled: true, //<-- SEE HERE
+                                fillColor: Color.fromARGB(255, 181, 156, 255),
+                                constraints: BoxConstraints.tightFor(
+                                    width: 380, height: 200),
+                                enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                    borderSide: BorderSide(
+                                        color:
+                                            Color.fromARGB(255, 181, 156, 255),
+                                        width: 2)),
+                                focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                    borderSide: BorderSide(
+                                        color:
+                                            Color.fromARGB(255, 119, 20, 244),
+                                        width: 2)),
+                                errorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                    borderSide: BorderSide(
+                                        color: Colors.red, width: 2))),
+                            // validator: (value) {
+                            //   if (value!.isEmpty) {
+                            //     return 'Please complete required flied';
+                            //   }
+                            //   return null;
+                            // }
+                          ),
                         ),
                       ),
                     ],
@@ -549,7 +595,14 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                   SizedBox(
                     height: 20,
-                  )
+                  ),
+                  if (saved) ...[
+                    Text(
+                      'Saved successfully!',
+                      style:
+                          TextStyle(color: Color.fromARGB(255, 234, 236, 236)),
+                    )
+                  ],
                 ],
               ),
             ),

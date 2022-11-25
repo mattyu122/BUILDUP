@@ -21,7 +21,6 @@ void main() async {
   ));
 }
 
-//sasjajsaj2121212121121221212
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
