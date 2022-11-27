@@ -51,7 +51,7 @@ class PostSearch {
           ),
         ),
 
-        searchLabel: 'Search Event',
+        searchLabel: 'Search Post',
         suggestion: Container(
           child: SingleChildScrollView(
               child: Column(

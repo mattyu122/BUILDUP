@@ -66,7 +66,7 @@ class _EventSearchState extends State<EventSearch> {
                 },
                 decoration: InputDecoration(
                   border: InputBorder.none,
-                  hintText: "Search Event",
+                  hintText: "Search Post",
                   hintStyle: TextStyle(color: Colors.black),
                 ),
               ),
