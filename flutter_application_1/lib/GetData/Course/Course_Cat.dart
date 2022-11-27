@@ -6,14 +6,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/GetData/Event/Event_CatSreen.dart';
 import 'package:flutter_application_1/services/Firebase_service.dart';
 
-class EventCat extends StatefulWidget {
-  const EventCat({super.key});
+import 'Course_CatSreen.dart';
+
+class CourseCat extends StatefulWidget {
+  const CourseCat({super.key});
 
   @override
-  State<EventCat> createState() => _EventCatState();
+  State<CourseCat> createState() => _CourseCatState();
 }
 
-class _EventCatState extends State<EventCat> {
+class _CourseCatState extends State<CourseCat> {
   @override
   Widget build(BuildContext context) {
     FirebaseService _service = FirebaseService();
@@ -21,7 +23,7 @@ class _EventCatState extends State<EventCat> {
     return Center(
       child: Container(
         child: FutureBuilder<QuerySnapshot>(
-          future: _service.cat.get(),
+          future: _service.Ccat.get(),
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasError) {
@@ -54,7 +56,7 @@ class _EventCatState extends State<EventCat> {
                           height: 32,
                           child: TextButton(
                             onPressed: () {
-                              Navigator.pushNamed(context, EventCatSreen.id);
+                              Navigator.pushNamed(context, CourseCatSreen.id);
                             },
                             child: Row(
                               children: const [

@@ -46,7 +46,7 @@ class _EventNEWState extends State<EventNEW> {
                       children: [
                         Expanded(
                             child: Text(
-                          ' New Events',
+                          ' The newest',
                           style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
@@ -58,20 +58,20 @@ class _EventNEWState extends State<EventNEW> {
                           child: TextButton(
                             onPressed: () {},
                             child: Row(
-                              children: const [
-                                Text('See All',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 15.0,
-                                    )),
-                                Icon(
-                                  Icons.arrow_forward_ios,
-                                  size: 12,
-                                  color: Colors.white,
-                                )
-                              ],
-                            ),
+                                // children: const [
+                                //   Text('See All',
+                                //       style: TextStyle(
+                                //         color: Colors.white,
+                                //         fontWeight: FontWeight.bold,
+                                //         fontSize: 15.0,
+                                //       )),
+                                //   Icon(
+                                //     Icons.arrow_forward_ios,
+                                //     size: 12,
+                                //     color: Colors.white,
+                                //   )
+                                // ],
+                                ),
                           ),
                         ),
                       ],
@@ -82,6 +82,7 @@ class _EventNEWState extends State<EventNEW> {
                           itemCount: snapshot.data?.docs.length,
                           itemBuilder: (BuildContext context, int index) {
                             var doc = snapshot.data?.docs[index];
+
                             return Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(100),
@@ -160,8 +161,22 @@ class _EventNEWState extends State<EventNEW> {
                                                         child: Row(
                                                           children: [
                                                             Icon(
-                                                                Icons.favorite),
-                                                            Text(doc['PostL'])
+                                                              Icons.favorite,
+                                                              color: Colors
+                                                                  .deepPurple,
+                                                            ),
+                                                            Text(
+                                                                style:
+                                                                    TextStyle(
+                                                                  color: Colors
+                                                                      .deepPurple,
+                                                                  // fontSize: 13,
+                                                                  // fontWeight:
+                                                                  //     FontWeight
+                                                                  //         .w500,
+                                                                ),
+                                                                '   ${doc['PostL']}'
+                                                                    .toString()),
                                                           ],
                                                         ),
                                                       ),

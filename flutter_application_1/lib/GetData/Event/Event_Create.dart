@@ -66,7 +66,7 @@ class _EventCreateState extends State<EventCreate> {
         iconTheme:
             IconThemeData(color: Color.fromARGB(255, 255, 255, 255), size: 30),
         centerTitle: true,
-        title: Text('Create Event Post',
+        title: Text('Create Post',
             style: TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.bold,
@@ -449,31 +449,31 @@ class _EventCreateState extends State<EventCreate> {
                   SizedBox(
                     height: 20,
                   ),
-                  // Padding(
-                  //   padding: const EdgeInsets.symmetric(horizontal: 0.0),
-                  //   child: Container(
-                  //     child: ElevatedButton(
-                  //       style: ElevatedButton.styleFrom(
-                  //           fixedSize: const Size(395, 50),
-                  //           backgroundColor: Color.fromARGB(255, 181, 156, 255),
-                  //           shape: RoundedRectangleBorder(
-                  //               borderRadius: BorderRadius.circular(10))),
-                  //       onPressed: () {},
-                  //       child: Text(
-                  //         'UPLOAD IMAGE', //Images should be saved into firebase storage database(not firestore)
-                  //         textAlign: TextAlign.center,
-                  //         style: TextStyle(
-                  //           color: Color.fromARGB(255, 255, 255, 255),
-                  //           fontWeight: FontWeight.bold,
-                  //           fontSize: 20.0,
-                  //         ),
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
-                  // SizedBox(
-                  //   height: 20,
-                  // ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 0.0),
+                    child: Container(
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            fixedSize: const Size(395, 50),
+                            backgroundColor: Color.fromARGB(255, 181, 156, 255),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10))),
+                        onPressed: () {},
+                        child: Text(
+                          'UPLOAD IMAGE', //Images should be saved into firebase storage database(not firestore)
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Color.fromARGB(255, 255, 255, 255),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20.0,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 0.0),
                     child: Container(

@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_const_constructors, unnecessary_new
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/DataModel/EventPosts.dart';
 import 'package:flutter_application_1/GetData/Event/Event_Sreen_details.dart';
 import 'package:flutter_application_1/GetData/Event/Provider.dart';
 import 'package:flutter_application_1/services/Firebase_service.dart';
@@ -46,7 +45,7 @@ class _EventTOPState extends State<EventTOP> {
                       children: [
                         Expanded(
                             child: Text(
-                          ' Top Rated',
+                          ' Top rated ',
                           style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
@@ -58,20 +57,20 @@ class _EventTOPState extends State<EventTOP> {
                           child: TextButton(
                             onPressed: () {},
                             child: Row(
-                              children: const [
-                                Text('See All',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 15.0,
-                                    )),
-                                Icon(
-                                  Icons.arrow_forward_ios,
-                                  size: 12,
-                                  color: Colors.white,
-                                )
-                              ],
-                            ),
+                                // children: const [
+                                //   Text('See All',
+                                //       style: TextStyle(
+                                //         color: Colors.white,
+                                //         fontWeight: FontWeight.bold,
+                                //         fontSize: 15.0,
+                                //       )),
+                                //   Icon(
+                                //     Icons.arrow_forward_ios,
+                                //     size: 12,
+                                //     color: Colors.white,
+                                //   )
+                                // ],
+                                ),
                           ),
                         ),
                       ],
@@ -94,8 +93,7 @@ class _EventTOPState extends State<EventTOP> {
                                     onTap: () {
                                       _provider.getEpostDetails(doc);
                                       Navigator.pushNamed(
-                                          context, EventSreenDetails.id,
-                                          arguments: doc as EventPost);
+                                          context, EventSreenDetails.id);
                                     },
                                     child: Container(
                                       width: 200,
@@ -161,8 +159,22 @@ class _EventTOPState extends State<EventTOP> {
                                                         child: Row(
                                                           children: [
                                                             Icon(
-                                                                Icons.favorite),
-                                                            Text(doc['PostL'])
+                                                              Icons.favorite,
+                                                              color: Colors
+                                                                  .deepPurple,
+                                                            ),
+                                                            Text(
+                                                                style:
+                                                                    TextStyle(
+                                                                  color: Colors
+                                                                      .deepPurple,
+                                                                  // fontSize: 13,
+                                                                  // fontWeight:
+                                                                  //     FontWeight
+                                                                  //         .w500,
+                                                                ),
+                                                                '   ${doc['PostL']}'
+                                                                    .toString()),
                                                           ],
                                                         ),
                                                       ),
