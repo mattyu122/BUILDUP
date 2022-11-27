@@ -32,7 +32,7 @@ class EventPost {
 
   Map<String, dynamic> toMap() {
     return {
-      'title': PostN,
+      'PostN': PostN,
       'PostD': PostD,
       'price': price,
       'PostL': PostL,
