@@ -5,5 +5,6 @@ import 'package:flutter/foundation.dart';
 
 class FirebaseService {
   CollectionReference cat = FirebaseFirestore.instance.collection('cat');
-  CollectionReference post = FirebaseFirestore.instance.collection('NewEPost');
+  CollectionReference Ccat = FirebaseFirestore.instance.collection('Ccat');
+  CollectionReference post = FirebaseFirestore.instance.collection('EventPost');
 }

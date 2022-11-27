@@ -10,6 +10,9 @@ import 'package:flutter_application_1/HomePages/Home.dart';
 import 'package:flutter_application_1/services/E_serarch.dart';
 import 'package:flutter_application_1/services/Firebase_service.dart';
 
+import '../GetData/Course/Course_Cat.dart';
+import '../GetData/Event/Event_Create.dart';
+
 class CoursePage extends StatefulWidget {
   const CoursePage({super.key});
 
@@ -45,7 +48,9 @@ class _CoursePageState extends State<CoursePage> {
         floatingActionButton: FloatingActionButton.extended(
             backgroundColor: Color.fromARGB(255, 119, 20, 244),
             icon: Icon(Icons.event_note),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, EventCreate.id);
+            },
             label: Text(
               "Create",
               style: TextStyle(
@@ -88,7 +93,7 @@ class _CoursePageState extends State<CoursePage> {
               // SizedBox(height: 15),
               // // EventSearch(),
               // SizedBox(height: 5),
-              EventCat(),
+              CourseCat(),
               EventUP(),
               EventTOP(),
               EventNEW(),

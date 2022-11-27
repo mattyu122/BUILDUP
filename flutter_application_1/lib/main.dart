@@ -9,6 +9,7 @@ import 'package:flutter_application_1/HomePages/Home.dart';
 import './LoginPages/login.dart';
 import 'package:provider/provider.dart';
 
+import 'GetData/Course/Course_CatSreen.dart';
 import 'GetData/Event/Event_Sreen_details.dart';
 
 void main() async {
@@ -34,6 +35,7 @@ class MyApp extends StatelessWidget {
       home: const FirstPage(),
       routes: {
         EventCatSreen.id: (context) => EventCatSreen(),
+        CourseCatSreen.id: (context) => CourseCatSreen(),
         EventCreate.id: (context) => EventCreate(),
         EventSreenDetails.id: (context) => EventSreenDetails(),
       },

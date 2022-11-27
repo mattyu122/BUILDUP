@@ -4,14 +4,14 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_application_1/services/Firebase_service.dart';
 
-class EventCatSreen extends StatefulWidget {
-  static const String id = 'category-list-screen';
+class CourseCatSreen extends StatefulWidget {
+  static const String id = 'Ccategory-list-screen';
 
   @override
-  State<EventCatSreen> createState() => _EventCatSreenState();
+  State<CourseCatSreen> createState() => _CourseCatSreenState();
 }
 
-class _EventCatSreenState extends State<EventCatSreen> {
+class _CourseCatSreenState extends State<CourseCatSreen> {
   @override
   Widget build(BuildContext context) {
     FirebaseService _service = FirebaseService();
@@ -32,7 +32,7 @@ class _EventCatSreenState extends State<EventCatSreen> {
       ),
       body: Container(
         child: FutureBuilder<QuerySnapshot>(
-          future: _service.cat.get(),
+          future: _service.Ccat.get(),
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasError) {
@@ -49,7 +49,7 @@ class _EventCatSreenState extends State<EventCatSreen> {
                   itemBuilder: (BuildContext context, int index) {
                     var doc = snapshot.data?.docs[index];
                     return Padding(
-                      padding: const EdgeInsets.all(10.0),
+                      padding: const EdgeInsets.all(8.0),
                       child: Container(
                         height: 70,
                         child: ListTile(

@@ -95,7 +95,7 @@ class _EventSreenDetails extends State<EventSreenDetails> {
                             // ignore: prefer_const_literals_to_create_immutables
                             children: [
                               Text(
-                                'Host:',
+                                'Host: ${_provider.EpostData?['hostName']} ',
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold,
@@ -106,7 +106,7 @@ class _EventSreenDetails extends State<EventSreenDetails> {
                                 height: 7,
                               ),
                               Text(
-                                'Date:',
+                                'Date: ${_provider.EpostData?['PostD']} ',
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold,
@@ -117,7 +117,7 @@ class _EventSreenDetails extends State<EventSreenDetails> {
                                 height: 7,
                               ),
                               Text(
-                                'Price:',
+                                'Price: ${_provider.EpostData?['price']} ',
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold,
@@ -128,7 +128,7 @@ class _EventSreenDetails extends State<EventSreenDetails> {
                                 height: 7,
                               ),
                               Text(
-                                'Location:',
+                                'Location: ${_provider.EpostData?['location']} ',
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold,
@@ -139,7 +139,7 @@ class _EventSreenDetails extends State<EventSreenDetails> {
                                 height: 7,
                               ),
                               Text(
-                                'Category:',
+                                'Category: ${_provider.EpostData?['category']} ',
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold,
@@ -150,7 +150,7 @@ class _EventSreenDetails extends State<EventSreenDetails> {
                                 height: 7,
                               ),
                               Text(
-                                'Participant/s:',
+                                'Participant/s: ${_provider.EpostData?['expectedNumber']} ',
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold,
@@ -186,11 +186,28 @@ class _EventSreenDetails extends State<EventSreenDetails> {
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: Container(
                         height: 150,
+                        width: 395,
                         decoration: BoxDecoration(
                           color: Color.fromARGB(255, 255, 255, 255),
                           border: Border.all(
                               color: Color.fromARGB(255, 181, 156, 255)),
                           borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                '${_provider.EpostData?['description']}',
+                                style: TextStyle(
+                                  color: Color.fromARGB(255, 0, 0, 0),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 17.0,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),

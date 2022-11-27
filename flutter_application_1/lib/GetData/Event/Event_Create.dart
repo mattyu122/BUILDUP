@@ -66,7 +66,7 @@ class _EventCreateState extends State<EventCreate> {
         iconTheme:
             IconThemeData(color: Color.fromARGB(255, 255, 255, 255), size: 30),
         centerTitle: true,
-        title: Text('Create Event Post',
+        title: Text('Create Post',
             style: TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.bold,

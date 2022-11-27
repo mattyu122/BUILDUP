@@ -45,7 +45,7 @@ class _EventUPState extends State<EventUP> {
                       children: [
                         Expanded(
                             child: Text(
-                          ' Upcoming Events',
+                          ' Recommend',
                           style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
@@ -57,20 +57,20 @@ class _EventUPState extends State<EventUP> {
                           child: TextButton(
                             onPressed: () {},
                             child: Row(
-                              children: const [
-                                Text('See All',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 15.0,
-                                    )),
-                                Icon(
-                                  Icons.arrow_forward_ios,
-                                  size: 12,
-                                  color: Colors.white,
-                                )
-                              ],
-                            ),
+                                // children: const [
+                                //   Text('See All',
+                                //       style: TextStyle(
+                                //         color: Colors.white,
+                                //         fontWeight: FontWeight.bold,
+                                //         fontSize: 15.0,
+                                //       )),
+                                //   Icon(
+                                //     Icons.arrow_forward_ios,
+                                //     size: 12,
+                                //     color: Colors.white,
+                                //   )
+                                // ],
+                                ),
                           ),
                         ),
                       ],
