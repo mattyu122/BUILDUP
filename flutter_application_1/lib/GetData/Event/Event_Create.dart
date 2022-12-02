@@ -18,6 +18,8 @@ class EventCreate extends StatefulWidget {
 }
 
 class _EventCreateState extends State<EventCreate> {
+  final blankPhoto =
+      'https://firebasestorage.googleapis.com/v0/b/buildup-7c651.appspot.com/o/New%20Event%20Test%2FDefaultBlank.jpg?alt=media&token=42ea3800-a53d-4122-8d8e-26e39be6ff5d';
   final _formKey = GlobalKey<FormState>();
   final titleController = TextEditingController();
   final dateController = TextEditingController();
@@ -31,8 +33,10 @@ class _EventCreateState extends State<EventCreate> {
       print('object');
       final number = int.parse(participantNumberController.text);
       EventPost newEvent = EventPost(
-          PostP:
-              'https://firebasestorage.googleapis.com/v0/b/buildup-7c651.appspot.com/o/New%20Event%20Test%2FDefaultBlank.jpg?alt=media&token=42ea3800-a53d-4122-8d8e-26e39be6ff5d',
+          PostD: dateController.text == ""
+              ? "To be confirmed"
+              : dateController.text,
+          PostP: blankPhoto,
           price: priceController.text == ""
               ? "To be confirmed"
               : priceController.text,
