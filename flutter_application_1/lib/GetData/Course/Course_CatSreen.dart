@@ -31,6 +31,7 @@ class _CourseCatSreenState extends State<CourseCatSreen> {
         ),
       ),
       body: Container(
+        color: Color.fromARGB(255, 255, 255, 255),
         child: FutureBuilder<QuerySnapshot>(
           future: _service.Ccat.get(),
           builder:
@@ -52,15 +53,21 @@ class _CourseCatSreenState extends State<CourseCatSreen> {
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
                         height: 70,
-                        child: ListTile(
-                          onTap: () {},
-                          leading: Image.network(doc!['catP'],
-                              width: 60, height: 100, fit: BoxFit.fill),
-                          title: Text(
-                            'TYPE : ${doc['catN']}',
-                            style: TextStyle(fontSize: 18, color: Colors.black),
-                          ),
-                          trailing: Icon(Icons.arrow_forward_ios, size: 12),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            ListTile(
+                              onTap: () {},
+                              leading: Image.network(doc!['catP'],
+                                  width: 60, height: 100, fit: BoxFit.fill),
+                              title: Text(
+                                'TYPE : ${doc['catN']}',
+                                style: TextStyle(
+                                    fontSize: 18, color: Colors.black),
+                              ),
+                              trailing: Icon(Icons.arrow_forward_ios, size: 12),
+                            ),
+                          ],
                         ),
                       ),
                     );
