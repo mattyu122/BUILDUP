@@ -19,7 +19,7 @@ class EventPage extends StatefulWidget {
   State<EventPage> createState() => _EventPageState();
 }
 
-class _EventPageState extends State<EventPage> {
+class _EventPageState extends State<EventPage> with WidgetsBindingObserver {
   FirebaseService _service = FirebaseService();
   PostSearch _search = PostSearch();
   static List<EPosts> eposts = [];
@@ -34,12 +34,14 @@ class _EventPageState extends State<EventPage> {
                 document: doc,
                 title: doc['PostN'],
                 date: doc['PostD'],
-                photo: doc['PostP']),
+                photo: doc['PostP'],
+                hostname: doc['hostName']),
           );
         });
       });
     });
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
   }
 
   Widget build(BuildContext context) {

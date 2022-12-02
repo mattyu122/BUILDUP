@@ -35,7 +35,8 @@ class _CoursePageState extends State<CoursePage> {
                 document: doc,
                 title: doc['PostN'],
                 date: doc['PostD'],
-                photo: doc['PostP']),
+                photo: doc['PostP'],
+                hostname: doc['hostName']),
           );
         });
       });

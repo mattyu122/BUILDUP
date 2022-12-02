@@ -31,9 +31,8 @@ class _EventCreateState extends State<EventCreate> {
       print('object');
       final number = int.parse(participantNumberController.text);
       EventPost newEvent = EventPost(
-          PostD: dateController.text == ""
-              ? "To be confirmed"
-              : dateController.text,
+          PostP:
+              'https://firebasestorage.googleapis.com/v0/b/buildup-7c651.appspot.com/o/New%20Event%20Test%2FDefaultBlank.jpg?alt=media&token=42ea3800-a53d-4122-8d8e-26e39be6ff5d',
           price: priceController.text == ""
               ? "To be confirmed"
               : priceController.text,

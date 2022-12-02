@@ -21,8 +21,8 @@ class _EventUPState extends State<EventUP> {
 
     return Center(
       child: Container(
-        child: FutureBuilder<QuerySnapshot>(
-          future: _service.post.get(),
+        child: StreamBuilder<QuerySnapshot>(
+          stream: _service.post.snapshots(),
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasError) {

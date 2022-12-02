@@ -12,12 +12,14 @@ class EPosts {
   final String title;
   final String date;
   final String photo;
+  final String hostname;
   final DocumentSnapshot document;
   EPosts(
       {required this.title,
       required this.date,
       required this.document,
-      required this.photo});
+      required this.photo,
+      required this.hostname});
 }
 
 class PostSearch {
@@ -127,7 +129,7 @@ class PostSearch {
                               Column(
                                 children: [
                                   Text(
-                                    'Host by : ',
+                                    'Host by : ${epost.hostname}',
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 17),
