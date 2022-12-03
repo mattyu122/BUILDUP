@@ -23,6 +23,7 @@ class _EventPageState extends State<EventPage> with WidgetsBindingObserver {
   FirebaseService _service = FirebaseService();
   PostSearch _search = PostSearch();
   static List<EPosts> eposts = [];
+
   @override
   void initState() {
     // TODO: implement initState
@@ -38,6 +39,20 @@ class _EventPageState extends State<EventPage> with WidgetsBindingObserver {
                 hostname: doc['hostName']),
           );
         });
+      });
+    });
+
+    FirebaseFirestore.instance
+        .collection('EventPost')
+        .snapshots()
+        .listen((querrysnapshot) {
+      querrysnapshot.docChanges.forEach((change) {
+        eposts.add(EPosts(
+            title: change.doc['PostN'],
+            date: change.doc['PostD'],
+            document: change.doc,
+            photo: change.doc['PostP'],
+            hostname: change.doc['hostName']));
       });
     });
     super.initState();

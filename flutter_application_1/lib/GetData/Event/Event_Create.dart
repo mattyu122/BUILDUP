@@ -55,7 +55,7 @@ class _EventCreateState extends State<EventCreate> {
       await FirebaseFirestore.instance
           .collection('EventPost')
           .add(newEvent.toMap())
-          .then((value) => {Navigator.of(context).pop()});
+          .then((value) => {Navigator.of(context).pop(context)});
     }
   }
 
