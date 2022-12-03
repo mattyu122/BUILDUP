@@ -27,6 +27,7 @@ class _EventPageState extends State<EventPage> {
   @override
   void initState() {
     // TODO: implement initState
+    eposts.clear();
     _service.post.snapshots().listen((querrysnapshot) {
       querrysnapshot.docChanges.forEach((change) {
         setState(() {
