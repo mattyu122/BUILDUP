@@ -19,7 +19,7 @@ class EventPage extends StatefulWidget {
   State<EventPage> createState() => _EventPageState();
 }
 
-class _EventPageState extends State<EventPage> with WidgetsBindingObserver {
+class _EventPageState extends State<EventPage> {
   FirebaseService _service = FirebaseService();
   PostSearch _search = PostSearch();
   static List<EPosts> eposts = [];
@@ -27,36 +27,35 @@ class _EventPageState extends State<EventPage> with WidgetsBindingObserver {
   @override
   void initState() {
     // TODO: implement initState
-    _service.post.get().then((QuerySnapshot snapshot) {
-      snapshot.docs.forEach((doc) {
+    _service.post.snapshots().listen((querrysnapshot) {
+      querrysnapshot.docChanges.forEach((change) {
         setState(() {
           eposts.add(
             EPosts(
-                document: doc,
-                title: doc['PostN'],
-                date: doc['PostD'],
-                photo: doc['PostP'],
-                hostname: doc['hostName']),
+                document: change.doc,
+                title: change.doc['PostN'],
+                date: change.doc['PostD'],
+                photo: change.doc['PostP'],
+                hostname: change.doc['hostName']),
           );
         });
       });
     });
 
-    FirebaseFirestore.instance
-        .collection('EventPost')
-        .snapshots()
-        .listen((querrysnapshot) {
-      querrysnapshot.docChanges.forEach((change) {
-        eposts.add(EPosts(
-            title: change.doc['PostN'],
-            date: change.doc['PostD'],
-            document: change.doc,
-            photo: change.doc['PostP'],
-            hostname: change.doc['hostName']));
-      });
-    });
+    // FirebaseFirestore.instance
+    //     .collection('EventPost')
+    //     .snapshots()
+    //     .listen((querrysnapshot) {
+    //   querrysnapshot.docChanges.forEach((change) {
+    //     eposts.add(EPosts(
+    //         title: change.doc['PostN'],
+    //         date: change.doc['PostD'],
+    //         document: change.doc,
+    //         photo: change.doc['PostP'],
+    //         hostname: change.doc['hostName']));
+    //   });
+    // });
     super.initState();
-    WidgetsBinding.instance.addObserver(this);
   }
 
   Widget build(BuildContext context) {
