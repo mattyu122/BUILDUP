@@ -135,7 +135,7 @@ class _EventTOPState extends State<EventTOP> {
                                                   '${doc['PostN']}',
                                                   style: TextStyle(
                                                     color: Colors.black,
-                                                    fontSize: 23,
+                                                    fontSize: 20,
                                                     fontWeight: FontWeight.w500,
                                                   ),
                                                 ),
