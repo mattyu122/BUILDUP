@@ -207,35 +207,35 @@ class _LoginPageState extends State<LoginPage> {
                 ),
 
                 //Check box Remember Me
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 0),
-                      child: CheckboxListTile(
-                          controlAffinity: ListTileControlAffinity.leading,
-                          side: MaterialStateBorderSide.resolveWith(
-                            (states) => BorderSide(
-                                width: 1.0,
-                                color: Color.fromARGB(255, 255, 255, 255)),
-                          ),
-                          title: Text(
-                            'Remember me',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.normal,
-                                fontSize: 16.0),
-                          ),
-                          value: isChecked,
-                          activeColor: Colors.black,
-                          onChanged: (newBool) {
-                            setState(() {
-                              isChecked = newBool;
-                            });
-                          }),
-                    ),
-                  ],
-                ),
+                // Column(
+                //   crossAxisAlignment: CrossAxisAlignment.start,
+                //   children: [
+                //     Padding(
+                //       padding: const EdgeInsets.symmetric(vertical: 0),
+                //       child: CheckboxListTile(
+                //           controlAffinity: ListTileControlAffinity.leading,
+                //           side: MaterialStateBorderSide.resolveWith(
+                //             (states) => BorderSide(
+                //                 width: 1.0,
+                //                 color: Color.fromARGB(255, 255, 255, 255)),
+                //           ),
+                //           title: Text(
+                //             'Remember me',
+                //             style: TextStyle(
+                //                 color: Colors.white,
+                //                 fontWeight: FontWeight.normal,
+                //                 fontSize: 16.0),
+                //           ),
+                //           value: isChecked,
+                //           activeColor: Colors.black,
+                //           onChanged: (newBool) {
+                //             setState(() {
+                //               isChecked = newBool;
+                //             });
+                //           }),
+                //     ),
+                //   ],
+                // ),
 
                 SizedBox(height: 28),
                 // Sign IN

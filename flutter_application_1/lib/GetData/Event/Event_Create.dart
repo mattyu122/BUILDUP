@@ -490,7 +490,7 @@ class _EventCreateState extends State<EventCreate> {
                           validate();
                         },
                         child: Text(
-                          'Create Post',
+                          'CREATE POST',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Color.fromARGB(255, 255, 255, 255),

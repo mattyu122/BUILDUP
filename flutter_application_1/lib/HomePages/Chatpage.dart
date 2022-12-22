@@ -47,7 +47,7 @@ class _ChatPageState extends State<ChatPage> {
         toolbarHeight: 56,
       ),
       extendBodyBehindAppBar: true,
-      backgroundColor: Colors.blue,
+      backgroundColor: Color.fromARGB(255, 0, 0, 0),
       body: SafeArea(
         child: Column(
           children: [

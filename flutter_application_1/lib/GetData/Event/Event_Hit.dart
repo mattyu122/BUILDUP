@@ -138,6 +138,11 @@ class _EventTOPState extends State<EventTOP> {
                                                     fontSize: 20,
                                                     fontWeight: FontWeight.w500,
                                                   ),
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  maxLines: 1,
+                                                  textDirection:
+                                                      TextDirection.ltr,
                                                 ),
                                                 // SizedBox(height: 5),
                                                 Row(

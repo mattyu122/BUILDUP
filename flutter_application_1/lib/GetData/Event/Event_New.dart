@@ -140,6 +140,10 @@ class _EventNEWState extends State<EventNEW> {
                                                     fontSize: 20,
                                                     fontWeight: FontWeight.w500,
                                                   ),
+                                                  overflow: TextOverflow.fade,
+                                                  maxLines: 1,
+                                                  textDirection:
+                                                      TextDirection.ltr,
                                                 ),
                                                 // SizedBox(height: 5),
                                                 Row(

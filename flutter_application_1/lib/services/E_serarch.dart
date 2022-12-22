@@ -76,9 +76,7 @@ class PostSearch {
           ),
         ),
 
-        filter: (epost) => [
-          epost.title,
-        ],
+        filter: (epost) => [epost.hostname, epost.title, epost.date],
         // sort: (a, b) => a.compareTo(b),
         builder: (epost) {
           var _provider = Provider.of<EpostProvider>(context);
@@ -112,42 +110,54 @@ class PostSearch {
                           SizedBox(
                             width: 10,
                           ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Column(
+                          Container(
+                              width: 200,
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
-                                    'Titel : ${epost.title}',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 17),
+                                  Column(
+                                    children: [
+                                      Text(
+                                        'Titel : ${epost.title}',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 17),
+                                        overflow: TextOverflow.fade,
+                                        maxLines: 1,
+                                        textDirection: TextDirection.ltr,
+                                      )
+                                    ],
+                                  ),
+                                  Column(
+                                    children: [
+                                      Text(
+                                        'Host by : ${epost.hostname}',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 17),
+                                        overflow: TextOverflow.fade,
+                                        maxLines: 1,
+                                        textDirection: TextDirection.ltr,
+                                      )
+                                    ],
+                                  ),
+                                  Column(
+                                    children: [
+                                      Text(
+                                        'Exp : ${epost.date}',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 17),
+                                        overflow: TextOverflow.fade,
+                                        maxLines: 1,
+                                        textDirection: TextDirection.ltr,
+                                      )
+                                    ],
                                   )
                                 ],
-                              ),
-                              Column(
-                                children: [
-                                  Text(
-                                    'Host by : ${epost.hostname}',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 17),
-                                  )
-                                ],
-                              ),
-                              Column(
-                                children: [
-                                  Text(
-                                    'Exp : ${epost.date}',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 17),
-                                  )
-                                ],
-                              )
-                            ],
-                          )
+                              ))
                         ],
                       ),
                     ),
