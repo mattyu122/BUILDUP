@@ -137,7 +137,7 @@ class _EventNEWState extends State<EventNEW> {
                                                   '${doc['PostN']}',
                                                   style: TextStyle(
                                                     color: Colors.black,
-                                                    fontSize: 23,
+                                                    fontSize: 20,
                                                     fontWeight: FontWeight.w500,
                                                   ),
                                                 ),
