@@ -22,22 +22,11 @@ class _ChatPageState extends State<Chatspage> {
   late UserAccount currentUser;
   String? receiverId;
   final userId = FirebaseAuth.instance.currentUser?.uid;
-  retrieveUserAccount() async {
-    // final user = await FirebaseFirestore.instance
-    //     .collection('user')
-    //     .doc(userId)
-    //     .get()
-    //     .then((value) => {currentUser = UserAccount.fromMap(value.data()!)});
-    // receiverId = contactIDList?[0] ?? null;
-    //print(user.toMap());
-    // print(receiverId);
-  }
 
   @override
   void initState() {
     // TODO: implement initState
     if (userId != null) {
-      retrieveUserAccount();
       setState(() {});
     }
     super.initState();
@@ -91,13 +80,15 @@ class _ChatPageState extends State<Chatspage> {
                     print(snapshot.error);
                   } else if (snapshot.hasData) {
                     final docData = snapshot.data as DocumentSnapshot;
-                    final contactUsers = docData['contactUser'] as List;
-                    final List<ContactUser> realcontactusers = contactUsers
-                        .map((e) => ContactUser.fromMap(e))
-                        .toList();
-                    print("dsafdsafdsaf");
-                    print(realcontactusers[0].email);
-                    return ChatMenuWidget(users: realcontactusers);
+                    if (docData != null) {
+                      final contactUsers = docData['contactUser'] as List;
+                      final List<ContactUser> realcontactusers = contactUsers
+                          .map((e) => ContactUser.fromMap(e))
+                          .toList();
+                      print("dsafdsafdsaf");
+                      print(realcontactusers[0].email);
+                      return ChatMenuWidget(users: realcontactusers);
+                    }
                   }
                   return buildText("no contacts");
               }

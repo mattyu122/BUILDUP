@@ -6,6 +6,7 @@ import 'package:flutter_application_1/GetData/Event/Event_CatSreen.dart';
 import 'package:flutter_application_1/GetData/Event/Event_Create.dart';
 import 'package:flutter_application_1/GetData/Event/Provider.dart';
 import 'package:flutter_application_1/HomePages/Home.dart';
+import 'package:flutter_application_1/LoginPages/verifyEmail.dart';
 import './LoginPages/login.dart';
 import 'package:provider/provider.dart';
 
@@ -49,7 +50,7 @@ class FirstPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
         body: StreamBuilder<User?>(
-            stream: FirebaseAuth.instance.userChanges(),
+            stream: FirebaseAuth.instance.authStateChanges(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 print(snapshot.data);

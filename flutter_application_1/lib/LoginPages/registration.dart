@@ -5,6 +5,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_application_1/DataModel/contactUser.dart';
 import 'package:flutter_application_1/DataModel/userAccount.dart';
+import 'package:flutter_application_1/LoginPages/verifyEmail.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -260,25 +261,39 @@ class _RegisterPageState extends State<RegisterPage> {
 
   Future signUp() async {
     try {
+      if (!emailController.text.contains(
+          "@link.cuhk.edu.hk", emailController.text.trim().length - 17)) {
+        return; //verify cuhk email
+      }
+
+      final query = FirebaseFirestore.instance
+          .collection("user")
+          .where("email", isEqualTo: emailController.text.trim());
+
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: emailController.text.trim(),
           password: passwordController.text.trim());
+
+      await FirebaseFirestore.instance
+          .collection("user")
+          .doc(FirebaseAuth.instance.currentUser?.uid)
+          .get();
       ContactUser newContact = ContactUser(
           userName: "matt1", email: "matt1@gmail.com", icon: "icon", id: "id");
       UserAccount newUser = UserAccount(
         id: FirebaseAuth.instance.currentUser?.uid,
-        userName: emailController.text.trim(),
-        email: emailController.text.trim(),
+        userName: FirebaseAuth.instance.currentUser!.email.toString(),
+        email: FirebaseAuth.instance.currentUser!.email.toString(),
         joinedEvent: [],
         contactUser: [newContact],
       );
       await FirebaseFirestore.instance
           .collection("user")
           .doc(FirebaseAuth.instance.currentUser?.uid)
-          .set(newUser.toMap());
-      if (mounted) {
-        Navigator.of(context).pop();
-      }
+          .set(newUser.toMap())
+          .then((value) => Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => VerifyEmail()))
+              .then((_) => Navigator.of(context).pop()));
     } on FirebaseAuthException catch (e) {
       print(e);
     }
