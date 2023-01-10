@@ -1,4 +1,5 @@
 // ignore_for_file: prefer_const_constructors, unnecessary_new, prefer_const_literals_to_create_immutables
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class ForgotPage extends StatefulWidget {
@@ -11,6 +12,8 @@ class ForgotPage extends StatefulWidget {
 class _ForgotPageState extends State<ForgotPage> {
   bool HidePassword = true;
   bool? isChecked = false;
+  final email = TextEditingController();
+  bool isEmailSent = false;
   @override
   Widget build(BuildContext context) {
     final urlImage = "https://cdn-icons-png.flaticon.com/512/6133/6133890.png";
@@ -91,6 +94,7 @@ class _ForgotPageState extends State<ForgotPage> {
                           borderRadius: BorderRadius.circular(10.0),
                         ),
                         child: TextField(
+                          controller: email,
                           decoration: InputDecoration(
                             border: InputBorder.none,
                             prefixIcon: Icon(
@@ -134,24 +138,35 @@ class _ForgotPageState extends State<ForgotPage> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
                   child: Container(
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          fixedSize: const Size(360, 50),
-                          backgroundColor: Color.fromARGB(255, 181, 156, 255),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(50))),
-                      onPressed: () {},
-                      child: Text(
-                        'Send Email',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Color.fromARGB(255, 255, 255, 255),
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20.0,
+                      child: Column(
+                    children: [
+                      if (isEmailSent) ...[
+                        Text(
+                          "Reset password email is sent, please check",
+                          style: TextStyle(
+                              color: Color.fromARGB(255, 185, 89, 240),
+                              fontSize: 17),
+                        )
+                      ],
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            fixedSize: const Size(360, 50),
+                            backgroundColor: Color.fromARGB(255, 181, 156, 255),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(50))),
+                        onPressed: sendForgotPasswordEmail,
+                        child: Text(
+                          'Send Email',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Color.fromARGB(255, 255, 255, 255),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20.0,
+                          ),
                         ),
                       ),
-                    ),
-                  ),
+                    ],
+                  )),
                 ),
               ]),
             ),
@@ -159,5 +174,13 @@ class _ForgotPageState extends State<ForgotPage> {
         ),
       ),
     );
+  }
+
+  void sendForgotPasswordEmail() async {
+    await FirebaseAuth.instance
+        .sendPasswordResetEmail(email: email.text.trim());
+    setState(() {
+      isEmailSent = true;
+    });
   }
 }
