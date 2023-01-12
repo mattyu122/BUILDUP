@@ -11,6 +11,7 @@ import 'package:flutter_application_1/GetData/Event/Event_Cat/PartySreen.dart';
 import 'package:flutter_application_1/GetData/Event/Event_Cat/PhotoSreen.dart';
 import 'package:flutter_application_1/GetData/Event/Event_Cat/ReadSreen.dart';
 import 'package:flutter_application_1/GetData/Event/Event_Cat/SingSreen.dart';
+import 'package:flutter_application_1/GetData/Event/Event_Cat/SportSreen.dart';
 import 'package:flutter_application_1/services/Firebase_service.dart';
 
 class EventCatSreen extends StatefulWidget {
@@ -201,7 +202,7 @@ class _EventCatSreenState extends State<EventCatSreen> {
                   ),
                   child: ListTile(
                     onTap: () {
-                      Navigator.pushNamed(context, SingSreen.id);
+                      Navigator.pushNamed(context, SportSreen.id);
                     },
                     leading: Image.network(
                         'https://firebasestorage.googleapis.com/v0/b/buildup-7c651.appspot.com/o/categories%2FSport.png?alt=media&token=28a38a6f-b041-445a-9966-162af2d5b8de',
