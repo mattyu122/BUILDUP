@@ -50,7 +50,7 @@ class _EventCatState extends State<EventCat> {
                             fontSize: 25.0,
                           ),
                         )),
-                        SizedBox(
+                        Container(
                           height: 32,
                           child: TextButton(
                             onPressed: () {
@@ -58,11 +58,11 @@ class _EventCatState extends State<EventCat> {
                             },
                             child: Row(
                               children: const [
-                                Text('See All',
+                                Text('See All ',
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 15.0,
+                                      fontSize: 14.0,
                                     )),
                                 Icon(
                                   Icons.arrow_forward_ios,

@@ -1,40 +1,36 @@
 // ignore_for_file: prefer_const_constructors
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_application_1/GetData/Course/C_Provider.dart';
 import 'package:flutter_application_1/services/Firebase_service.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:provider/provider.dart';
 
-import '../../DrawerPages/Setting.dart';
-import 'Provider.dart';
-
-class EventSreenDetails extends StatefulWidget {
-  static const String id = 'Event-Post-Details-screen';
+class CourseSreenDetails extends StatefulWidget {
+  static const String id = 'Course123-Post-Details-screen';
 
   @override
-  State<EventSreenDetails> createState() => _EventSreenDetails();
+  State<CourseSreenDetails> createState() => _CourseSreenDetailsState();
 }
 
-class _EventSreenDetails extends State<EventSreenDetails> {
+class _CourseSreenDetailsState extends State<CourseSreenDetails> {
   FirebaseService _service = FirebaseService();
-  bool _isliked = false;
-  List favL = [];
+  bool _isliked1 = false;
+  List favLc = [];
   @override
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
-    var _provider = Provider.of<EpostProvider>(context);
-    _service.post.doc(_provider.EpostData?.id).get().then((value) {
+    var _provider = Provider.of<CpostProvider>(context);
+    _service.Cpost.doc(_provider.CpostData?.id).get().then((value) {
       setState(() {
-        favL = value['fav'];
+        favLc = value['favc'];
       });
-      if (favL.contains(_service.user?.uid)) {
+      if (favLc.contains(_service.user?.uid)) {
         setState(() {
-          _isliked = true;
+          _isliked1 = true;
         });
       } else {
         setState(() {
-          _isliked = false;
+          _isliked1 = false;
         });
       }
     });
@@ -45,9 +41,9 @@ class _EventSreenDetails extends State<EventSreenDetails> {
   Widget build(BuildContext context) {
     FirebaseService _service = FirebaseService();
 
-    var _provider = Provider.of<EpostProvider>(context);
+    var _provider = Provider.of<CpostProvider>(context);
 
-    var data = _provider.EpostData;
+    var data = _provider.CpostData;
     return Scaffold(
       // ignore: unnecessary_new
       appBar: new AppBar(
@@ -57,20 +53,20 @@ class _EventSreenDetails extends State<EventSreenDetails> {
         centerTitle: true,
         actions: [
           IconButton(
-            icon: Icon(_isliked ? Icons.favorite : Icons.favorite_border),
-            color: _isliked ? Colors.red : Colors.white,
+            icon: Icon(_isliked1 ? Icons.favorite : Icons.favorite_border),
+            color: _isliked1 ? Colors.red : Colors.white,
             onPressed: () {
               setState(() {
-                _isliked = !_isliked;
+                _isliked1 = !_isliked1;
               });
               // Navigator.of(context).push(MaterialPageRoute(
               //   builder: (context) => const SetPage(),
               // ));
-              _service.updateFavourite(_isliked, data?.id, context);
+              _service.updateFavourite2(_isliked1, data?.id, context);
             },
           )
         ],
-        title: Text('${_provider.EpostData?['PostN']}',
+        title: Text('${_provider.CpostData?['PostN']}',
             style: TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.bold,
@@ -88,7 +84,7 @@ class _EventSreenDetails extends State<EventSreenDetails> {
                   width: MediaQuery.of(context).size.width,
                   height: 300,
                   // color: Colors.grey.shade300,
-                  child: Image.network(_provider.EpostData?['PostP'],
+                  child: Image.network(_provider.CpostData?['PostP'],
                       fit: BoxFit.cover),
                 ),
                 SizedBox(
@@ -127,7 +123,7 @@ class _EventSreenDetails extends State<EventSreenDetails> {
                             // ignore: prefer_const_literals_to_create_immutables
                             children: [
                               Text(
-                                'Host: ${_provider.EpostData?['hostName']} ',
+                                'Host: ${_provider.CpostData?['hostName']} ',
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold,
@@ -138,7 +134,7 @@ class _EventSreenDetails extends State<EventSreenDetails> {
                                 height: 7,
                               ),
                               Text(
-                                'Date: ${_provider.EpostData?['PostD']} ',
+                                'Date: ${_provider.CpostData?['PostD']} ',
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold,
@@ -149,7 +145,7 @@ class _EventSreenDetails extends State<EventSreenDetails> {
                                 height: 7,
                               ),
                               Text(
-                                'Price: ${_provider.EpostData?['price']} ',
+                                'Price: ${_provider.CpostData?['price']} ',
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold,
@@ -160,7 +156,7 @@ class _EventSreenDetails extends State<EventSreenDetails> {
                                 height: 7,
                               ),
                               Text(
-                                'Location: ${_provider.EpostData?['location']} ',
+                                'Location: ${_provider.CpostData?['location']} ',
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold,
@@ -171,7 +167,7 @@ class _EventSreenDetails extends State<EventSreenDetails> {
                                 height: 7,
                               ),
                               Text(
-                                'Category: ${_provider.EpostData?['category']} ',
+                                'Category: ${_provider.CpostData?['category']} ',
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold,
@@ -182,7 +178,7 @@ class _EventSreenDetails extends State<EventSreenDetails> {
                                 height: 7,
                               ),
                               Text(
-                                'Participant/s: ${_provider.EpostData?['expectedNumber']} ',
+                                'Participant/s: ${_provider.CpostData?['expectedNumber']} ',
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold,
@@ -231,7 +227,7 @@ class _EventSreenDetails extends State<EventSreenDetails> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                '${_provider.EpostData?['description']}',
+                                '${_provider.CpostData?['description']}',
                                 style: TextStyle(
                                   color: Color.fromARGB(255, 0, 0, 0),
                                   fontWeight: FontWeight.bold,

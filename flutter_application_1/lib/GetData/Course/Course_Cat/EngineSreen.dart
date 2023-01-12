@@ -1,17 +1,14 @@
-// ignore_for_file: prefer_const_constructors, unnecessary_new
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/GetData/Event/Event_FavClick.dart';
+import 'package:flutter_application_1/GetData/Course/Course_Cat/Engine.dart';
 
-import '../GetData/Event/Event_FavClick.dart';
-
-class FavPage extends StatefulWidget {
-  const FavPage({super.key});
+class EngineSreen extends StatefulWidget {
+  static const String id = 'EngineSreen-screen';
 
   @override
-  State<FavPage> createState() => _FavPageState();
+  State<EngineSreen> createState() => _EngineSreenState();
 }
 
-class _FavPageState extends State<FavPage> {
+class _EngineSreenState extends State<EngineSreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +17,7 @@ class _FavPageState extends State<FavPage> {
           iconTheme: IconThemeData(
               color: Color.fromARGB(255, 255, 255, 255), size: 30),
           centerTitle: true,
-          title: Text("Favourite Events",
+          title: Text("ENGINE",
               style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
@@ -36,7 +33,7 @@ class _FavPageState extends State<FavPage> {
               // SizedBox(height: 15),
 
               // SizedBox(height: 5),
-              FAV(),
+              CourseEngine(),
             ],
           ),
         )));

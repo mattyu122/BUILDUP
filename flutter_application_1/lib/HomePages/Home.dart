@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, unnecessary_new
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/DrawerPages/CFavourites.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
 import 'package:flutter_application_1/HomePages/Chatspage.dart';
@@ -160,7 +161,7 @@ class NavigationDrawer extends StatelessWidget {
                 color: Colors.black,
               ),
               title: const Text(
-                'Favourites',
+                'Favourite Events',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 15.0,
@@ -170,6 +171,28 @@ class NavigationDrawer extends StatelessWidget {
                 // Navigator.pop(context); close the drawer
                 Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => const FavPage(),
+                ));
+              },
+            ),
+            // const Divider(
+            //   color: Colors.black,
+            // ),
+            ListTile(
+              leading: const Icon(
+                Icons.favorite,
+                color: Colors.black,
+              ),
+              title: const Text(
+                'Favourite Courses',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 15.0,
+                ),
+              ),
+              onTap: () {
+                // Navigator.pop(context); close the drawer
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const FavPageC(),
                 ));
               },
             ),

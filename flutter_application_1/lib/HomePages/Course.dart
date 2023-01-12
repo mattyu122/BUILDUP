@@ -1,16 +1,15 @@
 // ignore_for_file: prefer_const_constructors, unnecessary_new
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/GetData/Event/Event_Cat.dart';
-import 'package:flutter_application_1/GetData/Event/Event_Hit.dart';
-import 'package:flutter_application_1/GetData/Event/Event_New.dart';
-import 'package:flutter_application_1/GetData/Event/Event_UpComing.dart';
-import 'package:flutter_application_1/GetData/Event/Event_Search.dart';
+import 'package:flutter_application_1/GetData/Course/Course_New.dart';
+
 import 'package:flutter_application_1/HomePages/Home.dart';
-import 'package:flutter_application_1/services/E_serarch.dart';
+import 'package:flutter_application_1/services/C_search.dart';
 import 'package:flutter_application_1/services/Firebase_service.dart';
 
 import '../GetData/Course/Course_Cat.dart';
+import '../GetData/Course/Course_Hit.dart';
+import '../GetData/Course/Course_UpComing.dart';
 import '../GetData/Event/Event_Create.dart';
 
 class CoursePage extends StatefulWidget {
@@ -22,16 +21,16 @@ class CoursePage extends StatefulWidget {
 
 class _CoursePageState extends State<CoursePage> {
   FirebaseService _service = FirebaseService();
-  PostSearch _search = PostSearch();
-  static List<EPosts> eposts = [];
+  CPostSearch _search = CPostSearch();
+  static List<CPosts> cposts = [];
   @override
   void initState() {
     // TODO: implement initState
-    _service.post.get().then((QuerySnapshot snapshot) {
+    _service.Cpost.get().then((QuerySnapshot snapshot) {
       snapshot.docs.forEach((doc) {
         setState(() {
-          eposts.add(
-            EPosts(
+          cposts.add(
+            CPosts(
                 document: doc,
                 title: doc['PostN'],
                 date: doc['PostD'],
@@ -70,7 +69,7 @@ class _CoursePageState extends State<CoursePage> {
               onPressed: () {
                 _search.serach(
                   context: context,
-                  EpostList: eposts,
+                  CpostList: cposts,
                 );
               },
               icon: Icon(
@@ -95,9 +94,9 @@ class _CoursePageState extends State<CoursePage> {
               // // EventSearch(),
               // SizedBox(height: 5),
               CourseCat(),
-              EventUP(),
-              EventTOP(),
-              EventNEW(),
+              CourseUP(),
+              CourseTOP(),
+              CourseNEW(),
             ],
           ),
         )));
