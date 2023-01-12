@@ -17,7 +17,7 @@ class _SocialScienceSreenState extends State<SocialScienceSreen> {
           iconTheme: IconThemeData(
               color: Color.fromARGB(255, 255, 255, 255), size: 30),
           centerTitle: true,
-          title: Text("ART",
+          title: Text("SOCIAL SCIENCE",
               style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
