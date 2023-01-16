@@ -1,17 +1,14 @@
-// ignore_for_file: prefer_const_constructors, unnecessary_new
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/GetData/Event/Event_FavClick.dart';
+import 'package:flutter_application_1/GetData/Course/Course_Cat/Law.dart';
 
-import '../GetData/Event/Event_FavClick.dart';
-
-class FavPage extends StatefulWidget {
-  const FavPage({super.key});
+class LawSreen extends StatefulWidget {
+  static const String id = 'LawSreen-screen';
 
   @override
-  State<FavPage> createState() => _FavPageState();
+  State<LawSreen> createState() => _LawSreenState();
 }
 
-class _FavPageState extends State<FavPage> {
+class _LawSreenState extends State<LawSreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +17,7 @@ class _FavPageState extends State<FavPage> {
           iconTheme: IconThemeData(
               color: Color.fromARGB(255, 255, 255, 255), size: 30),
           centerTitle: true,
-          title: Text("Favourite Events",
+          title: Text("LAW",
               style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
@@ -36,7 +33,7 @@ class _FavPageState extends State<FavPage> {
               // SizedBox(height: 15),
 
               // SizedBox(height: 5),
-              FAV(),
+              CourseLaw(),
             ],
           ),
         )));
