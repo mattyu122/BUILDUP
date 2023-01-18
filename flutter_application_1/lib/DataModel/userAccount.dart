@@ -12,6 +12,7 @@ class UserAccount {
   final String? introduction;
   final int? gender;
   final String? tags;
+  final String? profileImageUrl;
   UserAccount({
     this.id,
     this.major,
@@ -22,6 +23,7 @@ class UserAccount {
     required this.email,
     required this.joinedEvent,
     required this.contactUser,
+    this.profileImageUrl,
   });
 
   Map<String, dynamic> toMap() {
@@ -35,6 +37,7 @@ class UserAccount {
       'introduction': introduction,
       'gender': gender,
       'tags': tags,
+      'profileImageUrl': profileImageUrl,
     };
   }
 
@@ -49,5 +52,6 @@ class UserAccount {
         major = userAccountMap['major'],
         introduction = userAccountMap['introduction'],
         gender = userAccountMap['gender'],
-        tags = userAccountMap['tags'];
+        tags = userAccountMap['tags'],
+        profileImageUrl = userAccountMap['profileImageUrl'];
 }

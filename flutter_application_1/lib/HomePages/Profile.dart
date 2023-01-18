@@ -1,11 +1,15 @@
 // ignore_for_file: prefer_const_constructors, unnecessary_new
+import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/DataModel/userAccount.dart';
 import 'package:flutter_application_1/DrawerPages/Setting.dart';
 import 'package:flutter_application_1/HomePages/Home.dart';
+import 'package:flutter_application_1/services/Firebase_service.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -23,6 +27,85 @@ class _ProfilePageState extends State<ProfilePage> {
   final introductionController = TextEditingController();
   final tagsController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  FirebaseStorage storage = FirebaseStorage.instance;
+  String profilePhotoURL = "";
+  File? _photo;
+  final ImagePicker _picker = ImagePicker();
+
+  void _showPicker(context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext bc) {
+          return SafeArea(
+            child: Container(
+              child: new Wrap(
+                children: <Widget>[
+                  new ListTile(
+                      leading: new Icon(Icons.photo_library),
+                      title: new Text('Gallery'),
+                      onTap: () {
+                        imgFromGallery();
+                        Navigator.of(context).pop();
+                      }),
+                  new ListTile(
+                    leading: new Icon(Icons.photo_camera),
+                    title: new Text('Camera'),
+                    onTap: () {
+                      imgFromCamera();
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
+  }
+
+  Future imgFromCamera() async {
+    final pickedFile = await _picker.pickImage(source: ImageSource.camera);
+
+    setState(() {
+      if (pickedFile != null) {
+        _photo = File(pickedFile.path);
+        uploadFile();
+      } else {
+        print('No image selected.');
+      }
+    });
+  }
+
+  Future imgFromGallery() async {
+    final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
+
+    setState(() {
+      if (pickedFile != null) {
+        _photo = File(pickedFile.path);
+        uploadFile();
+      } else {
+        print('No image selected.');
+      }
+    });
+  }
+
+  Future uploadFile() async {
+    if (_photo == null) return;
+    final destination = FirebaseAuth.instance.currentUser!.uid;
+
+    try {
+      final ref =
+          FirebaseStorage.instance.ref(destination).child('profilePhoto/');
+      await ref.putFile(_photo!);
+      await fetchUserInfo();
+      await FirebaseFirestore.instance
+          .collection("user")
+          .doc(FirebaseAuth.instance.currentUser?.uid)
+          .update({"profileImageUrl": profilePhotoURL});
+    } catch (e) {
+      print('error occured');
+    }
+  }
+
   validate() async {
     if (_formKey.currentState!.validate()) {
       print('object');
@@ -77,19 +160,25 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  void fetchUserInfo() async {
+  Future fetchUserInfo() async {
     await FirebaseFirestore.instance
         .collection('user')
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .get()
         .then(
             (value) => {currentUserInfo = UserAccount.fromMap(value.data()!)});
+
+    final profilePhotoURLtmp = await FirebaseStorage.instance
+        .ref(FirebaseAuth.instance.currentUser!.uid)
+        .child('profilePhoto')
+        .getDownloadURL();
     setState(() {
       nameController.text = currentUserInfo.userName;
       majorController.text = currentUserInfo.major ?? '';
       introductionController.text = currentUserInfo.introduction ?? '';
       tagsController.text = currentUserInfo.tags ?? '';
       selected = currentUserInfo.gender ?? 0;
+      profilePhotoURL = profilePhotoURLtmp;
     });
   }
 
@@ -142,7 +231,9 @@ class _ProfilePageState extends State<ProfilePage> {
                       splashColor: Colors.blue,
                       borderRadius: BorderRadius.circular(150.0),
                       // customBorder: CircleBorder(),
-                      onTap: () {},
+                      onTap: () {
+                        _showPicker(context);
+                      },
                       child: Container(
                         width: 300,
                         height: 300,
@@ -150,8 +241,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             shape: BoxShape.circle,
                             image: DecorationImage(
                               fit: BoxFit.cover,
-                              image: NetworkImage(
-                                  'https://www.pngfind.com/pngs/m/93-938537_png-file-fa-user-circle-o-transparent-png.png'),
+                              image: NetworkImage(profilePhotoURL),
                             )),
                       ),
                     ),
