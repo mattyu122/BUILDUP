@@ -15,6 +15,7 @@ class EventPost {
   final int joinedNumber;
   final List<UserAccount>? joinedAccount;
   final String createAt;
+  final String? PostImageUrl;
   EventPost(
       {required this.PostN,
       required this.category,
@@ -22,6 +23,7 @@ class EventPost {
       required this.expectedNumber,
       required this.joinedNumber,
       required this.PostL,
+      this.PostImageUrl,
       this.PostD,
       this.PostP,
       this.location,
@@ -45,6 +47,7 @@ class EventPost {
       'joinedNumber': joinedNumber,
       'createAt': createAt,
       'joinedAccount': joinedAccount!.map((i) => i.toMap()).toList(),
+      'PostImageUrl': PostImageUrl,
     };
   }
 
@@ -61,5 +64,6 @@ class EventPost {
         expectedNumber = eventPostMap["expectedNumber"],
         joinedNumber = eventPostMap["joinedNumber"],
         createAt = eventPostMap['createAt'],
-        joinedAccount = eventPostMap["joinedAccount"];
+        joinedAccount = eventPostMap["joinedAccount"],
+        PostImageUrl = eventPostMap["PostImageUrl"];
 }

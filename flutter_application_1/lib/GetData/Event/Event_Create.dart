@@ -1,14 +1,18 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'dart:async';
-
+import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_application_1/services/Firebase_service.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_application_1/DataModel/EventPosts.dart';
+import 'package:image_picker/image_picker.dart';
 
 class EventCreate extends StatefulWidget {
   static const String id = 'Event-Create-Post-screen';
@@ -28,34 +32,115 @@ class _EventCreateState extends State<EventCreate> {
   final categoryController = TextEditingController();
   final participantNumberController = TextEditingController();
   final descriptionController = TextEditingController();
+  String profilePhotoURL = "";
+  File? _photo;
+  final ImagePicker _picker = ImagePicker();
   validate() async {
     if (_formKey.currentState!.validate()) {
       print('object');
       final number = int.parse(participantNumberController.text);
       EventPost newEvent = EventPost(
-          PostD: dateController.text == ""
-              ? "To be confirmed"
-              : dateController.text,
-          PostP: blankPhoto,
-          price: priceController.text == ""
-              ? "To be confirmed"
-              : priceController.text,
-          location: locationController.text == ""
-              ? "To be confirmed"
-              : locationController.text,
-          PostL: 0,
-          description: descriptionController.text,
-          PostN: titleController.text,
-          category: categoryController.text,
-          hostName: FirebaseAuth.instance.currentUser!.email!,
-          expectedNumber: number,
-          joinedNumber: 0,
-          joinedAccount: [],
-          createAt: DateTime.now().toString());
+        PostD:
+            dateController.text == "" ? "To be confirmed" : dateController.text,
+        PostP: blankPhoto,
+        price: priceController.text == ""
+            ? "To be confirmed"
+            : priceController.text,
+        location: locationController.text == ""
+            ? "To be confirmed"
+            : locationController.text,
+        PostL: 0,
+        description: descriptionController.text,
+        PostN: titleController.text,
+        category: categoryController.text,
+        hostName: FirebaseAuth.instance.currentUser!.email!,
+        expectedNumber: number,
+        joinedNumber: 0,
+        joinedAccount: [],
+        createAt: DateTime.now().toString(),
+        PostImageUrl: profilePhotoURL,
+      );
       await FirebaseFirestore.instance
           .collection('EventPost')
           .add(newEvent.toMap())
           .then((value) => {Navigator.of(context).pop(context)});
+    }
+  }
+
+  void _showPicker(context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext bc) {
+          return SafeArea(
+            child: Container(
+              child: new Wrap(
+                children: <Widget>[
+                  new ListTile(
+                      leading: new Icon(Icons.photo_library),
+                      title: new Text('Gallery'),
+                      onTap: () {
+                        imgFromGallery();
+                        Navigator.of(context).pop();
+                      }),
+                  new ListTile(
+                    leading: new Icon(Icons.photo_camera),
+                    title: new Text('Camera'),
+                    onTap: () {
+                      imgFromCamera();
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
+  }
+
+  Future imgFromCamera() async {
+    final pickedFile = await _picker.pickImage(source: ImageSource.camera);
+
+    setState(() {
+      if (pickedFile != null) {
+        _photo = File(pickedFile.path);
+        uploadFile();
+      } else {
+        print('No image selected.');
+      }
+    });
+  }
+
+  Future imgFromGallery() async {
+    final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
+
+    setState(() {
+      if (pickedFile != null) {
+        _photo = File(pickedFile.path);
+        uploadFile();
+      } else {
+        print('No image selected.');
+      }
+    });
+  }
+
+  Future uploadFile() async {
+    if (_photo == null) return;
+    final destination = FirebaseAuth.instance.currentUser!.uid;
+    try {
+      final photostring = _photo.toString();
+      final ref =
+          FirebaseStorage.instance.ref(destination).child('post/$photostring');
+      await ref.putFile(_photo!);
+
+      final profilePhotoURLtmp = await FirebaseStorage.instance
+          .ref(destination)
+          .child('post/$photostring')
+          .getDownloadURL();
+      setState(() {
+        profilePhotoURL = profilePhotoURLtmp;
+      });
+    } catch (e) {
+      print('error occured');
     }
   }
 
@@ -308,57 +393,6 @@ class _EventCreateState extends State<EventCreate> {
                     height: 12,
                   ),
 
-                  // Column(
-                  //   crossAxisAlignment: CrossAxisAlignment.start,
-                  //   children: [
-                  //     Padding(
-                  //       padding: const EdgeInsets.symmetric(horizontal: 0.0),
-                  //       child: Text(
-                  //         'Description',
-                  //         style: TextStyle(
-                  //           color: Colors.white,
-                  //           fontWeight: FontWeight.bold,
-                  //           fontSize: 17.0,
-                  //         ),
-                  //       ),
-                  //     ),
-                  //     SizedBox(height: 7),
-                  //     Padding(
-                  //       padding: const EdgeInsets.symmetric(horizontal: 0.0),
-                  //       child: Container(
-                  //         height: 180,
-                  //         decoration: BoxDecoration(
-                  //           color: Color.fromARGB(255, 181, 156, 255),
-                  //           border: Border.all(
-                  //               color: Color.fromARGB(255, 181, 156, 255),
-                  //               width: 2),
-                  //           borderRadius: BorderRadius.circular(5.0),
-                  //         ),
-                  //         child: TextFormField(
-                  //           style: TextStyle(fontSize: 17, color: Colors.black),
-                  //           decoration: InputDecoration(
-                  //             border: InputBorder.none,
-                  //             hintText: "",
-                  //             contentPadding: EdgeInsets.only(
-                  //                 left: 10, bottom: 0, right: 10, top: 0),
-                  //             hintStyle: TextStyle(
-                  //                 fontSize: 17.0,
-                  //                 color: Color.fromARGB(255, 0, 0, 0)),
-                  //           ),
-                  //           validator: (value) {
-                  //             if (value!.isEmpty) {
-                  //               return 'Please complete required flied';
-                  //             }
-                  //             return null;
-                  //           },
-                  //           maxLines: 10,
-                  //           minLines: 1,
-                  //         ),
-                  //       ),
-                  //     ),
-                  //   ],
-                  // ),
-
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -421,34 +455,6 @@ class _EventCreateState extends State<EventCreate> {
                     ],
                   ),
 
-                  // TextFormField(
-                  //     maxLines: 30,
-                  //     style: TextStyle(fontSize: 17, color: Colors.white),
-                  //     decoration: InputDecoration(
-                  //         constraints:
-                  //             BoxConstraints.tightFor(width: 395, height: 200),
-                  //         labelText: 'Description',
-                  //         labelStyle: TextStyle(
-                  //           color: Colors.white,
-                  //           fontWeight: FontWeight.bold,
-                  //         ),
-                  //         enabledBorder: OutlineInputBorder(
-                  //             borderSide: BorderSide(
-                  //                 color: Color.fromARGB(255, 181, 156, 255),
-                  //                 width: 2)),
-                  //         focusedBorder: OutlineInputBorder(
-                  //             borderSide: BorderSide(
-                  //                 color: Color.fromARGB(255, 181, 156, 255),
-                  //                 width: 2)),
-                  //         errorBorder: OutlineInputBorder(
-                  //             borderSide:
-                  //                 BorderSide(color: Colors.red, width: 2))),
-                  //     validator: (value) {
-                  //       if (value!.isEmpty) {
-                  //         return 'Please complete required flied';
-                  //       }
-                  //       return null;
-                  //     }),
                   SizedBox(
                     height: 20,
                   ),
@@ -461,7 +467,9 @@ class _EventCreateState extends State<EventCreate> {
                             backgroundColor: Color.fromARGB(255, 181, 156, 255),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10))),
-                        onPressed: () {},
+                        onPressed: () {
+                          _showPicker(context);
+                        },
                         child: Text(
                           'UPLOAD IMAGE', //Images should be saved into firebase storage database(not firestore)
                           textAlign: TextAlign.center,
