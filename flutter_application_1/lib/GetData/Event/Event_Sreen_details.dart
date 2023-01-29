@@ -306,6 +306,10 @@ class _EventSreenDetails extends State<EventSreenDetails> {
                             _provider.EpostData!.id,
                             _provider.EpostData?['PostN'],
                             _provider.EpostData?.id);
+
+                        await _service.post
+                            .doc(_provider.EpostData!.id)
+                            .delete();
                         if (!mounted) return;
                         Navigator.of(context).pop();
                       },

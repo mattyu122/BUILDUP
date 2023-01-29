@@ -258,6 +258,10 @@ class _CourseSreenDetailsState extends State<CourseSreenDetails> {
                             _provider.CpostData!.id,
                             _provider.CpostData?['PostN'],
                             _provider.CpostData?.id);
+
+                        await _service.post
+                            .doc(_provider.CpostData!.id)
+                            .delete();
                         if (!mounted) return;
                         Navigator.of(context).pop();
                       },
