@@ -40,6 +40,7 @@ class _EventCreateState extends State<EventCreate> {
       print('object');
       final number = int.parse(participantNumberController.text);
       EventPost newEvent = EventPost(
+        hostUserId: FirebaseAuth.instance.currentUser!.uid,
         PostD:
             dateController.text == "" ? "To be confirmed" : dateController.text,
         PostP: blankPhoto,
@@ -57,6 +58,7 @@ class _EventCreateState extends State<EventCreate> {
         expectedNumber: number,
         joinedNumber: 0,
         joinedAccount: [],
+        fav: [],
         createAt: DateTime.now().toString(),
         PostImageUrl: profilePhotoURL,
       );

@@ -6,6 +6,7 @@ class EventPost {
   final String hostName;
   final String? PostD;
   final int PostL;
+  final String hostUserId;
   final String? PostP;
   final String? price;
   final String category;
@@ -13,8 +14,9 @@ class EventPost {
   final String? description;
   final int expectedNumber;
   final int joinedNumber;
-  final List<UserAccount>? joinedAccount;
+  final List<String>? joinedAccount;
   final String createAt;
+  final List<String> fav;
   final String? PostImageUrl;
   EventPost(
       {required this.PostN,
@@ -23,6 +25,8 @@ class EventPost {
       required this.expectedNumber,
       required this.joinedNumber,
       required this.PostL,
+      required this.fav,
+      required this.hostUserId,
       this.PostImageUrl,
       this.PostD,
       this.PostP,
@@ -36,6 +40,7 @@ class EventPost {
     return {
       'PostN': PostN,
       'PostD': PostD,
+      'hostUserId': hostUserId,
       'price': price,
       'PostL': PostL,
       'PostP': PostP,
@@ -46,8 +51,9 @@ class EventPost {
       'expectedNumber': expectedNumber,
       'joinedNumber': joinedNumber,
       'createAt': createAt,
-      'joinedAccount': joinedAccount!.map((i) => i.toMap()).toList(),
+      'joinedAccount': joinedAccount!.map((i) => i.toString()).toList(),
       'PostImageUrl': PostImageUrl,
+      'fav': fav.map((i) => i.toString()).toList(),
     };
   }
 
@@ -57,6 +63,7 @@ class EventPost {
         price = eventPostMap['price'],
         PostL = eventPostMap['PostL'],
         PostP = eventPostMap['PostP'],
+        hostUserId = eventPostMap['hostUserId'],
         category = eventPostMap['category'],
         description = eventPostMap['description'],
         hostName = eventPostMap["hostName"],
@@ -64,6 +71,7 @@ class EventPost {
         expectedNumber = eventPostMap["expectedNumber"],
         joinedNumber = eventPostMap["joinedNumber"],
         createAt = eventPostMap['createAt'],
-        joinedAccount = eventPostMap["joinedAccount"],
-        PostImageUrl = eventPostMap["PostImageUrl"];
+        joinedAccount = eventPostMap["joinedAccount"].cast<String>(),
+        PostImageUrl = eventPostMap["PostImageUrl"],
+        fav = eventPostMap["fav"].cast<String>();
 }

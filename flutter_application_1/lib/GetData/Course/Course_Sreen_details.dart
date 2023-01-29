@@ -253,8 +253,13 @@ class _CourseSreenDetailsState extends State<CourseSreenDetails> {
                           backgroundColor: Color.fromARGB(255, 181, 156, 255),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10))),
-                      onPressed: () {
-                        // validate();
+                      onPressed: () async {
+                        await _service.createChatRoomForGroup(
+                            _provider.CpostData!.id,
+                            _provider.CpostData?['PostN'],
+                            _provider.CpostData?.id);
+                        if (!mounted) return;
+                        Navigator.of(context).pop();
                       },
                       child: Text(
                         'JOIN EVENT',

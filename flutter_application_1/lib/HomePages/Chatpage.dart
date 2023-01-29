@@ -59,19 +59,24 @@ class _ChatPageState extends State<ChatPage> {
                 ),
                 child: MessagesWidget(
                   chatroomId: chatroomId(FirebaseAuth.instance.currentUser!.uid,
-                      currentChatUser.id),
+                      currentChatUser.id, currentChatUser.groupChat),
                   currentChatUser: currentChatUser,
                 ),
               ),
             ),
-            SendNewMessageWidget(idUser: currentChatUser.id)
+            SendNewMessageWidget(
+              contact: currentChatUser,
+            )
           ],
         ),
       ),
     );
   }
 
-  String chatroomId(String senderId, String receiverId) {
+  String chatroomId(String senderId, String receiverId, bool groupChat) {
+    if (groupChat) {
+      return receiverId;
+    }
     return senderId.hashCode <= receiverId.hashCode
         ? '${senderId}_$receiverId'
         : "${receiverId}_$senderId";

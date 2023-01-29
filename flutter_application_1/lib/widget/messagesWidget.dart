@@ -51,6 +51,7 @@ class _MessagesWidgetState extends State<MessagesWidget> {
             } else if (snapshot.hasData) {
               final messages = snapshot.data!.docs
                   .map((e) => Message(
+                      senderName: e['senderName'],
                       senderId: e['senderId'],
                       receiverId: e['receiverId'],
                       message: e['message'],
@@ -65,12 +66,12 @@ class _MessagesWidgetState extends State<MessagesWidget> {
                       itemBuilder: (context, index) {
                         //final message = snapshot.data!.docs[index]['message'];
                         return MessageWidget(
-                          message: messages[index]
-                              .message, //snapshot.data!.docs[index]['message'],
-                          isMe: messages[index].senderId ==
-                              FirebaseAuth.instance.currentUser!
-                                  .uid, //snapshot.data!.docs[index]['senderId'] ==
-                        );
+                            message: messages[index]
+                                .message, //snapshot.data!.docs[index]['message'],
+                            isMe: messages[index].senderId ==
+                                FirebaseAuth.instance.currentUser!
+                                    .uid, //snapshot.data!.docs[index]['senderId'] ==
+                            senderName: messages[index].senderName);
                       },
                     );
             }

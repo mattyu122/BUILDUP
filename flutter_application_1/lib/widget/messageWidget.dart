@@ -4,10 +4,11 @@ import 'package:flutter/material.dart';
 class MessageWidget extends StatelessWidget {
   final String message;
   final bool isMe;
-
+  final String senderName;
   const MessageWidget({
     required this.message,
     required this.isMe,
+    required this.senderName,
     Key? key,
   }) : super(key: key);
 
@@ -24,10 +25,7 @@ class MessageWidget extends StatelessWidget {
           margin: const EdgeInsets.all(4),
           constraints: const BoxConstraints(maxWidth: 170),
           decoration: BoxDecoration(
-            color: isMe
-                ? const Color.fromARGB(255, 104, 46, 170)
-                : const Color.fromARGB(
-                    255, 10, 0, 1), //Theme.of(context).accentColor,
+            color: const Color.fromARGB(255, 153, 145, 161),
             borderRadius: isMe
                 ? borderRadius
                     .subtract(const BorderRadius.only(bottomRight: radius))
@@ -44,6 +42,13 @@ class MessageWidget extends StatelessWidget {
         crossAxisAlignment:
             isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
         children: <Widget>[
+          Text(
+            "$senderName:",
+            style: TextStyle(color: Color.fromARGB(255, 133, 43, 235)),
+          ),
+          SizedBox(
+            height: 5,
+          ),
           Text(
             message,
             style: TextStyle(

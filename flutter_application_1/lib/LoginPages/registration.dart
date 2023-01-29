@@ -279,7 +279,11 @@ class _RegisterPageState extends State<RegisterPage> {
           .doc(FirebaseAuth.instance.currentUser?.uid)
           .get();
       ContactUser newContact = ContactUser(
-          userName: "matt1", email: "matt1@gmail.com", icon: "icon", id: "id");
+          userName: "matt1",
+          email: "matt1@gmail.com",
+          icon: "icon",
+          id: "id",
+          groupChat: false);
       UserAccount newUser = UserAccount(
         id: FirebaseAuth.instance.currentUser?.uid,
         userName: FirebaseAuth.instance.currentUser!.email.toString(),

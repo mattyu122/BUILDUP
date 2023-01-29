@@ -5,11 +5,13 @@ class ContactUser {
   final String email;
   final String icon;
   final String id;
+  final bool groupChat;
   ContactUser({
     required this.userName,
     required this.email,
     required this.icon,
     required this.id,
+    required this.groupChat,
   });
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -17,6 +19,7 @@ class ContactUser {
       'userName': userName,
       'email': email,
       'icon': icon,
+      'groupChat': groupChat,
     };
   }
 
@@ -24,5 +27,6 @@ class ContactUser {
       : id = contactUserMap["id"],
         userName = contactUserMap["userName"],
         email = contactUserMap["email"],
-        icon = contactUserMap["icon"];
+        icon = contactUserMap["icon"],
+        groupChat = contactUserMap["groupChat"];
 }
