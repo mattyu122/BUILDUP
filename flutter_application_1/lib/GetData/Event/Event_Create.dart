@@ -22,6 +22,33 @@ class EventCreate extends StatefulWidget {
 }
 
 class _EventCreateState extends State<EventCreate> {
+  String dropdownvalue = 'Category Select';
+  var items = [
+    'Category Select',
+    'Movie',
+    'Photo',
+    'Game',
+    'Read',
+    'Sport',
+    'Music',
+    'Food',
+    'Party',
+    'Sing',
+    'Drama',
+  ];
+
+  String dropdownvalue1 = 'Faculty Select';
+  var items1 = [
+    'Faculty Select',
+    'Medicine',
+    'Science',
+    'Engine',
+    'Social Science',
+    'Art',
+    'Business',
+    'Education',
+    'Law',
+  ];
   final blankPhoto =
       'https://firebasestorage.googleapis.com/v0/b/buildup-7c651.appspot.com/o/New%20Event%20Test%2FDefaultBlank.jpg?alt=media&token=42ea3800-a53d-4122-8d8e-26e39be6ff5d';
   final _formKey = GlobalKey<FormState>();
@@ -67,6 +94,15 @@ class _EventCreateState extends State<EventCreate> {
           .add(newEvent.toMap())
           .then((value) => {Navigator.of(context).pop(context)});
     }
+  }
+
+  void _showdatepicker() {
+    showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2023),
+      lastDate: DateTime(2099),
+    );
   }
 
   void _showPicker(context) {
@@ -184,6 +220,99 @@ class _EventCreateState extends State<EventCreate> {
                   SizedBox(
                     height: 10,
                   ),
+
+                  Padding(
+                    padding: const EdgeInsets.all(0.0),
+                    child: Container(
+                      padding: const EdgeInsets.all(8.0),
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                            width: 2,
+                            color: Color.fromARGB(255, 181, 156, 255)),
+                        borderRadius: BorderRadius.all(Radius.circular(5)),
+                      ),
+                      width: 395,
+                      height: 60,
+                      child: DropdownButton(
+                        isExpanded: true,
+                        underline: Container(),
+                        dropdownColor: Colors.black,
+                        value: dropdownvalue,
+                        icon: const Icon(Icons.keyboard_arrow_down,
+                            color: Color.fromARGB(255, 181, 156, 255)),
+                        items: items.map((String items) {
+                          return DropdownMenuItem(
+                            value: items,
+                            child: Text(
+                              items,
+                              style: TextStyle(
+                                fontSize: 17,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          );
+                        }).toList(),
+                        onChanged: (String? newValue) {
+                          setState(() {
+                            dropdownvalue = newValue!;
+                          });
+                        },
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+
+                  SizedBox(
+                    height: 10,
+                  ),
+
+                  Padding(
+                    padding: const EdgeInsets.all(0.0),
+                    child: Container(
+                      padding: const EdgeInsets.all(8.0),
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                            width: 2,
+                            color: Color.fromARGB(255, 181, 156, 255)),
+                        borderRadius: BorderRadius.all(Radius.circular(5)),
+                      ),
+                      width: 395,
+                      height: 60,
+                      child: DropdownButton(
+                        isExpanded: true,
+                        underline: Container(),
+                        dropdownColor: Colors.black,
+                        value: dropdownvalue1,
+                        icon: const Icon(Icons.keyboard_arrow_down,
+                            color: Color.fromARGB(255, 181, 156, 255)),
+                        items: items1.map((String items) {
+                          return DropdownMenuItem(
+                            value: items,
+                            child: Text(
+                              items,
+                              style: TextStyle(
+                                fontSize: 17,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          );
+                        }).toList(),
+                        onChanged: (String? newValue1) {
+                          setState(() {
+                            dropdownvalue1 = newValue1!;
+                          });
+                        },
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+
                   TextFormField(
                       controller: titleController,
                       style: TextStyle(fontSize: 17, color: Colors.white),
@@ -223,6 +352,9 @@ class _EventCreateState extends State<EventCreate> {
                       controller: dateController,
                       style: TextStyle(fontSize: 17, color: Colors.white),
                       decoration: InputDecoration(
+                          hintStyle:
+                              TextStyle(fontSize: 17, color: Colors.white),
+                          hintText: 'Year/Month/Day',
                           labelText: 'Date',
                           labelStyle: TextStyle(
                             color: Colors.white,
