@@ -265,10 +265,6 @@ class _EventCreateState extends State<EventCreate> {
                     height: 10,
                   ),
 
-                  SizedBox(
-                    height: 10,
-                  ),
-
                   Padding(
                     padding: const EdgeInsets.all(0.0),
                     child: Container(
