@@ -61,6 +61,7 @@ class FirebaseService {
     if (_isliked) {
       post.doc(postId).update({
         'fav': FieldValue.arrayUnion([user?.uid]),
+        'PostL': FieldValue.increment(1),
       });
 
       ScaffoldMessenger.of(context).showSnackBar(
@@ -68,7 +69,8 @@ class FirebaseService {
       );
     } else {
       post.doc(postId).update({
-        'fav': FieldValue.arrayRemove([user?.uid])
+        'fav': FieldValue.arrayRemove([user?.uid]),
+        'PostL': FieldValue.increment(-1),
       });
 
       ScaffoldMessenger.of(context).showSnackBar(
@@ -81,13 +83,15 @@ class FirebaseService {
     if (_isliked1) {
       Cpost.doc(postId1).update({
         'favc': FieldValue.arrayUnion([user?.uid]),
+        'PostL': FieldValue.increment(1),
       });
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Added to my favourite')),
       );
     } else {
       Cpost.doc(postId1).update({
-        'favc': FieldValue.arrayRemove([user?.uid])
+        'favc': FieldValue.arrayRemove([user?.uid]),
+        'PostL': FieldValue.increment(-1),
       });
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Removed to my favourite')),
