@@ -23,7 +23,7 @@ class _CourseTOPState extends State<CourseTOP> {
     return Center(
       child: Container(
         child: StreamBuilder<QuerySnapshot>(
-          stream: _service.Cpost.snapshots(),
+          stream: _service.Cpost.orderBy('PostL', descending: true).snapshots(),
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasError) {
