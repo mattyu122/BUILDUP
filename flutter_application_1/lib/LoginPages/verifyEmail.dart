@@ -50,6 +50,7 @@ class _VerifyEmail extends State<VerifyEmail> {
     });
 
     if (emailVerified) {
+      await createAccountInDataBase();
       if (mounted) {
         Navigator.of(context).pop();
       }
@@ -57,7 +58,7 @@ class _VerifyEmail extends State<VerifyEmail> {
     }
   }
 
-  Future checkAccountExist() async {
+  Future createAccountInDataBase() async {
     final tmp = await FirebaseFirestore.instance
         .collection("user")
         .doc(FirebaseAuth.instance.currentUser?.uid)

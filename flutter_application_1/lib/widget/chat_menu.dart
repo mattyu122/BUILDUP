@@ -30,7 +30,8 @@ class ChatMenuWidget extends StatelessWidget {
       itemBuilder: (context, index) {
         print(realuser[index]);
         return Container(
-          height: 75,
+          decoration: BoxDecoration(border: Border(bottom: BorderSide())),
+          height: 65,
           child: ListTile(
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(

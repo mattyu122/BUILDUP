@@ -96,11 +96,17 @@ class _ProfilePageState extends State<ProfilePage> {
       final ref =
           FirebaseStorage.instance.ref(destination).child('profilePhoto/');
       await ref.putFile(_photo!);
-      await fetchUserInfo();
+      //await fetchUserInfo();
+      final profilePhotoURLtmp = await FirebaseStorage.instance
+          .ref(FirebaseAuth.instance.currentUser!.uid)
+          .child('profilePhoto')
+          .getDownloadURL();
       await FirebaseFirestore.instance
           .collection("user")
           .doc(FirebaseAuth.instance.currentUser?.uid)
-          .update({"profileImageUrl": profilePhotoURL});
+          .update({"profileImageUrl": profilePhotoURLtmp});
+      print("fldksjafldjsalkfjdsaf:\n");
+      print(profilePhotoURL);
     } catch (e) {
       print('error occured');
     }
@@ -178,7 +184,7 @@ class _ProfilePageState extends State<ProfilePage> {
       introductionController.text = currentUserInfo.introduction ?? '';
       tagsController.text = currentUserInfo.tags ?? '';
       selected = currentUserInfo.gender ?? 0;
-      profilePhotoURL = profilePhotoURLtmp;
+      profilePhotoURL = currentUserInfo.profileImageUrl!;
     });
   }
 

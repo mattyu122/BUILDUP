@@ -30,6 +30,9 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   @override
+  void initState() {}
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: new AppBar(
@@ -266,38 +269,49 @@ class _RegisterPageState extends State<RegisterPage> {
         return; //verify cuhk email
       }
 
-      final query = FirebaseFirestore.instance
-          .collection("user")
-          .where("email", isEqualTo: emailController.text.trim());
+      // final query = FirebaseFirestore.instance
+      //     .collection("user")
+      //     .where("email", isEqualTo: emailController.text.trim());
 
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: emailController.text.trim(),
-          password: passwordController.text.trim());
+      await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
+              email: emailController.text.trim(),
+              password: passwordController.text.trim())
+          .then((value) {
+        Navigator.push(
+                context, MaterialPageRoute(builder: (context) => VerifyEmail()))
+            .then((_) {
+          if (!mounted) {
+            Navigator.of(context).pop();
+          }
+        });
+      });
+      // await FirebaseFirestore.instance
+      //     .collection("user")
+      //     .doc(FirebaseAuth.instance.currentUser?.uid)
+      //     .get();
 
-      await FirebaseFirestore.instance
-          .collection("user")
-          .doc(FirebaseAuth.instance.currentUser?.uid)
-          .get();
-      ContactUser newContact = ContactUser(
-          userName: "matt1",
-          email: "matt1@gmail.com",
-          icon: "icon",
-          id: "id",
-          groupChat: false);
-      UserAccount newUser = UserAccount(
-        id: FirebaseAuth.instance.currentUser?.uid,
-        userName: FirebaseAuth.instance.currentUser!.email.toString(),
-        email: FirebaseAuth.instance.currentUser!.email.toString(),
-        joinedEvent: [],
-        contactUser: [newContact],
-      );
-      await FirebaseFirestore.instance
-          .collection("user")
-          .doc(FirebaseAuth.instance.currentUser?.uid)
-          .set(newUser.toMap())
-          .then((value) => Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => VerifyEmail()))
-              .then((_) => Navigator.of(context).pop()));
+      // ContactUser newContact = ContactUser(
+      //     userName: "matt1",
+      //     email: "matt1@gmail.com",
+      //     icon: "icon",
+      //     id: "id",
+      //     groupChat: false);
+      // UserAccount newUser = UserAccount(
+      //   id: FirebaseAuth.instance.currentUser?.uid,
+      //   userName: FirebaseAuth.instance.currentUser!.email.toString(),
+      //   email: FirebaseAuth.instance.currentUser!.email.toString(),
+      //   joinedEvent: [],
+      //   contactUser: [newContact],
+      //   pushNotificationToken: pushNotificationTokenString!,
+      // );
+      // await FirebaseFirestore.instance
+      //     .collection("user")
+      //     .doc(FirebaseAuth.instance.currentUser?.uid)
+      //     .set(newUser.toMap())
+      //     .then((value) => Navigator.push(context,
+      //             MaterialPageRoute(builder: (context) => VerifyEmail()))
+      //         .then((_) => Navigator.of(context).pop()));
     } on FirebaseAuthException catch (e) {
       print(e);
     }
