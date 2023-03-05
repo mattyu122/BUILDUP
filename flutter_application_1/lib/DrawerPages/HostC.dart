@@ -1,16 +1,16 @@
 // ignore_for_file: prefer_const_constructors, unnecessary_new
 import 'package:flutter/material.dart';
 
-import '../GetData/Event/Event_Host.dart';
+import '../GetData/Course/Course_Host.dart';
 
-class HostPage extends StatefulWidget {
-  const HostPage({super.key});
+class HostCPage extends StatefulWidget {
+  const HostCPage({super.key});
 
   @override
-  State<HostPage> createState() => _HostPageState();
+  State<HostCPage> createState() => _HostCPageState();
 }
 
-class _HostPageState extends State<HostPage> {
+class _HostCPageState extends State<HostCPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,7 +19,7 @@ class _HostPageState extends State<HostPage> {
           iconTheme: IconThemeData(
               color: Color.fromARGB(255, 255, 255, 255), size: 30),
           centerTitle: true,
-          title: Text("Host Events",
+          title: Text("Host Courses",
               style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
@@ -35,7 +35,7 @@ class _HostPageState extends State<HostPage> {
               // SizedBox(height: 15),
 
               // SizedBox(height: 5),
-              HOSTE(),
+              HOSTC(),
             ],
           ),
         )));
