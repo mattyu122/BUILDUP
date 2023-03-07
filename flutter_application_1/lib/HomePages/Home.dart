@@ -11,6 +11,7 @@ import 'package:flutter_application_1/HomePages/Profile.dart';
 
 import '../DrawerPages/Favourites.dart';
 import '../DrawerPages/Host.dart';
+import '../DrawerPages/HostC.dart';
 import '../DrawerPages/Notifications.dart';
 import '../DrawerPages/Setting.dart';
 import '../LoginPages/login.dart';
@@ -143,7 +144,7 @@ class NavigationDrawer extends StatelessWidget {
                 color: Colors.black,
               ),
               title: const Text(
-                'Host',
+                'Host Events',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 15.0,
@@ -152,6 +153,24 @@ class NavigationDrawer extends StatelessWidget {
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => const HostPage(),
+                ));
+              },
+            ),
+            ListTile(
+              leading: const Icon(
+                Icons.person,
+                color: Colors.black,
+              ),
+              title: const Text(
+                'Host Courses',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 15.0,
+                ),
+              ),
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const HostCPage(),
                 ));
               },
             ),

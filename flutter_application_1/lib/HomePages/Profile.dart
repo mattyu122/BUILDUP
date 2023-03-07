@@ -19,6 +19,43 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  String dropdownvalue1 = 'Select Your Faculty';
+  var items1 = [
+    'Select Your Faculty',
+    'Medicine',
+    'Science',
+    'Engine',
+    'Social Science',
+    'Art',
+    'Business',
+    'Education',
+    'Law',
+  ];
+  String dropdownvalue3 = 'Select Your Interest Event';
+  var items3 = [
+    'Select Your Interest Event',
+    'Social event',
+    'Educational event',
+    'Entertainment event',
+    'Sports and fitness event',
+    'Outdoor event',
+    'Relaxation event',
+    'Cultural event',
+    'Food and drink event',
+    'Charity event',
+    'Gaming event',
+    'Competition event',
+    'Other events'
+  ];
+
+  String dropdownvalue4 = 'Select Your Tag';
+  var items4 = [
+    'Select Your Tag',
+    'Hardworking groupmate',
+    'Perfectionist groupmate',
+    'Leader groupmate',
+    'Collaborative groupmate',
+  ];
   late final UserAccount currentUserInfo;
   bool saved = false;
   int selected = 0;
@@ -556,6 +593,189 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                   SizedBox(
                     height: 15,
+                  ),
+
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 0.0),
+                        child: Text(
+                          'Faculty of Major',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 17.0,
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 7),
+                      Padding(
+                        padding: const EdgeInsets.all(0.0),
+                        child: Container(
+                          padding: const EdgeInsets.all(8.0),
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                                width: 2,
+                                color: Color.fromARGB(255, 181, 156, 255)),
+                            borderRadius: BorderRadius.all(Radius.circular(5)),
+                          ),
+                          width: 380,
+                          height: 60,
+                          child: DropdownButton(
+                            isExpanded: true,
+                            underline: Container(),
+                            dropdownColor: Colors.black,
+                            value: dropdownvalue1,
+                            icon: const Icon(Icons.keyboard_arrow_down,
+                                color: Color.fromARGB(255, 181, 156, 255)),
+                            items: items1.map((String items) {
+                              return DropdownMenuItem(
+                                value: items,
+                                child: Text(
+                                  items,
+                                  style: TextStyle(
+                                    fontSize: 17,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              );
+                            }).toList(),
+                            onChanged: (String? newValue1) {
+                              setState(() {
+                                dropdownvalue1 = newValue1!;
+                              });
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 12,
+                  ),
+
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 0.0),
+                        child: Text(
+                          'Event type of interest',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 17.0,
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 7),
+                      Padding(
+                        padding: const EdgeInsets.all(0.0),
+                        child: Container(
+                          padding: const EdgeInsets.all(8.0),
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                                width: 2,
+                                color: Color.fromARGB(255, 181, 156, 255)),
+                            borderRadius: BorderRadius.all(Radius.circular(5)),
+                          ),
+                          width: 380,
+                          height: 60,
+                          child: DropdownButton(
+                            isExpanded: true,
+                            underline: Container(),
+                            dropdownColor: Colors.black,
+                            value: dropdownvalue3,
+                            icon: const Icon(Icons.keyboard_arrow_down,
+                                color: Color.fromARGB(255, 181, 156, 255)),
+                            items: items3.map((String items) {
+                              return DropdownMenuItem(
+                                value: items,
+                                child: Text(
+                                  items,
+                                  style: TextStyle(
+                                    fontSize: 17,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              );
+                            }).toList(),
+                            onChanged: (String? newValue3) {
+                              setState(() {
+                                dropdownvalue3 = newValue3!;
+                              });
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 12,
+                  ),
+
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 0.0),
+                        child: Text(
+                          'Course Tag',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 17.0,
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 7),
+                      Padding(
+                        padding: const EdgeInsets.all(0.0),
+                        child: Container(
+                          padding: const EdgeInsets.all(8.0),
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                                width: 2,
+                                color: Color.fromARGB(255, 181, 156, 255)),
+                            borderRadius: BorderRadius.all(Radius.circular(5)),
+                          ),
+                          width: 380,
+                          height: 60,
+                          child: DropdownButton(
+                            isExpanded: true,
+                            underline: Container(),
+                            dropdownColor: Colors.black,
+                            value: dropdownvalue4,
+                            icon: const Icon(Icons.keyboard_arrow_down,
+                                color: Color.fromARGB(255, 181, 156, 255)),
+                            items: items4.map((String items) {
+                              return DropdownMenuItem(
+                                value: items,
+                                child: Text(
+                                  items,
+                                  style: TextStyle(
+                                    fontSize: 17,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              );
+                            }).toList(),
+                            onChanged: (String? newValue4) {
+                              setState(() {
+                                dropdownvalue4 = newValue4!;
+                              });
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 12,
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

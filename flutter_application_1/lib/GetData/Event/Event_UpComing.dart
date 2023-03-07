@@ -1,10 +1,16 @@
-// ignore_for_file: prefer_const_constructors, unnecessary_new
+import 'dart:collection';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/GetData/Event/Event_Sreen_details.dart';
 import 'package:flutter_application_1/GetData/Event/Provider.dart';
+import 'package:flutter_application_1/GetData/Event/Read1.dart';
 import 'package:flutter_application_1/services/Firebase_service.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_application_1/GetData/Event/ReadUser.dart';
+import 'package:flutter_application_1/DataModel/userAccount.dart';
+import 'package:flutter_application_1/GetData/Event/Read1.dart';
 
 class EventUP extends StatefulWidget {
   const EventUP({super.key});
@@ -15,6 +21,57 @@ class EventUP extends StatefulWidget {
 
 class _EventUPState extends State<EventUP> {
   @override
+  void initState() {
+    super.initState();
+    // fetchRecords();
+    fetchUserInfo1();
+  }
+
+  UserAccount? currentUserInfo;
+  // final tagsController = TextEditingController();
+
+  // validate() async {
+  //   await FirebaseFirestore.instance
+  //       .collection('user')
+  //       .doc(FirebaseAuth.instance.currentUser!.uid)
+  //       .update({
+  //     'tags': tagsController.text.trim(),
+  //   });
+  // }
+
+  Future fetchUserInfo1() async {
+    await FirebaseFirestore.instance
+        .collection('user')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .get()
+        .then(
+            (value) => {currentUserInfo = UserAccount.fromMap(value.data()!)});
+
+    // setState(() {
+    //   tagsController.text = currentUserInfo?.tags ?? '';
+    // });
+  }
+
+  // List<User123> useritem = [];
+
+  // Future fetchRecords() async {
+  //   var records = await FirebaseFirestore.instance
+  //       .collection('user')
+  //       .doc(FirebaseAuth.instance.currentUser!.uid)
+  //       .get();
+  // }
+
+  // mapRecords(QuerySnapshot<Map<String, dynamic>> records) {
+  //   var _list = records.docs
+  //       .map((item) => User123(
+  //           id: item.id, tags: item['tags'], userName: item['userName']))
+  //       .toList();
+
+  //   setState(() {
+  //     useritem = _list;
+  //   });
+  // }
+
   Widget build(BuildContext context) {
     var _provider = Provider.of<EpostProvider>(context);
     FirebaseService _service = FirebaseService();
@@ -22,7 +79,10 @@ class _EventUPState extends State<EventUP> {
     return Center(
       child: Container(
         child: StreamBuilder<QuerySnapshot>(
-          stream: _service.post.snapshots(),
+          stream: _service.post
+              .where('category', isEqualTo: currentUserInfo?.tags)
+              .where('PostN', isEqualTo: 'CE')
+              .snapshots(),
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasError) {
