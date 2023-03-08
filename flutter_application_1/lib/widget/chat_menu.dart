@@ -30,7 +30,15 @@ class ChatMenuWidget extends StatelessWidget {
       itemBuilder: (context, index) {
         print(realuser[index]);
         return Container(
-          decoration: BoxDecoration(border: Border(bottom: BorderSide())),
+          margin: EdgeInsets.only(bottom: 10.0),
+          decoration: BoxDecoration(
+            border: Border.all(width: 3, color: Color.fromARGB(255, 0, 0, 0)),
+            borderRadius: BorderRadius.all(Radius.circular(5)),
+            boxShadow: [
+              BoxShadow(
+                  blurRadius: 10, color: Colors.black, offset: Offset(1, 3))
+            ],
+          ),
           height: 65,
           child: ListTile(
             onTap: () {
@@ -38,7 +46,16 @@ class ChatMenuWidget extends StatelessWidget {
                 builder: (context) => ChatPage(user: realuser[index]),
               ));
             },
-            title: Text(realuser[index].userName),
+            title: Text(
+              realuser[index].userName,
+              style: TextStyle(
+                  fontSize: 18, color: Color.fromARGB(255, 255, 255, 255)),
+            ),
+            trailing: const Icon(
+              Icons.arrow_forward_ios,
+              size: 12,
+              color: Colors.white,
+            ),
           ),
         );
       },
