@@ -3,11 +3,15 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/DrawerPages/CFavourites.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_application_1/HomePages/Chatspage.dart';
 import 'package:flutter_application_1/HomePages/Course.dart';
 import 'package:flutter_application_1/HomePages/Event.dart';
 import 'package:flutter_application_1/HomePages/Profile.dart';
+import 'package:flutter_application_1/services/Firebase_service.dart';
+import 'package:flutter_application_1/DataModel/userAccount.dart';
 
 import '../DrawerPages/Favourites.dart';
 import '../DrawerPages/Host.dart';
@@ -46,7 +50,7 @@ class _HomePageState extends State<HomePage> {
       //   backgroundColor: Color.fromARGB(255, 119, 20, 244),
       // ),
       body: _pages[_selecIndex],
-      drawer: const NavigationDrawer(),
+      drawer: NavigationDrawer(),
       bottomNavigationBar: Container(
         color: Colors.black,
         child: Padding(
@@ -96,8 +100,36 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-class NavigationDrawer extends StatelessWidget {
-  const NavigationDrawer({super.key});
+class NavigationDrawer extends StatefulWidget {
+  NavigationDrawer({super.key}); //This key is what we use
+  @override
+  _NavigationDrawer createState() => _NavigationDrawer();
+}
+
+class _NavigationDrawer extends State<NavigationDrawer> {
+  late UserAccount currentUserInfo;
+  late String username = "";
+  late String profilePhotoURL = "";
+  Future fetchUserInfo() async {
+    await FirebaseFirestore.instance
+        .collection('user')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .get()
+        .then((value) => {
+              currentUserInfo = UserAccount.fromMap(value.data()!),
+            });
+    setState(() {
+      username = currentUserInfo.userName;
+      profilePhotoURL = currentUserInfo.profileImageUrl!;
+    }); //This line rebuilds the scaffold
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    fetchUserInfo();
+  }
+
   @override
   Widget build(BuildContext context) => Drawer(
         child: SingleChildScrollView(
@@ -118,15 +150,16 @@ class NavigationDrawer extends StatelessWidget {
           bottom: 24,
         ),
         child: Column(
-          children: const [
+          children: [
             CircleAvatar(
               radius: 70,
-              backgroundImage: NetworkImage(
-                  'https://www.pngfind.com/pngs/m/93-938537_png-file-fa-user-circle-o-transparent-png.png'),
+              backgroundImage: profilePhotoURL == ""
+                  ? NetworkImage(
+                      'https://www.pngfind.com/pngs/m/93-938537_png-file-fa-user-circle-o-transparent-png.png')
+                  : NetworkImage(profilePhotoURL),
             ),
             SizedBox(height: 10),
-            Text('USER NAME',
-                style: TextStyle(color: Colors.white, fontSize: 25)),
+            Text(username, style: TextStyle(color: Colors.white, fontSize: 25)),
             // Text('USER EMAIL',
             //     style: TextStyle(color: Colors.black, fontSize: 20))
           ],

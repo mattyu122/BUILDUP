@@ -161,6 +161,9 @@ class _ProfilePageState extends State<ProfilePage> {
         'introduction': introductionController.text.trim(),
         'gender': selected,
         'tags': tagsController.text.trim(),
+        'faculty': dropdownvalue1,
+        'interestEvent': dropdownvalue3,
+        'groupMateTag': dropdownvalue4,
       }).then((value) => setState(() {
                 saved = true;
               }));
@@ -234,7 +237,7 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        drawer: const NavigationDrawer(),
+        drawer: NavigationDrawer(),
         appBar: new AppBar(
           backgroundColor: Color.fromARGB(255, 119, 20, 244),
           iconTheme: IconThemeData(

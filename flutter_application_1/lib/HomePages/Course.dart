@@ -58,7 +58,7 @@ class _CoursePageState extends State<CoursePage> {
                 fontSize: 15.0,
               ),
             )),
-        drawer: const NavigationDrawer(),
+        drawer: NavigationDrawer(),
         appBar: new AppBar(
           backgroundColor: Color.fromARGB(255, 119, 20, 244),
           iconTheme: IconThemeData(
