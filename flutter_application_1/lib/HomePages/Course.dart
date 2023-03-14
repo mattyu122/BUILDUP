@@ -11,6 +11,7 @@ import '../GetData/Course/Course_Cat.dart';
 import '../GetData/Course/Course_Hit.dart';
 import '../GetData/Course/Course_UpComing.dart';
 import '../GetData/Event/Event_Create.dart';
+import '../GetData/Course/Course_Create.dart';
 
 class CoursePage extends StatefulWidget {
   const CoursePage({super.key});
@@ -49,7 +50,7 @@ class _CoursePageState extends State<CoursePage> {
             backgroundColor: Color.fromARGB(255, 119, 20, 244),
             icon: Icon(Icons.event_note),
             onPressed: () {
-              Navigator.pushNamed(context, EventCreate.id);
+              Navigator.pushNamed(context, CourseCreate.id);
             },
             label: Text(
               "Create",

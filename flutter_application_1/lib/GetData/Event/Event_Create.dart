@@ -76,14 +76,14 @@ class _EventCreateState extends State<EventCreate> {
     'Other events'
   ];
 
-  String dropdownvalue4 = 'Groupmate Type Select';
-  var items4 = [
-    'Groupmate Type Select',
-    'Hardworking groupmates',
-    'Perfectionist groupmates',
-    'Leader groupmates',
-    'Collaborative groupmates',
-  ];
+  // String dropdownvalue4 = 'Groupmate Type Select';
+  // var items4 = [
+  //   'Groupmate Type Select',
+  //   'Hardworking groupmates',
+  //   'Perfectionist groupmates',
+  //   'Leader groupmates',
+  //   'Collaborative groupmates',
+  // ];
 
   final blankPhoto =
       'https://firebasestorage.googleapis.com/v0/b/buildup-7c651.appspot.com/o/New%20Event%20Test%2FDefaultBlank.jpg?alt=media&token=42ea3800-a53d-4122-8d8e-26e39be6ff5d';
@@ -103,13 +103,14 @@ class _EventCreateState extends State<EventCreate> {
       print('object');
       final number = int.parse(participantNumberController.text);
       EventPost newEvent = EventPost(
+        gender: items2.contains(dropdownvalue2) ? dropdownvalue2 : "",
         hostUserId: FirebaseAuth.instance.currentUser!.uid,
         PostD:
             dateController.text == "" ? "To be confirmed" : dateController.text,
         PostP: blankPhoto,
         price: priceController.text == ""
-            ? "To be confirmed"
-            : priceController.text,
+            ? 0.0
+            : double.parse(priceController.text),
         location: locationController.text == ""
             ? "To be confirmed"
             : locationController.text,
@@ -431,50 +432,50 @@ class _EventCreateState extends State<EventCreate> {
                     ),
                   ),
 
-                  SizedBox(
-                    height: 10,
-                  ),
+                  // SizedBox(
+                  //   height: 10,
+                  // ),
 
-                  Padding(
-                    padding: const EdgeInsets.all(0.0),
-                    child: Container(
-                      padding: const EdgeInsets.all(8.0),
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                            width: 2,
-                            color: Color.fromARGB(255, 181, 156, 255)),
-                        borderRadius: BorderRadius.all(Radius.circular(5)),
-                      ),
-                      width: 395,
-                      height: 60,
-                      child: DropdownButton(
-                        isExpanded: true,
-                        underline: Container(),
-                        dropdownColor: Colors.black,
-                        value: dropdownvalue4,
-                        icon: const Icon(Icons.keyboard_arrow_down,
-                            color: Color.fromARGB(255, 181, 156, 255)),
-                        items: items4.map((String items) {
-                          return DropdownMenuItem(
-                            value: items,
-                            child: Text(
-                              items,
-                              style: TextStyle(
-                                fontSize: 17,
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          );
-                        }).toList(),
-                        onChanged: (String? newValue4) {
-                          setState(() {
-                            dropdownvalue4 = newValue4!;
-                          });
-                        },
-                      ),
-                    ),
-                  ),
+                  // Padding(
+                  //   padding: const EdgeInsets.all(0.0),
+                  //   child: Container(
+                  //     padding: const EdgeInsets.all(8.0),
+                  //     decoration: BoxDecoration(
+                  //       border: Border.all(
+                  //           width: 2,
+                  //           color: Color.fromARGB(255, 181, 156, 255)),
+                  //       borderRadius: BorderRadius.all(Radius.circular(5)),
+                  //     ),
+                  //     width: 395,
+                  //     height: 60,
+                  //     child: DropdownButton(
+                  //       isExpanded: true,
+                  //       underline: Container(),
+                  //       dropdownColor: Colors.black,
+                  //       value: dropdownvalue4,
+                  //       icon: const Icon(Icons.keyboard_arrow_down,
+                  //           color: Color.fromARGB(255, 181, 156, 255)),
+                  //       items: items4.map((String items) {
+                  //         return DropdownMenuItem(
+                  //           value: items,
+                  //           child: Text(
+                  //             items,
+                  //             style: TextStyle(
+                  //               fontSize: 17,
+                  //               color: Colors.white,
+                  //               fontWeight: FontWeight.bold,
+                  //             ),
+                  //           ),
+                  //         );
+                  //       }).toList(),
+                  //       onChanged: (String? newValue4) {
+                  //         setState(() {
+                  //           dropdownvalue4 = newValue4!;
+                  //         });
+                  //       },
+                  //     ),
+                  //   ),
+                  // ),
                   SizedBox(
                     height: 10,
                   ),

@@ -1,17 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_application_1/DataModel/userAccount.dart';
 
-class EventPost {
-  final String PostN;
-  final String? faculty;
-  final String gender;
+class CoursePost {
+  final String PostN; //title
+  final String faculty; //faculty
   final String hostName;
-  final String? eventType;
-  final String? PostD;
+  final String? PostD; //date
   final int PostL;
-  final String hostUserId;
+  final String? groupMateTypes;
+  final String ChostUserId;
   final String? PostP;
-  final double? price;
   final String category;
   final String? location;
   final String? description;
@@ -19,37 +17,34 @@ class EventPost {
   final int joinedNumber;
   final List<String>? joinedAccount;
   final String createAt;
-  final List<String> fav;
+  final List<String> favc;
   final String? PostImageUrl;
-  EventPost(
+  CoursePost(
       {required this.PostN,
-      required this.gender,
+      required this.faculty,
       required this.category,
       required this.hostName,
       required this.expectedNumber,
       required this.joinedNumber,
       required this.PostL,
-      required this.fav,
-      required this.hostUserId,
-      this.eventType,
-      this.faculty,
+      required this.favc,
+      required this.ChostUserId,
+      this.groupMateTypes,
       this.PostImageUrl,
       this.PostD,
       this.PostP,
       this.location,
       this.description,
-      this.price,
       this.joinedAccount,
       required this.createAt});
 
   Map<String, dynamic> toMap() {
     return {
+      'faculty': faculty,
       'PostN': PostN,
       'PostD': PostD,
-      'faculty': faculty,
-      'gender': gender,
-      'hostUserId': hostUserId,
-      'price': price,
+      'hostUserId': ChostUserId,
+      'groupMateTypes': groupMateTypes,
       'PostL': PostL,
       'PostP': PostP,
       'category': category,
@@ -61,20 +56,18 @@ class EventPost {
       'createAt': createAt,
       'joinedAccount': joinedAccount!.map((i) => i.toString()).toList(),
       'PostImageUrl': PostImageUrl,
-      'fav': fav.map((i) => i.toString()).toList(),
+      'fav': favc.map((i) => i.toString()).toList(),
     };
   }
 
-  EventPost.fromMap(Map<String, dynamic> eventPostMap)
+  CoursePost.fromMap(Map<String, dynamic> eventPostMap)
       : PostN = eventPostMap["PostN"],
+        faculty = eventPostMap["faculty"],
         PostD = eventPostMap['PostD'],
-        price = eventPostMap['price'],
         PostL = eventPostMap['PostL'],
         PostP = eventPostMap['PostP'],
-        gender = eventPostMap['gender'],
-        eventType = eventPostMap['eventType'],
-        faculty = eventPostMap['faculty'],
-        hostUserId = eventPostMap['hostUserId'],
+        groupMateTypes = eventPostMap["groupMateTypes"],
+        ChostUserId = eventPostMap['hostUserId'],
         category = eventPostMap['category'],
         description = eventPostMap['description'],
         hostName = eventPostMap["hostName"],
@@ -84,5 +77,5 @@ class EventPost {
         createAt = eventPostMap['createAt'],
         joinedAccount = eventPostMap["joinedAccount"].cast<String>(),
         PostImageUrl = eventPostMap["PostImageUrl"],
-        fav = eventPostMap["fav"].cast<String>();
+        favc = eventPostMap["fav"].cast<String>();
 }

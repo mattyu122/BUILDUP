@@ -10,6 +10,7 @@ import 'package:flutter_application_1/GetData/Course/Course_Cat/EducationSreen.d
 import 'package:flutter_application_1/GetData/Course/Course_Cat/MedicineSreen.dart';
 import 'package:flutter_application_1/GetData/Course/Course_Cat/ScienceSreen.dart';
 import 'package:flutter_application_1/GetData/Course/Course_Cat/SocialscienceSreen.dart';
+import 'package:flutter_application_1/GetData/Course/Course_Create.dart';
 import 'package:flutter_application_1/GetData/Course/Course_Sreen_details.dart';
 import 'package:flutter_application_1/GetData/Event/Event_Cat/DramaSreen.dart';
 import 'package:flutter_application_1/GetData/Event/Event_Cat/GameScreen.dart';
@@ -64,6 +65,7 @@ class MyApp extends StatelessWidget {
         CourseCatSreen.id: (context) => CourseCatSreen(),
         EventCreate.id: (context) => EventCreate(),
         EventSreenDetails.id: (context) => EventSreenDetails(),
+        CourseCreate.id: (context) => CourseCreate(),
         GameScreen.id: (context) => GameScreen(),
         DramaSreen.id: (context) => DramaSreen(),
         FoodSreen.id: (context) => FoodSreen(),
