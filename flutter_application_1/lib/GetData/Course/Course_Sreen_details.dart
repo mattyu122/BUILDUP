@@ -144,17 +144,17 @@ class _CourseSreenDetailsState extends State<CourseSreenDetails> {
                               SizedBox(
                                 height: 7,
                               ),
-                              Text(
-                                'Price: ${_provider.CpostData?['price']} ',
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 17.0,
-                                ),
-                              ),
-                              SizedBox(
-                                height: 7,
-                              ),
+                              // Text(
+                              //   'Price: ${_provider.CpostData?['price']} ',
+                              //   style: TextStyle(
+                              //     color: Colors.black,
+                              //     fontWeight: FontWeight.bold,
+                              //     fontSize: 17.0,
+                              //   ),
+                              // ),
+                              // SizedBox(
+                              //   height: 7,
+                              // ),
                               Text(
                                 'Location: ${_provider.CpostData?['location']} ',
                                 style: TextStyle(
