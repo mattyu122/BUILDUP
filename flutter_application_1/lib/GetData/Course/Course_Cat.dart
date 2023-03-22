@@ -6,6 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/GetData/Event/Event_CatSreen.dart';
 import 'package:flutter_application_1/services/Firebase_service.dart';
 
+import 'package:flutter_application_1/GetData/Course/Course_Cat/ArtSreen.dart';
+import 'package:flutter_application_1/GetData/Course/Course_Cat/BusinessSreen.dart';
+import 'package:flutter_application_1/GetData/Course/Course_Cat/EducationSreen.dart';
+import 'package:flutter_application_1/GetData/Course/Course_Cat/EngineSreen.dart';
+import 'package:flutter_application_1/GetData/Course/Course_Cat/LawSreen.dart';
+import 'package:flutter_application_1/GetData/Course/Course_Cat/MedicineSreen.dart';
+import 'package:flutter_application_1/GetData/Course/Course_Cat/ScienceSreen.dart';
+import 'package:flutter_application_1/GetData/Course/Course_Cat/SocialscienceSreen.dart';
 import 'Course_CatSreen.dart';
 
 class CourseCat extends StatefulWidget {
@@ -22,8 +30,8 @@ class _CourseCatState extends State<CourseCat> {
 
     return Center(
       child: Container(
-        child: FutureBuilder<QuerySnapshot>(
-          future: _service.Ccat.get(),
+        child: StreamBuilder<QuerySnapshot>(
+          stream: _service.Ccat.snapshots(),
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasError) {
@@ -89,7 +97,10 @@ class _CourseCatState extends State<CourseCat> {
                               child: Column(
                                 children: [
                                   InkWell(
-                                      onTap: () {},
+                                      onTap: () {
+                                        Navigator.pushNamed(
+                                            context, doc!['sreenid']);
+                                      },
                                       child: Image.network(doc!['catP'])),
                                   Flexible(
                                       child: Text(

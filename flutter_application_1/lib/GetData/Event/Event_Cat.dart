@@ -5,6 +5,16 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/GetData/Event/Event_CatSreen.dart';
 import 'package:flutter_application_1/services/Firebase_service.dart';
+import 'package:flutter_application_1/GetData/Event/Event_Cat/DramaSreen.dart';
+import 'package:flutter_application_1/GetData/Event/Event_Cat/FoodSreen.dart';
+import 'package:flutter_application_1/GetData/Event/Event_Cat/GameScreen.dart';
+import 'package:flutter_application_1/GetData/Event/Event_Cat/MovieSreen.dart';
+import 'package:flutter_application_1/GetData/Event/Event_Cat/MusicSreen.dart';
+import 'package:flutter_application_1/GetData/Event/Event_Cat/PartySreen.dart';
+import 'package:flutter_application_1/GetData/Event/Event_Cat/PhotoSreen.dart';
+import 'package:flutter_application_1/GetData/Event/Event_Cat/ReadSreen.dart';
+import 'package:flutter_application_1/GetData/Event/Event_Cat/SingSreen.dart';
+import 'package:flutter_application_1/GetData/Event/Event_Cat/SportSreen.dart';
 
 class EventCat extends StatefulWidget {
   const EventCat({super.key});
@@ -20,8 +30,8 @@ class _EventCatState extends State<EventCat> {
 
     return Center(
       child: Container(
-        child: FutureBuilder<QuerySnapshot>(
-          future: _service.cat.get(),
+        child: StreamBuilder<QuerySnapshot>(
+          stream: _service.cat.snapshots(),
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasError) {
@@ -87,7 +97,10 @@ class _EventCatState extends State<EventCat> {
                               child: Column(
                                 children: [
                                   InkWell(
-                                      onTap: () {},
+                                      onTap: () {
+                                        Navigator.pushNamed(
+                                            context, doc!['sreenid']);
+                                      },
                                       child: Image.network(doc!['catP'])),
                                   Flexible(
                                       child: Text(

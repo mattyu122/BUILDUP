@@ -24,7 +24,7 @@ class _CourseNEWState extends State<CourseNEW> {
       child: Container(
         child: StreamBuilder<QuerySnapshot>(
           stream:
-              _service.Cpost.orderBy('number', descending: true).snapshots(),
+              _service.Cpost.orderBy('createAt', descending: true).snapshots(),
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasError) {

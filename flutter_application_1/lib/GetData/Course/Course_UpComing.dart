@@ -33,10 +33,6 @@ class _CourseUPState extends State<CourseUP> {
         .get()
         .then(
             (value) => {currentUserInfo = UserAccount.fromMap(value.data()!)});
-
-    // setState(() {
-    //   tagsController.text = currentUserInfo?.tags ?? '';
-    // });
   }
 
   Widget build(BuildContext context) {
