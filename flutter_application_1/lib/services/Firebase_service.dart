@@ -12,6 +12,8 @@ class FirebaseService {
   CollectionReference cat = FirebaseFirestore.instance.collection('cat');
   CollectionReference Ccat = FirebaseFirestore.instance.collection('Ccat');
   CollectionReference post = FirebaseFirestore.instance.collection('EventPost');
+  CollectionReference post12 =
+      FirebaseFirestore.instance.collection('NewEPost');
   CollectionReference users = FirebaseFirestore.instance.collection('user');
   CollectionReference Cpost =
       FirebaseFirestore.instance.collection('CoursePost');
@@ -93,6 +95,28 @@ class FirebaseService {
         'favc': FieldValue.arrayRemove([user?.uid]),
         'PostL': FieldValue.increment(-1),
       });
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Removed to my favourite')),
+      );
+    }
+  }
+
+  updateFavourite3(_isliked3, postId3, context) {
+    if (_isliked3) {
+      post12.doc(postId3).update({
+        'fav': FieldValue.arrayUnion([user?.uid]),
+        'PostL': FieldValue.increment(1),
+      });
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Added to my favourite')),
+      );
+    } else {
+      post12.doc(postId3).update({
+        'fav': FieldValue.arrayRemove([user?.uid]),
+        'PostL': FieldValue.increment(-1),
+      });
+
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Removed to my favourite')),
       );

@@ -10,8 +10,12 @@ import 'package:flutter_application_1/services/Firebase_service.dart';
 import '../GetData/Course/Course_Cat.dart';
 import '../GetData/Course/Course_Hit.dart';
 import '../GetData/Course/Course_UpComing.dart';
+import '../GetData/Event/Event_Cat.dart';
 import '../GetData/Event/Event_Create.dart';
 import '../GetData/Course/Course_Create.dart';
+import '../GetData/Event/Event_Hit.dart';
+import '../GetData/Event/Event_New.dart';
+import '../GetData/Event/Event_UpComing.dart';
 
 class CoursePage extends StatefulWidget {
   const CoursePage({super.key});
