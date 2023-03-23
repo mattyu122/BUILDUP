@@ -19,30 +19,24 @@ class EventSreenDetails extends StatefulWidget {
 
 class _EventSreenDetails extends State<EventSreenDetails> {
   FirebaseService _service = FirebaseService();
-  bool _isliked = false;
+  bool _isliked3 = false;
   List favL = [];
-  late final _provider = Provider.of<EpostProvider>(context);
-
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
-    //_provider = Provider.of<EpostProvider>(context);
-    _service.post.doc(_provider.EpostData?.id).get().then((value) {
+    var _provider = Provider.of<EpostProvider>(context);
+    _service.post12.doc(_provider.EpostData?.id).get().then((value) {
       setState(() {
         favL = value['fav'];
       });
       if (favL.contains(_service.user?.uid)) {
         setState(() {
-          _isliked = true;
+          _isliked3 = true;
         });
       } else {
         setState(() {
-          _isliked = false;
+          _isliked3 = false;
         });
       }
     });
@@ -53,7 +47,7 @@ class _EventSreenDetails extends State<EventSreenDetails> {
   Widget build(BuildContext context) {
     FirebaseService _service = FirebaseService();
 
-    //var _provider = Provider.of<EpostProvider>(context);
+    var _provider = Provider.of<EpostProvider>(context);
 
     var data = _provider.EpostData;
     return Scaffold(
@@ -65,16 +59,16 @@ class _EventSreenDetails extends State<EventSreenDetails> {
         centerTitle: true,
         actions: [
           IconButton(
-            icon: Icon(_isliked ? Icons.favorite : Icons.favorite_border),
-            color: _isliked ? Colors.red : Colors.white,
+            icon: Icon(_isliked3 ? Icons.favorite : Icons.favorite_border),
+            color: _isliked3 ? Colors.red : Colors.white,
             onPressed: () {
               setState(() {
-                _isliked = !_isliked;
+                _isliked3 = !_isliked3;
               });
               // Navigator.of(context).push(MaterialPageRoute(
               //   builder: (context) => const SetPage(),
               // ));
-              _service.updateFavourite(_isliked, data?.id, context);
+              _service.updateFavourite3(_isliked3, data?.id, context);
             },
           )
         ],

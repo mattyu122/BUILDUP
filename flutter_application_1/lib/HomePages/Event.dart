@@ -12,6 +12,11 @@ import 'package:flutter_application_1/HomePages/Home.dart';
 import 'package:flutter_application_1/services/E_serarch.dart';
 import 'package:flutter_application_1/services/Firebase_service.dart';
 
+import '../GetData/Course/Course_Cat.dart';
+import '../GetData/Course/Course_Hit.dart';
+import '../GetData/Course/Course_New.dart';
+import '../GetData/Course/Course_UpComing.dart';
+
 class EventPage extends StatefulWidget {
   const EventPage({super.key});
 
@@ -113,6 +118,10 @@ class _EventPageState extends State<EventPage> {
               EventUP(),
               EventTOP(),
               EventNEW(),
+              // CourseCat(),
+              // CourseUP(),
+              // CourseTOP(),
+              // CourseNEW(),
             ],
           ),
         )));

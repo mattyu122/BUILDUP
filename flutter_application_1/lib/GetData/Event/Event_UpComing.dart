@@ -24,53 +24,19 @@ class _EventUPState extends State<EventUP> {
   void initState() {
     super.initState();
     // fetchRecords();
-    fetchUserInfo1();
+    fetchUserInfo2();
   }
 
   UserAccount? currentUserInfo;
-  // final tagsController = TextEditingController();
 
-  // validate() async {
-  //   await FirebaseFirestore.instance
-  //       .collection('user')
-  //       .doc(FirebaseAuth.instance.currentUser!.uid)
-  //       .update({
-  //     'tags': tagsController.text.trim(),
-  //   });
-  // }
-
-  Future fetchUserInfo1() async {
+  Future fetchUserInfo2() async {
     await FirebaseFirestore.instance
         .collection('user')
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .get()
         .then(
             (value) => {currentUserInfo = UserAccount.fromMap(value.data()!)});
-
-    // setState(() {
-    //   tagsController.text = currentUserInfo?.tags ?? '';
-    // });
   }
-
-  // List<User123> useritem = [];
-
-  // Future fetchRecords() async {
-  //   var records = await FirebaseFirestore.instance
-  //       .collection('user')
-  //       .doc(FirebaseAuth.instance.currentUser!.uid)
-  //       .get();
-  // }
-
-  // mapRecords(QuerySnapshot<Map<String, dynamic>> records) {
-  //   var _list = records.docs
-  //       .map((item) => User123(
-  //           id: item.id, tags: item['tags'], userName: item['userName']))
-  //       .toList();
-
-  //   setState(() {
-  //     useritem = _list;
-  //   });
-  // }
 
   Widget build(BuildContext context) {
     var _provider = Provider.of<EpostProvider>(context);
@@ -79,9 +45,10 @@ class _EventUPState extends State<EventUP> {
     return Center(
       child: Container(
         child: StreamBuilder<QuerySnapshot>(
-          stream: _service.post
-              .where('category', isEqualTo: currentUserInfo?.tags)
-              .where('PostN', isEqualTo: 'CE')
+          stream: _service.post12
+              .where('gender', isEqualTo: 'Male')
+              .where('faculty', isEqualTo: currentUserInfo?.faculty)
+              .where('interestEvent', isEqualTo: currentUserInfo?.interestEvent)
               .snapshots(),
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {

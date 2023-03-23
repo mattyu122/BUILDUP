@@ -22,7 +22,8 @@ class _EventTOPState extends State<EventTOP> {
     return Center(
       child: Container(
         child: StreamBuilder<QuerySnapshot>(
-          stream: _service.post.orderBy('PostL', descending: true).snapshots(),
+          stream:
+              _service.post12.orderBy('PostL', descending: true).snapshots(),
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasError) {
@@ -78,7 +79,7 @@ class _EventTOPState extends State<EventTOP> {
                     Expanded(
                       child: ListView.builder(
                           scrollDirection: Axis.horizontal,
-                          itemCount: 5,
+                          itemCount: snapshot.data?.docs.length,
                           itemBuilder: (BuildContext context, int index) {
                             var doc = snapshot.data?.docs[index];
                             return Container(
