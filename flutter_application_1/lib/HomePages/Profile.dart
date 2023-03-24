@@ -8,7 +8,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/DataModel/userAccount.dart';
 import 'package:flutter_application_1/DrawerPages/Setting.dart';
-import 'package:flutter_application_1/HomePages/Home.dart';
+import 'package:flutter_application_1/HomePages/Home.dart' as selfCreated;
 import 'package:flutter_application_1/services/Firebase_service.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -237,7 +237,7 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        drawer: NavigationDrawer(),
+        drawer: selfCreated.NavigationDrawer(),
         appBar: new AppBar(
           backgroundColor: Color.fromARGB(255, 119, 20, 244),
           iconTheme: IconThemeData(

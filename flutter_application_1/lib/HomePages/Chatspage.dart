@@ -7,7 +7,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_application_1/DataModel/userAccount.dart';
 import 'package:flutter_application_1/DataModel/contactUser.dart';
 import 'package:flutter_application_1/DrawerPages/Setting.dart';
-import 'package:flutter_application_1/HomePages/Home.dart';
+import 'package:flutter_application_1/HomePages/Home.dart' as selfCreated;
 import 'package:flutter_application_1/widget/chat_menu.dart';
 
 class Chatspage extends StatefulWidget {
@@ -35,7 +35,7 @@ class _ChatPageState extends State<Chatspage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        drawer: NavigationDrawer(),
+        drawer: selfCreated.NavigationDrawer(),
         appBar: new AppBar(
           backgroundColor: Color.fromARGB(255, 119, 20, 244),
           iconTheme: IconThemeData(

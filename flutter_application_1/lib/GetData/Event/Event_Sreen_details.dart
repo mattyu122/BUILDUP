@@ -296,14 +296,25 @@ class _EventSreenDetails extends State<EventSreenDetails> {
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10))),
                       onPressed: () async {
-                        await _service.createChatRoomForGroup(
-                            _provider.EpostData!.id,
-                            _provider.EpostData?['PostN'],
-                            _provider.EpostData?.id);
+                        await _service
+                            .createChatRoomForEventGroup(
+                                _provider.EpostData!.id,
+                                _provider.EpostData?['PostN'],
+                                _provider.EpostData?.id)
+                            .then((value) => {
+                                  _service
+                                      .deleteEventPost(_provider.EpostData!.id)
+                                });
+                        //_service.deleteEventPost(_provider.EpostData!.id)
 
-                        await _service.post
-                            .doc(_provider.EpostData!.id)
-                            .delete();
+                        // await _service.createChatRoomForEventGroup(
+                        //     _provider.EpostData!.id,
+                        //     _provider.EpostData?['PostN'],
+                        //     _provider.EpostData?.id);
+
+                        // await _service.post12
+                        //     .doc(_provider.EpostData!.id)
+                        //     .delete();
                         if (!mounted) return;
                         Navigator.of(context).pop();
                       },

@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/GetData/Course/Course_New.dart';
 
-import 'package:flutter_application_1/HomePages/Home.dart';
+import 'package:flutter_application_1/HomePages/Home.dart' as selfCreated;
 import 'package:flutter_application_1/services/C_search.dart';
 import 'package:flutter_application_1/services/Firebase_service.dart';
 
@@ -63,7 +63,7 @@ class _CoursePageState extends State<CoursePage> {
                 fontSize: 15.0,
               ),
             )),
-        drawer: NavigationDrawer(),
+        drawer: selfCreated.NavigationDrawer(),
         appBar: new AppBar(
           backgroundColor: Color.fromARGB(255, 119, 20, 244),
           iconTheme: IconThemeData(

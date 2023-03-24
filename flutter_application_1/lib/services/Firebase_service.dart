@@ -4,6 +4,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/DataModel/CoursePosts.dart';
 import 'package:flutter_application_1/DataModel/EventPosts.dart';
 import 'package:flutter_application_1/DataModel/contactUser.dart';
 
@@ -11,7 +12,7 @@ class FirebaseService {
   User? user = FirebaseAuth.instance.currentUser;
   CollectionReference cat = FirebaseFirestore.instance.collection('cat');
   CollectionReference Ccat = FirebaseFirestore.instance.collection('Ccat');
-  CollectionReference post = FirebaseFirestore.instance.collection('EventPost');
+  // CollectionReference post = FirebaseFirestore.instance.collection('EventPost');
   CollectionReference post12 =
       FirebaseFirestore.instance.collection('NewEPost');
   CollectionReference users = FirebaseFirestore.instance.collection('user');
@@ -21,12 +22,18 @@ class FirebaseService {
   CollectionReference chatRoom =
       FirebaseFirestore.instance.collection("chatroom");
 
+  Future<void> deleteEventPost(String postId) async {
+    await post12.doc(postId).delete();
+  }
+
   Future<bool> joinEvent(String? postId) async {
-    final data = await post.doc(postId).get();
+    final data = await post12.doc(postId).get();
     final tmppost = EventPost.fromMap(data.data() as Map<String, dynamic>);
     if (tmppost.joinedNumber < tmppost.expectedNumber) {
-      await post.doc(postId).update({'joinedNumber': FieldValue.increment(1)});
-      await post.doc(postId).update({
+      await post12
+          .doc(postId)
+          .update({'joinedNumber': FieldValue.increment(1)});
+      await post12.doc(postId).update({
         'joinedAccount': FieldValue.arrayUnion([user?.uid])
       });
       print("joined");
@@ -37,9 +44,9 @@ class FirebaseService {
   }
 
   //implement: add Contact() to every joined member's contact attribute in firebase and add notification
-  createChatRoomForGroup(
+  Future<void> createChatRoomForEventGroup(
       String? chatRoomId, String chatRoomName, String? postId) async {
-    final data = await post.doc(postId).get();
+    final data = await post12.doc(postId).get();
     final tmppost = EventPost.fromMap(data.data() as Map<String, dynamic>);
     final chatRoom = ContactUser(
         userName: chatRoomName,
@@ -57,11 +64,34 @@ class FirebaseService {
         'contactUser': FieldValue.arrayUnion([chatRoom.toMap()])
       });
     }
+    return;
+  }
+
+  Future<void> createChatRoomForCourseGroup(
+      String? chatRoomId, String chatRoomName, String? postId) async {
+    final data = await Cpost.doc(postId).get();
+    final tmppost = CoursePost.fromMap(data.data() as Map<String, dynamic>);
+    final chatRoom = ContactUser(
+        userName: chatRoomName,
+        email: "",
+        icon: "",
+        id: chatRoomId!,
+        groupChat: true);
+
+    await users.doc(tmppost.ChostUserId).update({
+      'contactUser': FieldValue.arrayUnion([chatRoom.toMap()])
+    });
+
+    for (int i = 0; i < tmppost.joinedAccount!.length; i++) {
+      await users.doc(tmppost.joinedAccount![i]).update({
+        'contactUser': FieldValue.arrayUnion([chatRoom.toMap()])
+      });
+    }
   }
 
   updateFavourite(_isliked, postId, context) {
     if (_isliked) {
-      post.doc(postId).update({
+      post12.doc(postId).update({
         'fav': FieldValue.arrayUnion([user?.uid]),
         'PostL': FieldValue.increment(1),
       });
@@ -70,7 +100,7 @@ class FirebaseService {
         const SnackBar(content: Text('Added to my favourite')),
       );
     } else {
-      post.doc(postId).update({
+      post12.doc(postId).update({
         'fav': FieldValue.arrayRemove([user?.uid]),
         'PostL': FieldValue.increment(-1),
       });

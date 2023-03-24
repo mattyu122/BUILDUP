@@ -8,7 +8,7 @@ import 'package:flutter_application_1/GetData/Event/Event_Hit.dart';
 import 'package:flutter_application_1/GetData/Event/Event_New.dart';
 import 'package:flutter_application_1/GetData/Event/Event_UpComing.dart';
 import 'package:flutter_application_1/GetData/Event/Event_Search.dart';
-import 'package:flutter_application_1/HomePages/Home.dart';
+import 'package:flutter_application_1/HomePages/Home.dart' as selfCreated;
 import 'package:flutter_application_1/services/E_serarch.dart';
 import 'package:flutter_application_1/services/Firebase_service.dart';
 
@@ -33,7 +33,7 @@ class _EventPageState extends State<EventPage> {
   void initState() {
     // TODO: implement initState
     eposts.clear();
-    _service.post.snapshots().listen((querrysnapshot) {
+    _service.post12.snapshots().listen((querrysnapshot) {
       querrysnapshot.docChanges.forEach((change) {
         setState(() {
           eposts.add(
@@ -79,7 +79,7 @@ class _EventPageState extends State<EventPage> {
                 fontSize: 15.0,
               ),
             )),
-        drawer: NavigationDrawer(),
+        drawer: selfCreated.NavigationDrawer(),
         appBar: new AppBar(
           backgroundColor: Color.fromARGB(255, 119, 20, 244),
           iconTheme: IconThemeData(

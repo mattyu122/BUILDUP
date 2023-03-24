@@ -127,7 +127,7 @@ class _EventCreateState extends State<EventCreate> {
         PostImageUrl: profilePhotoURL,
       );
       await FirebaseFirestore.instance
-          .collection('EventPost')
+          .collection('NewEPost')
           .add(newEvent.toMap())
           .then((value) => {Navigator.of(context).pop(context)});
     }

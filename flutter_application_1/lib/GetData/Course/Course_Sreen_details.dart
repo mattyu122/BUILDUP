@@ -254,14 +254,15 @@ class _CourseSreenDetailsState extends State<CourseSreenDetails> {
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10))),
                       onPressed: () async {
-                        await _service.createChatRoomForGroup(
-                            _provider.CpostData!.id,
-                            _provider.CpostData?['PostN'],
-                            _provider.CpostData?.id);
-
-                        await _service.post
-                            .doc(_provider.CpostData!.id)
-                            .delete();
+                        await _service
+                            .createChatRoomForCourseGroup(
+                                _provider.CpostData!.id,
+                                _provider.CpostData?['PostN'],
+                                _provider.CpostData?.id)
+                            .then((value) => {
+                                  _service.Cpost.doc(_provider.CpostData!.id)
+                                      .delete()
+                                });
                         if (!mounted) return;
                         Navigator.of(context).pop();
                       },
