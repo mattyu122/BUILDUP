@@ -103,7 +103,9 @@ class _EventCreateState extends State<EventCreate> {
       print('object');
       final number = int.parse(participantNumberController.text);
       EventPost newEvent = EventPost(
+        faculty: items1.contains(dropdownvalue1) ? dropdownvalue1 : "",
         gender: items2.contains(dropdownvalue2) ? dropdownvalue2 : "",
+        eventType: items3.contains(dropdownvalue3) ? dropdownvalue3 : "",
         hostUserId: FirebaseAuth.instance.currentUser!.uid,
         PostD:
             dateController.text == "" ? "To be confirmed" : dateController.text,
@@ -117,7 +119,9 @@ class _EventCreateState extends State<EventCreate> {
         PostL: 0,
         description: descriptionController.text,
         PostN: titleController.text,
-        category: categoryController.text,
+        category: items.contains(dropdownvalue)
+            ? dropdownvalue
+            : "", //categoryController.text,
         hostName: FirebaseAuth.instance.currentUser!.email!,
         expectedNumber: number,
         joinedNumber: 0,
@@ -127,7 +131,7 @@ class _EventCreateState extends State<EventCreate> {
         PostImageUrl: profilePhotoURL,
       );
       await FirebaseFirestore.instance
-          .collection('NewEPost')
+          .collection('EventPost')
           .add(newEvent.toMap())
           .then((value) => {Navigator.of(context).pop(context)});
     }
@@ -619,41 +623,41 @@ class _EventCreateState extends State<EventCreate> {
                         }
                         return null;
                       }),
-                  SizedBox(
-                    height: 12,
-                  ),
-                  TextFormField(
-                      controller: categoryController,
-                      style: TextStyle(fontSize: 17, color: Colors.white),
-                      decoration: InputDecoration(
-                          labelText: 'Category',
-                          labelStyle: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(5)),
-                              borderSide: BorderSide(
-                                  color: Color.fromARGB(255, 181, 156, 255),
-                                  width: 2)),
-                          focusedBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(5)),
-                              borderSide: BorderSide(
-                                  color: Color.fromARGB(255, 181, 156, 255),
-                                  width: 2)),
-                          errorBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(5)),
-                              borderSide:
-                                  BorderSide(color: Colors.red, width: 2))),
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Please complete required flied';
-                        }
-                        return null;
-                      }),
+                  // SizedBox(
+                  //   height: 12,
+                  // ),
+                  // TextFormField(
+                  //     controller: categoryController,
+                  //     style: TextStyle(fontSize: 17, color: Colors.white),
+                  //     decoration: InputDecoration(
+                  //         labelText: 'Category',
+                  //         labelStyle: TextStyle(
+                  //           color: Colors.white,
+                  //           fontWeight: FontWeight.bold,
+                  //         ),
+                  //         enabledBorder: OutlineInputBorder(
+                  //             borderRadius:
+                  //                 BorderRadius.all(Radius.circular(5)),
+                  //             borderSide: BorderSide(
+                  //                 color: Color.fromARGB(255, 181, 156, 255),
+                  //                 width: 2)),
+                  //         focusedBorder: OutlineInputBorder(
+                  //             borderRadius:
+                  //                 BorderRadius.all(Radius.circular(5)),
+                  //             borderSide: BorderSide(
+                  //                 color: Color.fromARGB(255, 181, 156, 255),
+                  //                 width: 2)),
+                  //         errorBorder: OutlineInputBorder(
+                  //             borderRadius:
+                  //                 BorderRadius.all(Radius.circular(5)),
+                  //             borderSide:
+                  //                 BorderSide(color: Colors.red, width: 2))),
+                  //     validator: (value) {
+                  //       if (value!.isEmpty) {
+                  //         return 'Please complete required flied';
+                  //       }
+                  //       return null;
+                  //     }),
                   SizedBox(
                     height: 12,
                   ),

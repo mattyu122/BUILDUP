@@ -13,8 +13,7 @@ class FirebaseService {
   CollectionReference cat = FirebaseFirestore.instance.collection('cat');
   CollectionReference Ccat = FirebaseFirestore.instance.collection('Ccat');
   CollectionReference post = FirebaseFirestore.instance.collection('EventPost');
-  CollectionReference post12 =
-      FirebaseFirestore.instance.collection('NewEPost');
+  // CollectionReference post = FirebaseFirestore.instance.collection('NewEPost');
   CollectionReference users = FirebaseFirestore.instance.collection('user');
   CollectionReference Cpost =
       FirebaseFirestore.instance.collection('CoursePost');
@@ -23,17 +22,15 @@ class FirebaseService {
       FirebaseFirestore.instance.collection("chatroom");
 
   Future<void> deleteEventPost(String postId) async {
-    await post12.doc(postId).delete();
+    await post.doc(postId).delete();
   }
 
   Future<bool> joinEvent(String? postId) async {
-    final data = await post12.doc(postId).get();
+    final data = await post.doc(postId).get();
     final tmppost = EventPost.fromMap(data.data() as Map<String, dynamic>);
     if (tmppost.joinedNumber < tmppost.expectedNumber) {
-      await post12
-          .doc(postId)
-          .update({'joinedNumber': FieldValue.increment(1)});
-      await post12.doc(postId).update({
+      await post.doc(postId).update({'joinedNumber': FieldValue.increment(1)});
+      await post.doc(postId).update({
         'joinedAccount': FieldValue.arrayUnion([user?.uid])
       });
       print("joined");
@@ -46,7 +43,7 @@ class FirebaseService {
   //implement: add Contact() to every joined member's contact attribute in firebase and add notification
   Future<void> createChatRoomForEventGroup(
       String? chatRoomId, String chatRoomName, String? postId) async {
-    final data = await post12.doc(postId).get();
+    final data = await post.doc(postId).get();
     final tmppost = EventPost.fromMap(data.data() as Map<String, dynamic>);
     final chatRoom = ContactUser(
         userName: chatRoomName,
@@ -91,7 +88,7 @@ class FirebaseService {
 
   // updateFavourite(_isliked, postId, context) {
   //   if (_isliked) {
-  //     post12.doc(postId).update({
+  //     post.doc(postId).update({
   //       'fav': FieldValue.arrayUnion([user?.uid]),
   //       'PostL': FieldValue.increment(1),
   //     });
@@ -100,7 +97,7 @@ class FirebaseService {
   //       const SnackBar(content: Text('Added to my favourite')),
   //     );
   //   } else {
-  //     post12.doc(postId).update({
+  //     post.doc(postId).update({
   //       'fav': FieldValue.arrayRemove([user?.uid]),
   //       'PostL': FieldValue.increment(-1),
   //     });
@@ -146,7 +143,6 @@ class FirebaseService {
         'fav': FieldValue.arrayRemove([user?.uid]),
         'PostL': FieldValue.increment(-1),
       });
-
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Removed to my favourite')),
       );

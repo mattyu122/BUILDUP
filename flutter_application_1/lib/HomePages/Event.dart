@@ -27,40 +27,25 @@ class EventPage extends StatefulWidget {
 class _EventPageState extends State<EventPage> {
   FirebaseService _service = FirebaseService();
   PostSearch _search = PostSearch();
-  static List<EPosts> eposts = [];
+  List<EPosts> eposts = [];
 
   @override
   void initState() {
     // TODO: implement initState
-    eposts.clear();
-    _service.post12.snapshots().listen((querrysnapshot) {
-      querrysnapshot.docChanges.forEach((change) {
+    _service.post.get().then((QuerySnapshot snapshot) {
+      snapshot.docs.forEach((doc) {
         setState(() {
           eposts.add(
             EPosts(
-                document: change.doc,
-                title: change.doc['PostN'],
-                date: change.doc['PostD'],
-                photo: change.doc['PostP'],
-                hostname: change.doc['hostName']),
+                document: doc,
+                title: doc['PostN'],
+                date: doc['PostD'],
+                photo: doc['PostP'],
+                hostname: doc['hostName']),
           );
         });
       });
     });
-
-    // FirebaseFirestore.instance
-    //     .collection('EventPost')
-    //     .snapshots()
-    //     .listen((querrysnapshot) {
-    //   querrysnapshot.docChanges.forEach((change) {
-    //     eposts.add(EPosts(
-    //         title: change.doc['PostN'],
-    //         date: change.doc['PostD'],
-    //         document: change.doc,
-    //         photo: change.doc['PostP'],
-    //         hostname: change.doc['hostName']));
-    //   });
-    // });
     super.initState();
   }
 

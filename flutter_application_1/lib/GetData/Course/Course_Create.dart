@@ -41,10 +41,10 @@ class _CourseCreateState extends State<CourseCreate> {
   String dropdownvalue4 = 'Groupmate Type Select';
   var items4 = [
     'Groupmate Type Select',
-    'Hardworking groupmates',
-    'Perfectionist groupmates',
-    'Leader groupmates',
-    'Collaborative groupmates',
+    'Hardworking groupmate',
+    'Perfectionist groupmate',
+    'Leader groupmate',
+    'Collaborative groupmate',
   ];
 
   final blankPhoto =
@@ -64,7 +64,7 @@ class _CourseCreateState extends State<CourseCreate> {
       print('object');
       final number = int.parse(participantNumberController.text);
       CoursePost newEvent = CoursePost(
-        faculty: dropdownvalue1,
+        faculty: items1.contains(dropdownvalue1) ? dropdownvalue1 : "",
         groupMateTypes: items4.contains(dropdownvalue4) ? dropdownvalue4 : "",
         ChostUserId: FirebaseAuth.instance.currentUser!.uid,
         PostD:

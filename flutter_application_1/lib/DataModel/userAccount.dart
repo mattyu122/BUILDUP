@@ -10,7 +10,7 @@ class UserAccount {
   final List<ContactUser>? contactUser;
   final String? major;
   final String? introduction;
-  final int? gender;
+  final String? gender;
   final String? tags;
   final String? profileImageUrl;
   final String? faculty;

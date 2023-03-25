@@ -27,7 +27,7 @@ class CoursePage extends StatefulWidget {
 class _CoursePageState extends State<CoursePage> {
   FirebaseService _service = FirebaseService();
   CPostSearch _search = CPostSearch();
-  static List<CPosts> cposts = [];
+  List<CPosts> cposts = [];
   @override
   void initState() {
     // TODO: implement initState
@@ -71,7 +71,12 @@ class _CoursePageState extends State<CoursePage> {
           centerTitle: true,
           actions: [
             IconButton(
-              onPressed: () {
+              onPressed: () async {
+                print("Cposts as follow:");
+                print(cposts);
+                print(cposts.length);
+                print("sssssssssssssssssssss");
+
                 _search.serach(
                   context: context,
                   CpostList: cposts,

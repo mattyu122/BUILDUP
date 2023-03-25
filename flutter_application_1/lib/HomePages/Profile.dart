@@ -159,7 +159,13 @@ class _ProfilePageState extends State<ProfilePage> {
         'userName': nameController.text.trim(),
         'major': majorController.text.trim(),
         'introduction': introductionController.text.trim(),
-        'gender': selected,
+        'gender': selected == 1
+            ? "MALE"
+            : selected == 2
+                ? "FEMALE"
+                : selected == 3
+                    ? "OTHER"
+                    : "",
         'tags': tagsController.text.trim(),
         'faculty': dropdownvalue1,
         'interestEvent': dropdownvalue3,
@@ -223,8 +229,17 @@ class _ProfilePageState extends State<ProfilePage> {
       majorController.text = currentUserInfo.major ?? '';
       introductionController.text = currentUserInfo.introduction ?? '';
       tagsController.text = currentUserInfo.tags ?? '';
-      selected = currentUserInfo.gender ?? 0;
+      selected = (currentUserInfo.gender == "MALE"
+          ? 1
+          : currentUserInfo.gender == "FEMALE"
+              ? 2
+              : currentUserInfo.gender == "OTHER"
+                  ? 3
+                  : 0);
       profilePhotoURL = currentUserInfo.profileImageUrl!;
+      dropdownvalue1 = currentUserInfo.faculty!;
+      dropdownvalue3 = currentUserInfo.interestEvent!;
+      dropdownvalue4 = currentUserInfo.groupMateTag!;
     });
   }
 
@@ -780,110 +795,110 @@ class _ProfilePageState extends State<ProfilePage> {
                   SizedBox(
                     height: 12,
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 0.0),
-                        child: Text(
-                          'Your Tags',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 17.0,
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 7),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 0.0),
-                        child: Container(
-                          decoration: BoxDecoration(),
-                          child: TextFormField(
-                            controller: tagsController,
-                            maxLines: 30,
-                            style: TextStyle(fontSize: 17, color: Colors.black),
-                            decoration: InputDecoration(
-                                contentPadding:
-                                    EdgeInsets.fromLTRB(10, 10, 10, 10),
-                                filled: true, //<-- SEE HERE
-                                fillColor: Color.fromARGB(255, 181, 156, 255),
-                                constraints: BoxConstraints.tightFor(
-                                    width: 380, height: 200),
-                                enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                    borderSide: BorderSide(
-                                        color:
-                                            Color.fromARGB(255, 181, 156, 255),
-                                        width: 2)),
-                                focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                    borderSide: BorderSide(
-                                        color:
-                                            Color.fromARGB(255, 119, 20, 244),
-                                        width: 2)),
-                                errorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                    borderSide: BorderSide(
-                                        color: Colors.red, width: 2))),
-                            // validator: (value) {
-                            //   if (value!.isEmpty) {
-                            //     return 'Please complete required flied';
-                            //   }
-                            //   return null;
-                            // }
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 0,
-                  ),
+                  // Column(
+                  //   crossAxisAlignment: CrossAxisAlignment.start,
+                  //   children: [
+                  //     Padding(
+                  //       padding: const EdgeInsets.symmetric(horizontal: 0.0),
+                  //       child: Text(
+                  //         'Your Tags',
+                  //         style: TextStyle(
+                  //           color: Colors.white,
+                  //           fontWeight: FontWeight.bold,
+                  //           fontSize: 17.0,
+                  //         ),
+                  //       ),
+                  //     ),
+                  //     SizedBox(height: 7),
+                  //     Padding(
+                  //       padding: const EdgeInsets.symmetric(horizontal: 0.0),
+                  //       child: Container(
+                  //         decoration: BoxDecoration(),
+                  //         child: TextFormField(
+                  //           controller: tagsController,
+                  //           maxLines: 30,
+                  //           style: TextStyle(fontSize: 17, color: Colors.black),
+                  //           decoration: InputDecoration(
+                  //               contentPadding:
+                  //                   EdgeInsets.fromLTRB(10, 10, 10, 10),
+                  //               filled: true, //<-- SEE HERE
+                  //               fillColor: Color.fromARGB(255, 181, 156, 255),
+                  //               constraints: BoxConstraints.tightFor(
+                  //                   width: 380, height: 200),
+                  //               enabledBorder: OutlineInputBorder(
+                  //                   borderRadius: BorderRadius.circular(10.0),
+                  //                   borderSide: BorderSide(
+                  //                       color:
+                  //                           Color.fromARGB(255, 181, 156, 255),
+                  //                       width: 2)),
+                  //               focusedBorder: OutlineInputBorder(
+                  //                   borderRadius: BorderRadius.circular(10.0),
+                  //                   borderSide: BorderSide(
+                  //                       color:
+                  //                           Color.fromARGB(255, 119, 20, 244),
+                  //                       width: 2)),
+                  //               errorBorder: OutlineInputBorder(
+                  //                   borderRadius: BorderRadius.circular(10.0),
+                  //                   borderSide: BorderSide(
+                  //                       color: Colors.red, width: 2))),
+                  //           // validator: (value) {
+                  //           //   if (value!.isEmpty) {
+                  //           //     return 'Please complete required flied';
+                  //           //   }
+                  //           //   return null;
+                  //           // }
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
+                  // SizedBox(
+                  //   height: 0,
+                  // ),
                   Container(
-                    child: Stack(
-                      children: <Widget>[
-                        Container(
-                          width: double.infinity,
-                          height: 40,
-                          margin: EdgeInsets.fromLTRB(25, 20, 25, 10),
-                          padding: EdgeInsets.only(bottom: 10),
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                                color: Color.fromARGB(255, 255, 255, 255),
-                                width: 1),
-                            borderRadius: BorderRadius.circular(10),
-                            shape: BoxShape.rectangle,
-                          ),
-                          child: TextField(
-                            style: TextStyle(color: Colors.white),
-                            decoration: InputDecoration(
-                              border: InputBorder.none,
-                              hintText: "",
-                              contentPadding: EdgeInsets.only(
-                                  left: 10, bottom: 10, right: 10, top: 0),
-                              hintStyle: TextStyle(
-                                  fontSize: 17.0,
-                                  color: Color.fromARGB(255, 0, 0, 0)),
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                            left: 40,
-                            top: 12,
-                            child: Container(
-                              padding:
-                                  EdgeInsets.only(bottom: 0, left: 5, right: 5),
-                              color: Colors.black,
-                              child: Text(
-                                'Add Tag here',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 12),
-                              ),
-                            )),
-                      ],
-                    ),
-                  ),
+                      // child: Stack(
+                      //   children: <Widget>[
+                      //     Container(
+                      //       width: double.infinity,
+                      //       height: 40,
+                      //       margin: EdgeInsets.fromLTRB(25, 20, 25, 10),
+                      //       padding: EdgeInsets.only(bottom: 10),
+                      //       decoration: BoxDecoration(
+                      //         border: Border.all(
+                      //             color: Color.fromARGB(255, 255, 255, 255),
+                      //             width: 1),
+                      //         borderRadius: BorderRadius.circular(10),
+                      //         shape: BoxShape.rectangle,
+                      //       ),
+                      //       child: TextField(
+                      //         style: TextStyle(color: Colors.white),
+                      //         decoration: InputDecoration(
+                      //           border: InputBorder.none,
+                      //           hintText: "",
+                      //           contentPadding: EdgeInsets.only(
+                      //               left: 10, bottom: 10, right: 10, top: 0),
+                      //           hintStyle: TextStyle(
+                      //               fontSize: 17.0,
+                      //               color: Color.fromARGB(255, 0, 0, 0)),
+                      //         ),
+                      //       ),
+                      //     ),
+                      //     // Positioned(
+                      //     //     left: 40,
+                      //     //     top: 12,
+                      //     //     child: Container(
+                      //     //       padding:
+                      //     //           EdgeInsets.only(bottom: 0, left: 5, right: 5),
+                      //     //       color: Colors.black,
+                      //     //       child: Text(
+                      //     //         'Add Tag here',
+                      //     //         style: TextStyle(
+                      //     //             color: Colors.white, fontSize: 12),
+                      //     //       ),
+                      //     //     )),
+                      //   ],
+                      // ),
+                      ),
 
                   SizedBox(
                     height: 10,
