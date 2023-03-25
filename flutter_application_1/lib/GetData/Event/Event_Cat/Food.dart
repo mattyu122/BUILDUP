@@ -23,7 +23,7 @@ class _EventFoodState extends State<EventFood> {
       child: Container(
         child: StreamBuilder<QuerySnapshot>(
           stream:
-              _service.post12.where('category', isEqualTo: 'Food').snapshots(),
+              _service.post.where('category', isEqualTo: 'Food').snapshots(),
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasError) {

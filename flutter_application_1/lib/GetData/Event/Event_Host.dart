@@ -25,7 +25,7 @@ class _HOSTEState extends State<HOSTE> {
     return Center(
       child: Container(
         child: StreamBuilder<QuerySnapshot>(
-          stream: _service.post12
+          stream: _service.post
               .where('hostUserId',
                   isEqualTo: FirebaseAuth.instance.currentUser!.uid)
               .snapshots(),

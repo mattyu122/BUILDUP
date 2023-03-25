@@ -23,7 +23,7 @@ class _EventMovieState extends State<EventMovie> {
       child: Container(
         child: StreamBuilder<QuerySnapshot>(
           stream:
-              _service.post12.where('category', isEqualTo: 'Movie').snapshots(),
+              _service.post.where('category', isEqualTo: 'Movie').snapshots(),
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasError) {

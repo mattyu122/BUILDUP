@@ -45,7 +45,7 @@ class _EventUPState extends State<EventUP> {
     return Center(
       child: Container(
         child: StreamBuilder<QuerySnapshot>(
-          stream: _service.post12
+          stream: _service.post
               .where('gender', isEqualTo: 'Male')
               .where('faculty', isEqualTo: currentUserInfo?.faculty)
               .where('interestEvent', isEqualTo: currentUserInfo?.interestEvent)

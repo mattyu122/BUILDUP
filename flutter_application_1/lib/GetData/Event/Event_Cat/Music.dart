@@ -23,7 +23,7 @@ class _EventMusicState extends State<EventMusic> {
       child: Container(
         child: StreamBuilder<QuerySnapshot>(
           stream:
-              _service.post12.where('category', isEqualTo: 'Music').snapshots(),
+              _service.post.where('category', isEqualTo: 'Music').snapshots(),
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasError) {

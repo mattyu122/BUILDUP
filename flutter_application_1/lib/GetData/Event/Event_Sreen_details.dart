@@ -26,7 +26,7 @@ class _EventSreenDetails extends State<EventSreenDetails> {
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
     var _provider = Provider.of<EpostProvider>(context);
-    _service.post12.doc(_provider.EpostData?.id).get().then((value) {
+    _service.post.doc(_provider.EpostData?.id).get().then((value) {
       setState(() {
         favL = value['fav'];
       });

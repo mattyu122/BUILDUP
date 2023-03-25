@@ -23,7 +23,7 @@ class _EventPartyState extends State<EventParty> {
       child: Container(
         child: StreamBuilder<QuerySnapshot>(
           stream:
-              _service.post12.where('category', isEqualTo: 'Party').snapshots(),
+              _service.post.where('category', isEqualTo: 'Party').snapshots(),
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasError) {
