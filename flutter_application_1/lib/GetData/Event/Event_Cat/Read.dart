@@ -23,7 +23,7 @@ class _EventReadState extends State<EventRead> {
       child: Container(
         child: StreamBuilder<QuerySnapshot>(
           stream:
-              _service.post12.where('category', isEqualTo: 'Read').snapshots(),
+              _service.post.where('category', isEqualTo: 'Read').snapshots(),
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasError) {

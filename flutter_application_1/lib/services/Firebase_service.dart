@@ -12,7 +12,7 @@ class FirebaseService {
   User? user = FirebaseAuth.instance.currentUser;
   CollectionReference cat = FirebaseFirestore.instance.collection('cat');
   CollectionReference Ccat = FirebaseFirestore.instance.collection('Ccat');
-  // CollectionReference post = FirebaseFirestore.instance.collection('EventPost');
+  CollectionReference post = FirebaseFirestore.instance.collection('EventPost');
   CollectionReference post12 =
       FirebaseFirestore.instance.collection('NewEPost');
   CollectionReference users = FirebaseFirestore.instance.collection('user');
@@ -89,27 +89,27 @@ class FirebaseService {
     }
   }
 
-  updateFavourite(_isliked, postId, context) {
-    if (_isliked) {
-      post12.doc(postId).update({
-        'fav': FieldValue.arrayUnion([user?.uid]),
-        'PostL': FieldValue.increment(1),
-      });
+  // updateFavourite(_isliked, postId, context) {
+  //   if (_isliked) {
+  //     post12.doc(postId).update({
+  //       'fav': FieldValue.arrayUnion([user?.uid]),
+  //       'PostL': FieldValue.increment(1),
+  //     });
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Added to my favourite')),
-      );
-    } else {
-      post12.doc(postId).update({
-        'fav': FieldValue.arrayRemove([user?.uid]),
-        'PostL': FieldValue.increment(-1),
-      });
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       const SnackBar(content: Text('Added to my favourite')),
+  //     );
+  //   } else {
+  //     post12.doc(postId).update({
+  //       'fav': FieldValue.arrayRemove([user?.uid]),
+  //       'PostL': FieldValue.increment(-1),
+  //     });
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Removed to my favourite')),
-      );
-    }
-  }
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       const SnackBar(content: Text('Removed to my favourite')),
+  //     );
+  //   }
+  // }
 
   updateFavourite2(_isliked1, postId1, context) {
     if (_isliked1) {
@@ -133,7 +133,7 @@ class FirebaseService {
 
   updateFavourite3(_isliked3, postId3, context) {
     if (_isliked3) {
-      post12.doc(postId3).update({
+      post.doc(postId3).update({
         'fav': FieldValue.arrayUnion([user?.uid]),
         'PostL': FieldValue.increment(1),
       });
@@ -142,7 +142,7 @@ class FirebaseService {
         const SnackBar(content: Text('Added to my favourite')),
       );
     } else {
-      post12.doc(postId3).update({
+      post.doc(postId3).update({
         'fav': FieldValue.arrayRemove([user?.uid]),
         'PostL': FieldValue.increment(-1),
       });

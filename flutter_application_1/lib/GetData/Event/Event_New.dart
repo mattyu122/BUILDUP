@@ -24,7 +24,7 @@ class _EventNEWState extends State<EventNEW> {
       child: Container(
         child: StreamBuilder<QuerySnapshot>(
           stream:
-              _service.post12.orderBy('createAt', descending: true).snapshots(),
+              _service.post.orderBy('createAt', descending: true).snapshots(),
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasError) {

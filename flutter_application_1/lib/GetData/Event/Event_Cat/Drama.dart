@@ -23,7 +23,7 @@ class _EventDramaState extends State<EventDrama> {
       child: Container(
         child: StreamBuilder<QuerySnapshot>(
           stream:
-              _service.post12.where('category', isEqualTo: 'Drama').snapshots(),
+              _service.post.where('category', isEqualTo: 'Drama').snapshots(),
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasError) {

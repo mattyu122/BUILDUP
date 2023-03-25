@@ -22,7 +22,7 @@ class _FAVState extends State<FAV> {
     return Center(
       child: Container(
         child: StreamBuilder<QuerySnapshot>(
-          stream: _service.post12
+          stream: _service.post
               .where('fav', arrayContains: _service.user?.uid)
               .snapshots(),
           builder:
