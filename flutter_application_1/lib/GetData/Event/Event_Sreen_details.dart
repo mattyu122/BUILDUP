@@ -300,7 +300,8 @@ class _EventSreenDetails extends State<EventSreenDetails> {
                             .createChatRoomForEventGroup(
                                 _provider.EpostData!.id,
                                 _provider.EpostData?['PostN'],
-                                _provider.EpostData?.id)
+                                _provider.EpostData?.id,
+                                _provider.EpostData?['PostP'])
                             .then((value) => {
                                   _service
                                       .deleteEventPost(_provider.EpostData!.id)

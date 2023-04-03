@@ -41,15 +41,15 @@ class FirebaseService {
   }
 
   //implement: add Contact() to every joined member's contact attribute in firebase and add notification
-  Future<void> createChatRoomForEventGroup(
-      String? chatRoomId, String chatRoomName, String? postId) async {
+  Future<void> createChatRoomForEventGroup(String? chatRoomId,
+      String chatRoomName, String? postId, String? imageUrl) async {
     final data = await post.doc(postId).get();
     final tmppost = EventPost.fromMap(data.data() as Map<String, dynamic>);
     final chatRoom = ContactUser(
         userName: chatRoomName,
         email: "",
-        icon: "",
         id: chatRoomId!,
+        icon: imageUrl!,
         groupChat: true);
 
     await users.doc(tmppost.hostUserId).update({
@@ -64,14 +64,14 @@ class FirebaseService {
     return;
   }
 
-  Future<void> createChatRoomForCourseGroup(
-      String? chatRoomId, String chatRoomName, String? postId) async {
+  Future<void> createChatRoomForCourseGroup(String? chatRoomId,
+      String chatRoomName, String? postId, String? imageUrl) async {
     final data = await Cpost.doc(postId).get();
     final tmppost = CoursePost.fromMap(data.data() as Map<String, dynamic>);
     final chatRoom = ContactUser(
         userName: chatRoomName,
         email: "",
-        icon: "",
+        icon: imageUrl!,
         id: chatRoomId!,
         groupChat: true);
 

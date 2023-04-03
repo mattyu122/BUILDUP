@@ -69,7 +69,7 @@ class _CourseCreateState extends State<CourseCreate> {
         ChostUserId: FirebaseAuth.instance.currentUser!.uid,
         PostD:
             dateController.text == "" ? "To be confirmed" : dateController.text,
-        PostP: blankPhoto,
+        PostP: profilePhotoURL == "" ? blankPhoto : profilePhotoURL,
         location: locationController.text == ""
             ? "To be confirmed"
             : locationController.text,
@@ -83,7 +83,6 @@ class _CourseCreateState extends State<CourseCreate> {
         joinedAccount: [],
         favc: [],
         createAt: DateTime.now().toString(),
-        PostImageUrl: profilePhotoURL,
       );
       await FirebaseFirestore.instance
           .collection('CoursePost')

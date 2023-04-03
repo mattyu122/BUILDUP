@@ -109,7 +109,7 @@ class _EventCreateState extends State<EventCreate> {
         hostUserId: FirebaseAuth.instance.currentUser!.uid,
         PostD:
             dateController.text == "" ? "To be confirmed" : dateController.text,
-        PostP: blankPhoto,
+        PostP: profilePhotoURL == "" ? blankPhoto : profilePhotoURL,
         price: priceController.text == ""
             ? 0.0
             : double.parse(priceController.text),
@@ -128,7 +128,6 @@ class _EventCreateState extends State<EventCreate> {
         joinedAccount: [],
         fav: [],
         createAt: DateTime.now().toString(),
-        PostImageUrl: profilePhotoURL,
       );
       await FirebaseFirestore.instance
           .collection('EventPost')

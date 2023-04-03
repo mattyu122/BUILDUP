@@ -20,7 +20,6 @@ class EventPost {
   final List<String>? joinedAccount;
   final String createAt;
   final List<String> fav;
-  final String? PostImageUrl;
   EventPost(
       {required this.PostN,
       required this.gender,
@@ -33,7 +32,6 @@ class EventPost {
       required this.hostUserId,
       this.eventType,
       this.faculty,
-      this.PostImageUrl,
       this.PostD,
       this.PostP,
       this.location,
@@ -60,7 +58,6 @@ class EventPost {
       'joinedNumber': joinedNumber,
       'createAt': createAt,
       'joinedAccount': joinedAccount!.map((i) => i.toString()).toList(),
-      'PostImageUrl': PostImageUrl,
       'fav': fav.map((i) => i.toString()).toList(),
     };
   }
@@ -83,6 +80,5 @@ class EventPost {
         joinedNumber = eventPostMap["joinedNumber"],
         createAt = eventPostMap['createAt'],
         joinedAccount = eventPostMap["joinedAccount"].cast<String>(),
-        PostImageUrl = eventPostMap["PostImageUrl"],
         fav = eventPostMap["fav"].cast<String>();
 }

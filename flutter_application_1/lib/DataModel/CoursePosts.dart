@@ -18,7 +18,6 @@ class CoursePost {
   final List<String>? joinedAccount;
   final String createAt;
   final List<String> favc;
-  final String? PostImageUrl;
   CoursePost(
       {required this.PostN,
       required this.faculty,
@@ -30,7 +29,6 @@ class CoursePost {
       required this.favc,
       required this.ChostUserId,
       this.groupMateTypes,
-      this.PostImageUrl,
       this.PostD,
       this.PostP,
       this.location,
@@ -43,7 +41,7 @@ class CoursePost {
       'faculty': faculty,
       'PostN': PostN,
       'PostD': PostD,
-      'hostUserId': ChostUserId,
+      'ChostUserId': ChostUserId,
       'groupMateTypes': groupMateTypes,
       'PostL': PostL,
       'PostP': PostP,
@@ -55,8 +53,7 @@ class CoursePost {
       'joinedNumber': joinedNumber,
       'createAt': createAt,
       'joinedAccount': joinedAccount!.map((i) => i.toString()).toList(),
-      'PostImageUrl': PostImageUrl,
-      'fav': favc.map((i) => i.toString()).toList(),
+      'favc': favc.map((i) => i.toString()).toList(),
     };
   }
 
@@ -67,7 +64,7 @@ class CoursePost {
         PostL = eventPostMap['PostL'],
         PostP = eventPostMap['PostP'],
         groupMateTypes = eventPostMap["groupMateTypes"],
-        ChostUserId = eventPostMap['hostUserId'],
+        ChostUserId = eventPostMap['ChostUserId'],
         category = eventPostMap['category'],
         description = eventPostMap['description'],
         hostName = eventPostMap["hostName"],
@@ -76,6 +73,5 @@ class CoursePost {
         joinedNumber = eventPostMap["joinedNumber"],
         createAt = eventPostMap['createAt'],
         joinedAccount = eventPostMap["joinedAccount"].cast<String>(),
-        PostImageUrl = eventPostMap["PostImageUrl"],
-        favc = eventPostMap["fav"].cast<String>();
+        favc = eventPostMap["favc"].cast<String>();
 }

@@ -258,7 +258,8 @@ class _CourseSreenDetailsState extends State<CourseSreenDetails> {
                             .createChatRoomForCourseGroup(
                                 _provider.CpostData!.id,
                                 _provider.CpostData?['PostN'],
-                                _provider.CpostData?.id)
+                                _provider.CpostData?.id,
+                                _provider.CpostData?['PostP'])
                             .then((value) => {
                                   _service.Cpost.doc(_provider.CpostData!.id)
                                       .delete()
