@@ -22,8 +22,7 @@ class _CourseLawState extends State<CourseLaw> {
     return Center(
       child: Container(
         child: StreamBuilder<QuerySnapshot>(
-          stream:
-              _service.Cpost.where('category', isEqualTo: 'Law').snapshots(),
+          stream: _service.Cpost.where('faculty', isEqualTo: 'Law').snapshots(),
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasError) {

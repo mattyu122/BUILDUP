@@ -22,7 +22,7 @@ class _CourseBusinessState extends State<CourseBusiness> {
     return Center(
       child: Container(
         child: StreamBuilder<QuerySnapshot>(
-          stream: _service.Cpost.where('category', isEqualTo: 'Business')
+          stream: _service.Cpost.where('faculty', isEqualTo: 'Business')
               .snapshots(),
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
