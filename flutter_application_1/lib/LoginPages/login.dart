@@ -48,7 +48,7 @@ class _LoginPageState extends State<LoginPage> {
               child: Column(children: [
                 SizedBox(height: 44),
                 Text(
-                  'B u l i d  U P',
+                  'B u i l d  U P',
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,

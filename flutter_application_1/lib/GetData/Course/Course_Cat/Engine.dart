@@ -23,7 +23,7 @@ class _CourseEngineState extends State<CourseEngine> {
       child: Container(
         child: StreamBuilder<QuerySnapshot>(
           stream:
-              _service.Cpost.where('category', isEqualTo: 'Engine').snapshots(),
+              _service.Cpost.where('faculty', isEqualTo: 'Engine').snapshots(),
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasError) {

@@ -47,7 +47,7 @@ class _ChatPageState extends State<ChatPage> {
         toolbarHeight: 56,
       ),
       extendBodyBehindAppBar: true,
-      backgroundColor: Color.fromARGB(255, 0, 0, 0),
+      backgroundColor: Color.fromARGB(255, 255, 255, 255),
       body: SafeArea(
         child: Column(
           children: [
@@ -55,7 +55,7 @@ class _ChatPageState extends State<ChatPage> {
               child: Container(
                 padding: const EdgeInsets.all(10),
                 decoration: const BoxDecoration(
-                  color: Colors.white,
+                  color: Color.fromARGB(255, 0, 0, 0),
                 ),
                 child: MessagesWidget(
                   chatroomId: chatroomId(FirebaseAuth.instance.currentUser!.uid,
