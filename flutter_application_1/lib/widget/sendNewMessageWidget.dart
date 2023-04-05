@@ -80,7 +80,7 @@ class _NewMessageWidgetState extends State<SendNewMessageWidget> {
               enableSuggestions: true,
               decoration: InputDecoration(
                 filled: true,
-                fillColor: Colors.grey[100],
+                fillColor: Color.fromARGB(255, 255, 255, 255),
                 border: OutlineInputBorder(
                   borderSide: const BorderSide(width: 4),
                   gapPadding: 3,

@@ -169,7 +169,7 @@ class _NavigationDrawer extends State<NavigationDrawer> {
   Widget Items(BuildContext context) => Container(
         padding: EdgeInsets.all(25),
         child: Wrap(
-          runSpacing: 15,
+          runSpacing: 25,
           children: [
             ListTile(
               leading: const Icon(
@@ -257,7 +257,7 @@ class _NavigationDrawer extends State<NavigationDrawer> {
                 color: Colors.black,
               ),
               title: const Text(
-                'Setting',
+                'Password Setting',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 15.0,
@@ -269,24 +269,24 @@ class _NavigationDrawer extends State<NavigationDrawer> {
                 ));
               },
             ),
-            ListTile(
-              leading: const Icon(
-                Icons.notifications_sharp,
-                color: Colors.black,
-              ),
-              title: const Text(
-                'Notifications',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 15.0,
-                ),
-              ),
-              onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => const NotiPage(),
-                ));
-              },
-            ),
+            // ListTile(
+            //   leading: const Icon(
+            //     Icons.notifications_sharp,
+            //     color: Colors.black,
+            //   ),
+            //   title: const Text(
+            //     'Notifications',
+            //     style: TextStyle(
+            //       fontWeight: FontWeight.bold,
+            //       fontSize: 15.0,
+            //     ),
+            //   ),
+            //   onTap: () {
+            //     Navigator.of(context).push(MaterialPageRoute(
+            //       builder: (context) => const NotiPage(),
+            //     ));
+            //   },
+            // ),
             ListTile(
               leading: const Icon(
                 Icons.logout,

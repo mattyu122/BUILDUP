@@ -25,7 +25,7 @@ class MessageWidget extends StatelessWidget {
           margin: const EdgeInsets.all(4),
           constraints: const BoxConstraints(maxWidth: 170),
           decoration: BoxDecoration(
-            color: const Color.fromARGB(255, 153, 145, 161),
+            color: Color.fromARGB(255, 255, 255, 255),
             borderRadius: isMe
                 ? borderRadius
                     .subtract(const BorderRadius.only(bottomRight: radius))
@@ -52,8 +52,7 @@ class MessageWidget extends StatelessWidget {
           Text(
             message,
             style: TextStyle(
-                color:
-                    isMe ? Color.fromARGB(255, 255, 255, 255) : Colors.white),
+                color: isMe ? Color.fromARGB(255, 0, 0, 0) : Colors.white),
             textAlign: isMe ? TextAlign.end : TextAlign.start,
           ),
         ],

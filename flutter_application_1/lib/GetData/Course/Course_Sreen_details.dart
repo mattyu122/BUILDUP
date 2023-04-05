@@ -108,7 +108,7 @@ class _CourseSreenDetailsState extends State<CourseSreenDetails> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: Container(
-                        height: 174,
+                        height: 146,
                         width: 395,
                         decoration: BoxDecoration(
                           color: Color.fromARGB(255, 255, 255, 255),
