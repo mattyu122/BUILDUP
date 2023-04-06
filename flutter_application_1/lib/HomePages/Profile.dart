@@ -142,7 +142,6 @@ class _ProfilePageState extends State<ProfilePage> {
           .collection("user")
           .doc(FirebaseAuth.instance.currentUser?.uid)
           .update({"profileImageUrl": profilePhotoURLtmp});
-      print("fldksjafldjsalkfjdsaf:\n");
       print(profilePhotoURL);
     } catch (e) {
       print('error occured');

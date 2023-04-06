@@ -120,7 +120,7 @@ class _NavigationDrawer extends State<NavigationDrawer> {
             });
     setState(() {
       username = currentUserInfo.userName;
-      profilePhotoURL = currentUserInfo.profileImageUrl!;
+      profilePhotoURL = currentUserInfo.profileImageUrl ?? "";
     }); //This line rebuilds the scaffold
   }
 

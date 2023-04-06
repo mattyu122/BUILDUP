@@ -281,7 +281,7 @@ class _RegisterPageState extends State<RegisterPage> {
         Navigator.push(
                 context, MaterialPageRoute(builder: (context) => VerifyEmail()))
             .then((_) {
-          if (!mounted) {
+          if (mounted) {
             Navigator.of(context).pop();
           }
         });

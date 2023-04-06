@@ -98,7 +98,8 @@ class FirstPage extends StatelessWidget {
         body: StreamBuilder<User?>(
             stream: FirebaseAuth.instance.authStateChanges(),
             builder: (context, snapshot) {
-              if (snapshot.hasData) {
+              if (snapshot.hasData &&
+                  FirebaseAuth.instance.currentUser!.emailVerified) {
                 print(snapshot.data);
                 return const HomePage();
               } else {
