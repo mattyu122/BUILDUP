@@ -8,6 +8,7 @@ import 'package:flutter_application_1/services/Firebase_service.dart';
 import 'package:provider/provider.dart';
 
 import '../../DataModel/userAccount.dart';
+import 'Course_Sreen_details.dart';
 
 class HOSTC extends StatefulWidget {
   const HOSTC({super.key});
@@ -66,7 +67,7 @@ class _HOSTCstate extends State<HOSTC> {
                                       onTap: () {
                                         _provider.getEpostDetails(doc);
                                         Navigator.pushNamed(
-                                            context, EventSreenDetails.id);
+                                            context, CourseSreenDetails.id);
                                       },
                                       child: Container(
                                         width: 400,
