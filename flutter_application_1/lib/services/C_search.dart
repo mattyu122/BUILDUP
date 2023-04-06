@@ -128,7 +128,7 @@ class CPostSearch {
                                             fontWeight: FontWeight.bold,
                                             fontSize: 17),
                                         overflow: TextOverflow.fade,
-                                        maxLines: 2,
+                                        maxLines: 3,
                                         textDirection: TextDirection.ltr,
                                       )
                                     ],
@@ -141,7 +141,7 @@ class CPostSearch {
                                             fontWeight: FontWeight.bold,
                                             fontSize: 17),
                                         overflow: TextOverflow.fade,
-                                        maxLines: 2,
+                                        maxLines: 3,
                                         textDirection: TextDirection.ltr,
                                       )
                                     ],
@@ -154,7 +154,7 @@ class CPostSearch {
                                             fontWeight: FontWeight.bold,
                                             fontSize: 17),
                                         overflow: TextOverflow.fade,
-                                        maxLines: 2,
+                                        maxLines: 3,
                                         textDirection: TextDirection.ltr,
                                       )
                                     ],
