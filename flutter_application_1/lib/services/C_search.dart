@@ -123,7 +123,7 @@ class CPostSearch {
                                   Column(
                                     children: [
                                       Text(
-                                        'Titel : ${cpost.title}',
+                                        'Title : ${cpost.title}',
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold,
                                             fontSize: 17),

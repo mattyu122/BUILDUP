@@ -120,7 +120,7 @@ class PostSearch {
                                   Column(
                                     children: [
                                       Text(
-                                        'Titel : ${epost.title}',
+                                        'Title : ${epost.title}',
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold,
                                             fontSize: 17),
