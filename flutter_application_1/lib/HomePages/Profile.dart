@@ -160,11 +160,11 @@ class _ProfilePageState extends State<ProfilePage> {
         'major': majorController.text.trim(),
         'introduction': introductionController.text.trim(),
         'gender': selected == 1
-            ? "MALE"
+            ? "Male"
             : selected == 2
-                ? "FEMALE"
+                ? "Female"
                 : selected == 3
-                    ? "OTHER"
+                    ? "Other"
                     : "",
         'tags': tagsController.text.trim(),
         'faculty': dropdownvalue1,
@@ -229,11 +229,11 @@ class _ProfilePageState extends State<ProfilePage> {
       majorController.text = currentUserInfo.major ?? '';
       introductionController.text = currentUserInfo.introduction ?? '';
       tagsController.text = currentUserInfo.tags ?? '';
-      selected = (currentUserInfo.gender == "MALE"
+      selected = (currentUserInfo.gender == "Male"
           ? 1
-          : currentUserInfo.gender == "FEMALE"
+          : currentUserInfo.gender == "Female"
               ? 2
-              : currentUserInfo.gender == "OTHER"
+              : currentUserInfo.gender == "Other"
                   ? 3
                   : 0);
       profilePhotoURL = currentUserInfo.profileImageUrl!;
@@ -597,15 +597,15 @@ class _ProfilePageState extends State<ProfilePage> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        customRadio("MALE", 1, Icons.male),
+                        customRadio("Male", 1, Icons.male),
                         SizedBox(
                           width: 20,
                         ),
-                        customRadio("FEMALE", 2, Icons.female),
+                        customRadio("Female", 2, Icons.female),
                         SizedBox(
                           width: 20,
                         ),
-                        customRadio("OTHER", 3, Icons.transgender)
+                        customRadio("Other", 3, Icons.transgender)
                       ],
                     ),
                   ),

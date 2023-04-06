@@ -129,12 +129,12 @@ class _ChatMenuWidget extends State<ChatMenuWidget> {
   //   );
   // }
   Widget buildChats(List<ContactUser> realuser) {
-    return ListView.separated(
-      separatorBuilder: (_, __) => const Divider(
-        height: 0.5,
-        color: Color.fromARGB(255, 58, 57, 58),
-        thickness: 1,
-      ),
+    return ListView.builder(
+      // separatorBuilder: (_, __) => const Divider(
+      //   height: 0.5,
+      //   color: Color.fromARGB(255, 58, 57, 58),
+      //   thickness: 1,
+      // ),
       physics: const BouncingScrollPhysics(),
       itemBuilder: (context, index) {
         return StreamBuilder<QuerySnapshot>(
@@ -161,22 +161,33 @@ class _ChatMenuWidget extends State<ChatMenuWidget> {
             return Container(
               margin: EdgeInsets.only(bottom: 5.0, top: 5.0),
               height: 65,
-              child: ListTile(
-                onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => ChatPage(user: realuser[index]),
-                  ));
-                },
-                title: Text(
-                  realuser[index].userName,
-                  style: TextStyle(
-                      fontSize: 18, color: Color.fromARGB(255, 238, 233, 233)),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(5.0),
                 ),
-                subtitle: Text(lastMessage,
+                child: ListTile(
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => ChatPage(user: realuser[index]),
+                    ));
+                  },
+                  title: Text(
+                    realuser[index].userName,
                     style: TextStyle(
-                        fontSize: 18,
-                        color: Color.fromARGB(255, 131, 130, 130))),
-                leading: UserAvatar(filename: realuser[index].icon),
+                        fontSize: 18, color: Color.fromARGB(255, 20, 20, 20)),
+                  ),
+                  subtitle: Text(lastMessage,
+                      style: TextStyle(
+                          fontSize: 18,
+                          color: Color.fromARGB(255, 131, 130, 130))),
+                  leading: Padding(
+                    padding: EdgeInsets.only(
+                        bottom:
+                            5.0), // Adjust this value to move the avatar up or down
+                    child: UserAvatar(filename: realuser[index].icon),
+                  ),
+                ),
               ),
             );
           },

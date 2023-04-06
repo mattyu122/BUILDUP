@@ -1,5 +1,8 @@
 // ignore_for_file: prefer_const_constructors, unnecessary_new
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SetPage extends StatefulWidget {
   const SetPage({super.key});
@@ -10,6 +13,9 @@ class SetPage extends StatefulWidget {
 
 class _SetPageState extends State<SetPage> {
   bool HidePassword = true;
+  TextEditingController oldPassword = TextEditingController();
+  TextEditingController newPassword = TextEditingController();
+  TextEditingController reEnternewPassword = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final urlImage = "https://cdn-icons-png.flaticon.com/512/6133/6133890.png";
@@ -98,6 +104,7 @@ class _SetPageState extends State<SetPage> {
                           borderRadius: BorderRadius.circular(10.0),
                         ),
                         child: TextField(
+                          controller: oldPassword,
                           decoration: InputDecoration(
                             suffixIcon: GestureDetector(
                               onTap: () {
@@ -151,6 +158,7 @@ class _SetPageState extends State<SetPage> {
                           borderRadius: BorderRadius.circular(10.0),
                         ),
                         child: TextField(
+                          controller: newPassword,
                           decoration: InputDecoration(
                             suffixIcon: GestureDetector(
                               onTap: () {
@@ -204,6 +212,7 @@ class _SetPageState extends State<SetPage> {
                           borderRadius: BorderRadius.circular(10.0),
                         ),
                         child: TextField(
+                          controller: reEnternewPassword,
                           decoration: InputDecoration(
                             suffixIcon: GestureDetector(
                               onTap: () {
@@ -262,5 +271,28 @@ class _SetPageState extends State<SetPage> {
         ),
       ),
     );
+  }
+
+  void _changePassword(
+      String oldPassword, String newPassword, String reEnterPassword) async {
+    try {
+      final user = FirebaseAuth.instance.currentUser!;
+      AuthCredential credential = EmailAuthProvider.credential(
+          email: user.email!, password: oldPassword);
+      await user.reauthenticateWithCredential(credential);
+
+      if (newPassword == reEnterPassword) {
+        user.updatePassword(newPassword).then((_) {
+          print("Successfully changed password");
+        });
+      } else {
+        print("New password doesn't match re-entered passwrod.");
+      }
+      return;
+    } on FirebaseAuthException catch (e) {
+      if (e.code == "wrong-password") {
+        print("wrong old password");
+      }
+    }
   }
 }

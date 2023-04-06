@@ -47,6 +47,7 @@ class EventPost {
       'faculty': faculty,
       'gender': gender,
       'hostUserId': hostUserId,
+      'eventType': eventType,
       'price': price,
       'PostL': PostL,
       'PostP': PostP,
