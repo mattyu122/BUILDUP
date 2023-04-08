@@ -219,10 +219,10 @@ class _ProfilePageState extends State<ProfilePage> {
         .then(
             (value) => {currentUserInfo = UserAccount.fromMap(value.data()!)});
 
-    final profilePhotoURLtmp = await FirebaseStorage.instance
-        .ref(FirebaseAuth.instance.currentUser!.uid)
-        .child('profilePhoto')
-        .getDownloadURL();
+    // final profilePhotoURLtmp = await FirebaseStorage.instance
+    //     .ref(FirebaseAuth.instance.currentUser!.uid)
+    //     .child('profilePhoto')
+    //     .getDownloadURL();
     setState(() {
       nameController.text = currentUserInfo.userName;
       majorController.text = currentUserInfo.major ?? '';

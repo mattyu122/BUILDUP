@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_application_1/GetData/Course/C_Provider.dart';
 import 'package:flutter_application_1/services/Firebase_service.dart';
 import 'package:flutter/material.dart';
@@ -244,41 +245,90 @@ class _CourseSreenDetailsState extends State<CourseSreenDetails> {
                 SizedBox(
                   height: 15,
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 0.0),
-                  child: Container(
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          fixedSize: const Size(395, 50),
-                          backgroundColor: Color.fromARGB(255, 181, 156, 255),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10))),
-                      onPressed: () async {
-                        await _service
-                            .createChatRoomForCourseGroup(
-                                _provider.CpostData!.id,
-                                _provider.CpostData?['PostN'],
-                                _provider.CpostData?.id,
-                                _provider.CpostData?['PostP'])
-                            .then((value) => {
-                                  _service.Cpost.doc(_provider.CpostData!.id)
-                                      .delete()
-                                });
-                        if (!mounted) return;
-                        Navigator.of(context).pop();
-                      },
-                      child: Text(
-                        'JOIN EVENT',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20.0,
+                if (_provider.CpostData?['ChostUserId'] !=
+                    FirebaseAuth.instance.currentUser!.uid) ...[
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 0.0),
+                    child: Container(
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            fixedSize: const Size(395, 50),
+                            backgroundColor: Color.fromARGB(255, 181, 156, 255),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10))),
+                        onPressed: _provider.CpostData?['joinedAccount']
+                                .contains(
+                                    FirebaseAuth.instance.currentUser!.uid)
+                            ? null
+                            : () async {
+                                final isJoinedEvent =
+                                    await _service.joinGroup(data?.id);
+                                if (isJoinedEvent == true && mounted) {
+                                  Navigator.pop(context);
+                                }
+                              },
+                        child: Text(
+                          _provider.CpostData?['joinedAccount'].contains(
+                                  FirebaseAuth.instance.currentUser!.uid)
+                              ? "JOINED"
+                              : "JOIN GROUP",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20.0,
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
+                ] else ...[
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 0.0),
+                    child: Container(
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            fixedSize: const Size(395, 50),
+                            backgroundColor: Color.fromARGB(255, 181, 156, 255),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10))),
+                        onPressed: () async {
+                          await _service
+                              .createChatRoomForCourseGroup(
+                                  _provider.CpostData!.id,
+                                  _provider.CpostData?['PostN'],
+                                  _provider.CpostData?.id,
+                                  _provider.CpostData?['PostP'])
+                              .then((value) => {
+                                    _service.deleteGroupPost(
+                                        _provider.CpostData!.id)
+                                  });
+                          //_service.deleteEventPost(_provider.EpostData!.id)
+
+                          // await _service.createChatRoomForEventGroup(
+                          //     _provider.EpostData!.id,
+                          //     _provider.EpostData?['PostN'],
+                          //     _provider.EpostData?.id);
+
+                          // await _service.post12
+                          //     .doc(_provider.EpostData!.id)
+                          //     .delete();
+                          if (!mounted) return;
+                          Navigator.of(context).pop();
+                        },
+                        child: Text(
+                          "START CAMPAIGN",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20.0,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ],
             ),
           ),

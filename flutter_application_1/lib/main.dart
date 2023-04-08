@@ -25,10 +25,9 @@ import 'package:flutter_application_1/GetData/Event/Provider.dart';
 import 'package:flutter_application_1/HomePages/Home.dart';
 import 'package:flutter_application_1/LoginPages/verifyEmail.dart';
 import './LoginPages/login.dart';
+import 'dart:async';
 import 'package:provider/provider.dart';
-
 import 'GetData/Course/C_Provider.dart';
-
 import 'GetData/Course/Course_CatSreen.dart';
 import 'GetData/Event/Event_Cat/Drama.dart';
 import 'GetData/Event/Event_Cat/FoodSreen.dart';
@@ -90,16 +89,46 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class FirstPage extends StatelessWidget {
+// class FirstPage extends StatelessWidget {
+//   const FirstPage({super.key});
+
+//   @override
+//   Widget build(BuildContext context) => Scaffold(
+//         body: StreamBuilder<User?>(
+//             stream: FirebaseAuth.instance.authStateChanges(),
+//             builder: (context, snapshot) {
+//               Timer(const Duration(seconds: 180), () {});
+//               if (snapshot.hasData &&
+//                   FirebaseAuth.instance.currentUser!.emailVerified) {
+//                 print(snapshot.data);
+//                 return const HomePage();
+//               } else {
+//                 return const LoginPage();
+//               }
+//             }),
+//       );
+// }
+class FirstPage extends StatefulWidget {
   const FirstPage({super.key});
 
   @override
+  _FirstPageState createState() => _FirstPageState();
+}
+
+class _FirstPageState extends State<FirstPage> {
+  Timer? timer;
+  bool emailverified = false;
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) => Scaffold(
-        body: StreamBuilder<User?>(
+        body: StreamBuilder(
             stream: FirebaseAuth.instance.authStateChanges(),
             builder: (context, snapshot) {
-              if (snapshot.hasData &&
-                  FirebaseAuth.instance.currentUser!.emailVerified) {
+              if (snapshot.hasData) {
                 print(snapshot.data);
                 return const HomePage();
               } else {
@@ -107,4 +136,14 @@ class FirstPage extends StatelessWidget {
               }
             }),
       );
+
+  Future checkEmailVerification() async {
+    await FirebaseAuth.instance.currentUser?.reload();
+    if (FirebaseAuth.instance.currentUser != null) {
+      if (FirebaseAuth.instance.currentUser!.emailVerified) {
+        emailverified = true;
+        timer?.cancel();
+      }
+    }
+  }
 }

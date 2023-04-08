@@ -25,12 +25,31 @@ class FirebaseService {
     await post.doc(postId).delete();
   }
 
+  Future<void> deleteGroupPost(String postId) async {
+    await Cpost.doc(postId).delete();
+  }
+
   Future<bool> joinEvent(String? postId) async {
     final data = await post.doc(postId).get();
     final tmppost = EventPost.fromMap(data.data() as Map<String, dynamic>);
     if (tmppost.joinedNumber < tmppost.expectedNumber) {
       await post.doc(postId).update({'joinedNumber': FieldValue.increment(1)});
       await post.doc(postId).update({
+        'joinedAccount': FieldValue.arrayUnion([user?.uid])
+      });
+      print("joined");
+      return true;
+    }
+
+    return false;
+  }
+
+  Future<bool> joinGroup(String? postId) async {
+    final data = await Cpost.doc(postId).get();
+    final tmppost = CoursePost.fromMap(data.data() as Map<String, dynamic>);
+    if (tmppost.joinedNumber < tmppost.expectedNumber) {
+      await Cpost.doc(postId).update({'joinedNumber': FieldValue.increment(1)});
+      await Cpost.doc(postId).update({
         'joinedAccount': FieldValue.arrayUnion([user?.uid])
       });
       print("joined");

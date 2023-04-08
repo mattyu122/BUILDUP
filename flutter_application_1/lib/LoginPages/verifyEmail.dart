@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_application_1/DataModel/userAccount.dart';
 // ignore_for_file: prefer_const_constructors, unnecessary_new
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -59,6 +60,11 @@ class _VerifyEmail extends State<VerifyEmail> {
   }
 
   Future createAccountInDataBase() async {
+    final profileDefaultPhotoURL = await FirebaseStorage.instance
+        .ref("profiledefault")
+        .child(
+            "pngtree-user-avatar-icon-profile-silhouette-png-image_5173766.png")
+        .getDownloadURL();
     final tmp = await FirebaseFirestore.instance
         .collection("user")
         .doc(FirebaseAuth.instance.currentUser?.uid)
@@ -73,12 +79,16 @@ class _VerifyEmail extends State<VerifyEmail> {
         id: "id",
         groupChat: false);
     UserAccount newUser = UserAccount(
-      id: FirebaseAuth.instance.currentUser?.uid,
-      userName: FirebaseAuth.instance.currentUser!.email.toString(),
-      email: FirebaseAuth.instance.currentUser!.email.toString(),
-      joinedEvent: [],
-      contactUser: [newContact],
-    );
+        id: FirebaseAuth.instance.currentUser?.uid,
+        userName: FirebaseAuth.instance.currentUser!.email.toString(),
+        email: FirebaseAuth.instance.currentUser!.email.toString(),
+        joinedEvent: [],
+        contactUser: [newContact],
+        profileImageUrl: profileDefaultPhotoURL,
+        faculty: "Select Your Faculty",
+        interestEvent: "Select Your Interest Event",
+        groupMateTag: "Select Your Tag");
+
     await FirebaseFirestore.instance
         .collection("user")
         .doc(FirebaseAuth.instance.currentUser?.uid)

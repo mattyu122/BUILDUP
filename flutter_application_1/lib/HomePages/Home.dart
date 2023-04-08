@@ -12,7 +12,7 @@ import 'package:flutter_application_1/HomePages/Event.dart';
 import 'package:flutter_application_1/HomePages/Profile.dart';
 import 'package:flutter_application_1/services/Firebase_service.dart';
 import 'package:flutter_application_1/DataModel/userAccount.dart';
-
+import 'dart:async';
 import '../DrawerPages/Favourites.dart';
 import '../DrawerPages/Host.dart';
 import '../DrawerPages/HostC.dart';
@@ -35,6 +35,8 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  Timer? timer;
+  bool emailVerified = false;
   final List<Widget> _pages = [
     Chatspage(),
     CoursePage(),
@@ -43,60 +45,78 @@ class _HomePageState extends State<HomePage> {
   ];
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    timer = Timer.periodic(Duration(seconds: 3), (timer) {
+      if (FirebaseAuth.instance.currentUser!.emailVerified) {
+        setState(() {
+          emailVerified = true;
+        });
+        timer.cancel();
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      // appBar: new AppBar(
-      //   toolbarHeight: 42,
-      //   backgroundColor: Color.fromARGB(255, 119, 20, 244),
-      // ),
-      body: _pages[_selecIndex],
-      drawer: NavigationDrawer(),
-      bottomNavigationBar: Container(
-        color: Colors.black,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-          child: GNav(
-              backgroundColor: Colors.black,
-              activeColor: Colors.white,
-              color: Colors.white,
-              tabBackgroundColor: Colors.grey.shade900,
-              gap: 8,
-              padding: EdgeInsets.all(15),
-              onTabChange: _navigate,
-              tabs: const [
-                GButton(
-                  icon: Icons.chat,
-                  text: 'Chat',
-                ),
+    if (emailVerified) {
+      return Scaffold(
+        // appBar: new AppBar(
+        //   toolbarHeight: 42,
+        //   backgroundColor: Color.fromARGB(255, 119, 20, 244),
+        // ),
+        body: _pages[_selecIndex],
+        drawer: NavigationDrawer(),
+        bottomNavigationBar: Container(
+          color: Colors.black,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+            child: GNav(
+                backgroundColor: Colors.black,
+                activeColor: Colors.white,
+                color: Colors.white,
+                tabBackgroundColor: Colors.grey.shade900,
+                gap: 8,
+                padding: EdgeInsets.all(15),
+                onTabChange: _navigate,
+                tabs: const [
+                  GButton(
+                    icon: Icons.chat,
+                    text: 'Chat',
+                  ),
 
-                // GButton(
-                //   icon: Icons.assignment_ind,
-                //   text: 'Host',
-                // ),
+                  // GButton(
+                  //   icon: Icons.assignment_ind,
+                  //   text: 'Host',
+                  // ),
 
-                GButton(
-                  icon: Icons.event_note,
-                  text: 'Course',
-                ),
+                  GButton(
+                    icon: Icons.event_note,
+                    text: 'Course',
+                  ),
 
-                GButton(
-                  //APPS
-                  //LAYERS
-                  icon: Icons.layers,
-                  text: 'Event',
-                ),
+                  GButton(
+                    //APPS
+                    //LAYERS
+                    icon: Icons.layers,
+                    text: 'Event',
+                  ),
 
-                GButton(
-                  //perm_contact_calendar
-                  //person
-                  //perm_identity
-                  icon: Icons.perm_contact_calendar,
-                  text: 'Profile',
-                ),
-              ]),
+                  GButton(
+                    //perm_contact_calendar
+                    //person
+                    //perm_identity
+                    icon: Icons.perm_contact_calendar,
+                    text: 'Profile',
+                  ),
+                ]),
+          ),
         ),
-      ),
-    );
+      );
+    } else {
+      return Text("Please verify your email first.");
+    }
   }
 }
 
