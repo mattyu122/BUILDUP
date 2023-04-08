@@ -286,32 +286,6 @@ class _RegisterPageState extends State<RegisterPage> {
           }
         });
       });
-      // await FirebaseFirestore.instance
-      //     .collection("user")
-      //     .doc(FirebaseAuth.instance.currentUser?.uid)
-      //     .get();
-
-      // ContactUser newContact = ContactUser(
-      //     userName: "matt1",
-      //     email: "matt1@gmail.com",
-      //     icon: "icon",
-      //     id: "id",
-      //     groupChat: false);
-      // UserAccount newUser = UserAccount(
-      //   id: FirebaseAuth.instance.currentUser?.uid,
-      //   userName: FirebaseAuth.instance.currentUser!.email.toString(),
-      //   email: FirebaseAuth.instance.currentUser!.email.toString(),
-      //   joinedEvent: [],
-      //   contactUser: [newContact],
-      //   pushNotificationToken: pushNotificationTokenString!,
-      // );
-      // await FirebaseFirestore.instance
-      //     .collection("user")
-      //     .doc(FirebaseAuth.instance.currentUser?.uid)
-      //     .set(newUser.toMap())
-      //     .then((value) => Navigator.push(context,
-      //             MaterialPageRoute(builder: (context) => VerifyEmail()))
-      //         .then((_) => Navigator.of(context).pop()));
     } on FirebaseAuthException catch (e) {
       print(e);
     }

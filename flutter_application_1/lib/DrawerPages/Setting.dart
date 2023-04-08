@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'dart:async';
 
 class SetPage extends StatefulWidget {
   const SetPage({super.key});
@@ -252,7 +253,8 @@ class _SetPageState extends State<SetPage> {
                           backgroundColor: Color.fromARGB(255, 181, 156, 255),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10))),
-                      onPressed: () {},
+                      onPressed: () => _changePassword(oldPassword.text,
+                          newPassword.text, reEnternewPassword.text),
                       child: Text(
                         'CHANGE PASSWORD',
                         textAlign: TextAlign.center,
@@ -283,6 +285,7 @@ class _SetPageState extends State<SetPage> {
 
       if (newPassword == reEnterPassword) {
         user.updatePassword(newPassword).then((_) {
+          _showReminderDialog();
           print("Successfully changed password");
         });
       } else {
@@ -294,5 +297,23 @@ class _SetPageState extends State<SetPage> {
         print("wrong old password");
       }
     }
+  }
+
+  void _showReminderDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Success!"),
+          content: Text("Successfully changed your password"),
+        );
+      },
+    );
+
+    // Automatically dismiss the dialog after 1 second
+    Timer(Duration(seconds: 1), () {
+      Navigator.of(context).pop();
+      Navigator.of(context).pop();
+    });
   }
 }

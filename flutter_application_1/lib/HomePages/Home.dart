@@ -115,7 +115,9 @@ class _HomePageState extends State<HomePage> {
         ),
       );
     } else {
-      return Text("Please verify your email first.");
+      return Center(
+        child: CircularProgressIndicator(),
+      );
     }
   }
 }
@@ -289,24 +291,6 @@ class _NavigationDrawer extends State<NavigationDrawer> {
                 ));
               },
             ),
-            // ListTile(
-            //   leading: const Icon(
-            //     Icons.notifications_sharp,
-            //     color: Colors.black,
-            //   ),
-            //   title: const Text(
-            //     'Notifications',
-            //     style: TextStyle(
-            //       fontWeight: FontWeight.bold,
-            //       fontSize: 15.0,
-            //     ),
-            //   ),
-            //   onTap: () {
-            //     Navigator.of(context).push(MaterialPageRoute(
-            //       builder: (context) => const NotiPage(),
-            //     ));
-            //   },
-            // ),
             ListTile(
               leading: const Icon(
                 Icons.logout,
