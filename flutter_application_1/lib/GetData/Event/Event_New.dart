@@ -80,7 +80,7 @@ class _EventNEWState extends State<EventNEW> {
                     Expanded(
                       child: ListView.builder(
                           scrollDirection: Axis.horizontal,
-                          itemCount: snapshot.data?.docs.length,
+                          itemCount: 5,
                           itemBuilder: (BuildContext context, int index) {
                             var doc = snapshot.data?.docs[index];
 
