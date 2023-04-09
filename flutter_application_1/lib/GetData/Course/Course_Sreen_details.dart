@@ -168,7 +168,7 @@ class _CourseSreenDetailsState extends State<CourseSreenDetails> {
                                 height: 7,
                               ),
                               Text(
-                                'Category: ${_provider.CpostData?['category']} ',
+                                'Category: ${_provider.CpostData?['faculty']} ',
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold,
