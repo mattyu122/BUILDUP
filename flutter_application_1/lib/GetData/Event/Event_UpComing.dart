@@ -48,7 +48,7 @@ class _EventUPState extends State<EventUP> {
           stream: _service.post
               .where('gender', isEqualTo: currentUserInfo?.gender)
               .where('faculty', isEqualTo: currentUserInfo?.faculty)
-              // .where('interestEvent', isEqualTo: currentUserInfo?.interestEvent)
+              .where('eventType', isEqualTo: currentUserInfo?.interestEvent)
               .snapshots(),
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {

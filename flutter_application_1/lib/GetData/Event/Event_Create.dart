@@ -510,7 +510,7 @@ class _EventCreateState extends State<EventCreate> {
                                   BorderSide(color: Colors.red, width: 2))),
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return 'Please complete required flied';
+                          return 'Please complete required field';
                         }
                         return null;
                       }),
@@ -548,7 +548,7 @@ class _EventCreateState extends State<EventCreate> {
                                   BorderSide(color: Colors.red, width: 2))),
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return 'Please complete required flied';
+                          return 'Please complete required field';
                         }
                         return null;
                       }),
@@ -583,7 +583,7 @@ class _EventCreateState extends State<EventCreate> {
                                   BorderSide(color: Colors.red, width: 2))),
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return 'Please complete required flied';
+                          return 'Please complete required field';
                         }
                         return null;
                       }),
@@ -618,7 +618,7 @@ class _EventCreateState extends State<EventCreate> {
                                   BorderSide(color: Colors.red, width: 2))),
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return 'Please complete required flied';
+                          return 'Please complete required field';
                         }
                         return null;
                       }),
@@ -688,7 +688,7 @@ class _EventCreateState extends State<EventCreate> {
                                   BorderSide(color: Colors.red, width: 2))),
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return 'Please complete required flied';
+                          return 'Please complete required field';
                         }
                         return null;
                       }),
@@ -749,7 +749,7 @@ class _EventCreateState extends State<EventCreate> {
                                           color: Colors.red, width: 2))),
                               validator: (value) {
                                 if (value!.isEmpty) {
-                                  return 'Please complete required flied';
+                                  return 'Please complete required field';
                                 }
                                 return null;
                               }),

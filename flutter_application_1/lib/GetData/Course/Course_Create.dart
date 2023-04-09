@@ -425,7 +425,7 @@ class _CourseCreateState extends State<CourseCreate> {
                                   BorderSide(color: Colors.red, width: 2))),
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return 'Please complete required flied';
+                          return 'Please complete required field';
                         }
                         return null;
                       }),
@@ -464,7 +464,7 @@ class _CourseCreateState extends State<CourseCreate> {
                                   BorderSide(color: Colors.red, width: 2))),
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return 'Please complete required flied';
+                          return 'Please complete required field';
                         }
                         return null;
                       }),
@@ -534,7 +534,7 @@ class _CourseCreateState extends State<CourseCreate> {
                                   BorderSide(color: Colors.red, width: 2))),
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return 'Please complete required flied';
+                          return 'Please complete required field';
                         }
                         return null;
                       }),
@@ -569,7 +569,7 @@ class _CourseCreateState extends State<CourseCreate> {
                                   BorderSide(color: Colors.red, width: 2))),
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return 'Please complete required flied';
+                          return 'Please complete required field';
                         }
                         return null;
                       }),
@@ -604,7 +604,7 @@ class _CourseCreateState extends State<CourseCreate> {
                                   BorderSide(color: Colors.red, width: 2))),
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return 'Please complete required flied';
+                          return 'Please complete required field';
                         }
                         return null;
                       }),
@@ -665,7 +665,7 @@ class _CourseCreateState extends State<CourseCreate> {
                                           color: Colors.red, width: 2))),
                               validator: (value) {
                                 if (value!.isEmpty) {
-                                  return 'Please complete required flied';
+                                  return 'Please complete required field';
                                 }
                                 return null;
                               }),
