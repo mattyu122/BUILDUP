@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/GetData/Event/Event_CatSreen.dart';
 import 'package:flutter_application_1/services/Firebase_service.dart';
 
-import 'package:flutter_application_1/GetData/Course/Course_Cat/ArtSreen.dart';
+import 'package:flutter_application_1/GetData/Course/Course_Cat/ArtsSreen.dart';
 import 'package:flutter_application_1/GetData/Course/Course_Cat/BusinessSreen.dart';
 import 'package:flutter_application_1/GetData/Course/Course_Cat/EducationSreen.dart';
 import 'package:flutter_application_1/GetData/Course/Course_Cat/EngineSreen.dart';

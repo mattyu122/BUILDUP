@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/GetData/Course/Course_Cat/Art.dart';
+import 'package:flutter_application_1/GetData/Course/Course_Cat/Arts.dart';
 
 class ArtSreen extends StatefulWidget {
   static const String id = 'ArtSreen-screen';
@@ -16,7 +16,7 @@ class _ArtSreenState extends State<ArtSreen> {
           iconTheme: IconThemeData(
               color: Color.fromARGB(255, 255, 255, 255), size: 30),
           centerTitle: true,
-          title: Text("ART",
+          title: Text("ARTS",
               style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
