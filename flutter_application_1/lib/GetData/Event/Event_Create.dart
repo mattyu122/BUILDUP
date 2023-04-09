@@ -521,9 +521,10 @@ class _EventCreateState extends State<EventCreate> {
                       controller: dateController,
                       style: TextStyle(fontSize: 17, color: Colors.white),
                       decoration: InputDecoration(
-                          hintStyle:
-                              TextStyle(fontSize: 17, color: Colors.white),
-                          hintText: 'Year/Month/Day',
+                          hintStyle: TextStyle(
+                              fontSize: 17,
+                              color: Color.fromARGB(255, 255, 0, 0)),
+                          hintText: 'Year/Month/Day eg: 2023/03/18',
                           labelText: 'Date',
                           labelStyle: TextStyle(
                             color: Colors.white,
