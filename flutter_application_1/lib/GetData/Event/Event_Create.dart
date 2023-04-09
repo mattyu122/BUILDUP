@@ -44,7 +44,7 @@ class _EventCreateState extends State<EventCreate> {
     'Science',
     'Engine',
     'Social Science',
-    'Art',
+    'Arts',
     'Business',
     'Education',
     'Law',

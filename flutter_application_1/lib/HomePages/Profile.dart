@@ -26,7 +26,7 @@ class _ProfilePageState extends State<ProfilePage> {
     'Science',
     'Engine',
     'Social Science',
-    'Art',
+    'Arts',
     'Business',
     'Education',
     'Law',
