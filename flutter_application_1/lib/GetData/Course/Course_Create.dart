@@ -76,7 +76,7 @@ class _CourseCreateState extends State<CourseCreate> {
         PostL: 0,
         description: descriptionController.text,
         PostN: titleController.text,
-        category: categoryController.text,
+        // category: categoryController.text,
         hostName: FirebaseAuth.instance.currentUser!.email!,
         expectedNumber: number,
         joinedNumber: 0,
@@ -538,41 +538,41 @@ class _CourseCreateState extends State<CourseCreate> {
                         }
                         return null;
                       }),
-                  SizedBox(
-                    height: 12,
-                  ),
-                  TextFormField(
-                      controller: categoryController,
-                      style: TextStyle(fontSize: 17, color: Colors.white),
-                      decoration: InputDecoration(
-                          labelText: 'Category',
-                          labelStyle: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(5)),
-                              borderSide: BorderSide(
-                                  color: Color.fromARGB(255, 181, 156, 255),
-                                  width: 2)),
-                          focusedBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(5)),
-                              borderSide: BorderSide(
-                                  color: Color.fromARGB(255, 181, 156, 255),
-                                  width: 2)),
-                          errorBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(5)),
-                              borderSide:
-                                  BorderSide(color: Colors.red, width: 2))),
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Please complete required field';
-                        }
-                        return null;
-                      }),
+                  // SizedBox(
+                  //   height: 12,
+                  // ),
+                  // TextFormField(
+                  //     controller: categoryController,
+                  //     style: TextStyle(fontSize: 17, color: Colors.white),
+                  //     decoration: InputDecoration(
+                  //         labelText: 'Category',
+                  //         labelStyle: TextStyle(
+                  //           color: Colors.white,
+                  //           fontWeight: FontWeight.bold,
+                  //         ),
+                  //         enabledBorder: OutlineInputBorder(
+                  //             borderRadius:
+                  //                 BorderRadius.all(Radius.circular(5)),
+                  //             borderSide: BorderSide(
+                  //                 color: Color.fromARGB(255, 181, 156, 255),
+                  //                 width: 2)),
+                  //         focusedBorder: OutlineInputBorder(
+                  //             borderRadius:
+                  //                 BorderRadius.all(Radius.circular(5)),
+                  //             borderSide: BorderSide(
+                  //                 color: Color.fromARGB(255, 181, 156, 255),
+                  //                 width: 2)),
+                  //         errorBorder: OutlineInputBorder(
+                  //             borderRadius:
+                  //                 BorderRadius.all(Radius.circular(5)),
+                  //             borderSide:
+                  //                 BorderSide(color: Colors.red, width: 2))),
+                  //     validator: (value) {
+                  //       if (value!.isEmpty) {
+                  //         return 'Please complete required field';
+                  //       }
+                  //       return null;
+                  //     }),
                   SizedBox(
                     height: 12,
                   ),

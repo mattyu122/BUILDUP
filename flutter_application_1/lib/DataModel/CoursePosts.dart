@@ -10,7 +10,7 @@ class CoursePost {
   final String? groupMateTypes;
   final String ChostUserId;
   final String? PostP;
-  final String category;
+  // final String category;
   final String? location;
   final String? description;
   final int expectedNumber;
@@ -21,7 +21,7 @@ class CoursePost {
   CoursePost(
       {required this.PostN,
       required this.faculty,
-      required this.category,
+      // required this.category,
       required this.hostName,
       required this.expectedNumber,
       required this.joinedNumber,
@@ -45,7 +45,7 @@ class CoursePost {
       'groupMateTypes': groupMateTypes,
       'PostL': PostL,
       'PostP': PostP,
-      'category': category,
+      // 'category': category,
       'description': description,
       'hostName': hostName,
       'location': location,
@@ -65,7 +65,7 @@ class CoursePost {
         PostP = eventPostMap['PostP'],
         groupMateTypes = eventPostMap["groupMateTypes"],
         ChostUserId = eventPostMap['ChostUserId'],
-        category = eventPostMap['category'],
+        // category = eventPostMap['category'],
         description = eventPostMap['description'],
         hostName = eventPostMap["hostName"],
         location = eventPostMap["location"],

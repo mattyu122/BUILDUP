@@ -160,32 +160,51 @@ class _ChatMenuWidget extends State<ChatMenuWidget> {
 
             return Container(
               margin: EdgeInsets.only(bottom: 5.0, top: 5.0),
-              height: 65,
+              height: 75,
               child: Container(
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(5.0),
+                  border:
+                      Border.all(color: Colors.grey, width: 1), // Outer border
                 ),
-                child: ListTile(
-                  onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => ChatPage(user: realuser[index]),
-                    ));
-                  },
-                  title: Text(
-                    realuser[index].userName,
-                    style: TextStyle(
-                        fontSize: 18, color: Color.fromARGB(255, 20, 20, 20)),
-                  ),
-                  subtitle: Text(lastMessage,
-                      style: TextStyle(
-                          fontSize: 18,
-                          color: Color.fromARGB(255, 131, 130, 130))),
-                  leading: Padding(
-                    padding: EdgeInsets.only(
-                        bottom:
-                            5.0), // Adjust this value to move the avatar up or down
-                    child: UserAvatar(filename: realuser[index].icon),
+                child: Padding(
+                  padding: EdgeInsets.all(4), // Space between the borders
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(4.0),
+                      border: Border.all(
+                          color: Colors.grey, width: 1), // Inner border
+                    ),
+                    child: ListTile(
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => ChatPage(user: realuser[index]),
+                        ));
+                      },
+                      title: Padding(
+                        padding: EdgeInsets.only(
+                            bottom: 8.0), // Move title up a little bit
+                        child: Text(
+                          realuser[index].userName,
+                          style: TextStyle(
+                              fontSize: 21,
+                              color: Color.fromARGB(255, 20, 20, 20)),
+                        ),
+                      ),
+                      subtitle: Text(lastMessage,
+                          style: TextStyle(
+                              fontSize: 15,
+                              color: Color.fromARGB(255, 131, 130, 130))),
+                      leading: Padding(
+                        padding: EdgeInsets.only(
+                            bottom:
+                                5.0), // Adjust this value to move the avatar up or down
+                        child: UserAvatar(filename: realuser[index].icon),
+                      ),
+                      trailing: Icon(Icons.arrow_forward_ios, size: 18.0),
+                    ),
                   ),
                 ),
               ),
