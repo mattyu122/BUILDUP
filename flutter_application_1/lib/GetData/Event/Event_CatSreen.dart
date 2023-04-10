@@ -310,7 +310,7 @@ class _EventCatSreenState extends State<EventCatSreen> {
                       Navigator.pushNamed(context, PartySreen.id);
                     },
                     leading: Image.network(
-                        'https://firebasestorage.googleapis.com/v0/b/buildup-7c651.appspot.com/o/categories%2FMusic.png?alt=media&token=b895e71d-6fa3-4af3-a8ba-4c576e6252b2',
+                        'https://firebasestorage.googleapis.com/v0/b/buildup-7c651.appspot.com/o/categories%2FParty.png?alt=media&token=98ef3c4a-4d68-4c39-9f3f-ca06fa235bda',
                         width: 60,
                         height: 100,
                         fit: BoxFit.fill),

@@ -32,7 +32,7 @@ class _CourseCreateState extends State<CourseCreate> {
     'Science',
     'Engine',
     'Social Science',
-    'Art',
+    'Arts',
     'Business',
     'Education',
     'Law',

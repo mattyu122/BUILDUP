@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter_application_1/GetData/Course/Course_Cat/ArtSreen.dart';
+import 'package:flutter_application_1/GetData/Course/Course_Cat/ArtsSreen.dart';
 import 'package:flutter_application_1/GetData/Course/Course_Cat/BusinessSreen.dart';
 import 'package:flutter_application_1/GetData/Course/Course_Cat/EducationSreen.dart';
 import 'package:flutter_application_1/GetData/Course/Course_Cat/EngineSreen.dart';
@@ -207,7 +207,7 @@ class _CourseCatSreenState extends State<CourseCatSreen> {
                         height: 100,
                         fit: BoxFit.fill),
                     title: Text(
-                      'TYPE : Art',
+                      'TYPE : Arts',
                       style: TextStyle(
                           fontSize: 18,
                           color: Color.fromARGB(255, 255, 255, 255)),

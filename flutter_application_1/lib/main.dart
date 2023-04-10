@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 //import 'package:flutter_application_1/HomePages/Home.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter_application_1/GetData/Course/Course_Cat/ArtSreen.dart';
+import 'package:flutter_application_1/GetData/Course/Course_Cat/ArtsSreen.dart';
 import 'package:flutter_application_1/GetData/Course/Course_Cat/EngineSreen.dart';
 import 'package:flutter_application_1/GetData/Course/Course_Cat/LawSreen.dart';
 import 'package:flutter_application_1/GetData/Course/Course_Cat/BusinessSreen.dart';
