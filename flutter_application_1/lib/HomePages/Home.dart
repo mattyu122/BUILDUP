@@ -35,6 +35,7 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  int timeCount = 0;
   Timer? timer;
   bool emailVerified = false;
   final List<Widget> _pages = [
@@ -49,12 +50,16 @@ class _HomePageState extends State<HomePage> {
     // TODO: implement initState
     super.initState();
     timer = Timer.periodic(Duration(seconds: 3), (timer) {
-      if (FirebaseAuth.instance.currentUser!.emailVerified) {
+      if (timeCount >= 20) {
+        timer.cancel();
+      } else if (FirebaseAuth.instance.currentUser != null &&
+          FirebaseAuth.instance.currentUser!.emailVerified) {
         setState(() {
           emailVerified = true;
         });
         timer.cancel();
       }
+      timeCount += 1;
     });
   }
 
@@ -116,8 +121,12 @@ class _HomePageState extends State<HomePage> {
       );
     } else {
       return Center(
-        child: CircularProgressIndicator(),
-      );
+          child: Column(
+        children: const [
+          CircularProgressIndicator(),
+          Text("Loading to Home Page")
+        ],
+      ));
     }
   }
 }

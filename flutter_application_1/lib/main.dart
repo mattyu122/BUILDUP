@@ -129,7 +129,6 @@ class _FirstPageState extends State<FirstPage> {
             stream: FirebaseAuth.instance.authStateChanges(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                print(snapshot.data);
                 return const HomePage();
               } else {
                 return const LoginPage();

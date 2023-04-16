@@ -19,13 +19,13 @@ class VerifyEmail extends StatefulWidget {
 
 class _VerifyEmail extends State<VerifyEmail> {
   bool emailVerified = false;
+  int timeCount = 0;
   Timer? timer;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     emailVerified = FirebaseAuth.instance.currentUser!.emailVerified;
-
     if (!emailVerified) {
       try {
         FirebaseAuth.instance.currentUser!.sendEmailVerification();
@@ -49,14 +49,20 @@ class _VerifyEmail extends State<VerifyEmail> {
     setState(() {
       emailVerified = FirebaseAuth.instance.currentUser!.emailVerified;
     });
-
-    if (emailVerified) {
+    if (timeCount >= 20 && !emailVerified) {
+      FirebaseAuth.instance.currentUser?.delete();
+      if (mounted) {
+        Navigator.of(context).pop();
+      }
+      timer?.cancel();
+    } else if (emailVerified) {
       await createAccountInDataBase();
       if (mounted) {
         Navigator.of(context).pop();
       }
       timer?.cancel();
     }
+    timeCount += 1;
   }
 
   Future createAccountInDataBase() async {
@@ -97,10 +103,28 @@ class _VerifyEmail extends State<VerifyEmail> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-        backgroundColor: Color.fromARGB(255, 255, 255, 255),
-        body: Center(
-          child: Text("Please verify your email to continue"),
-        ));
+    return Scaffold(
+      body: Center(
+        child: Padding(
+          padding: EdgeInsets.all(16),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                'Verify Your Email in 60 seconds',
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 16),
+              Text(
+                'Please check your inbox and click the verification link in the email we just sent you.',
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 16),
+              ),
+              SizedBox(height: 24),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
