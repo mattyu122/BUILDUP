@@ -54,7 +54,6 @@ class _NewMessageWidgetState extends State<SendNewMessageWidget> {
         receiverId: widget.contact.id,
         message: message,
         createdAt: DateTime.now().toString());
-    await Future.delayed(Duration(seconds: 5));
     if (mounted) {
       setState(() {
         textMessageController.clear();
