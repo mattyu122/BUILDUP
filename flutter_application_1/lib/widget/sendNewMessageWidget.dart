@@ -22,7 +22,7 @@ class _NewMessageWidgetState extends State<SendNewMessageWidget> {
   final textMessageController = TextEditingController();
   String message = '';
   late final String chatroomId;
-  late final String senderName;
+  String senderName = '';
   @override
   void initState() {
     // TODO: implement initState
