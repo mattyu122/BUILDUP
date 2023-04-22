@@ -51,8 +51,7 @@ class MessageWidget extends StatelessWidget {
           ),
           Text(
             message,
-            style: TextStyle(
-                color: isMe ? Color.fromARGB(255, 0, 0, 0) : Colors.white),
+            style: const TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
             textAlign: isMe ? TextAlign.end : TextAlign.start,
           ),
         ],
