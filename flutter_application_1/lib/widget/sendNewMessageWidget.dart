@@ -63,6 +63,7 @@ class _NewMessageWidgetState extends State<SendNewMessageWidget> {
         .set(newMessage.toMap());
 
     textMessageController.clear();
+    message = '';
   }
 
   @override
@@ -94,7 +95,7 @@ class _NewMessageWidgetState extends State<SendNewMessageWidget> {
           ),
           const SizedBox(width: 20),
           GestureDetector(
-            onTap: message.trim().isEmpty ? null : sendMessage,
+            onTap: message == '' ? null : sendMessage,
             child: Container(
               padding: const EdgeInsets.all(8),
               decoration: const BoxDecoration(
