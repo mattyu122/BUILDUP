@@ -47,12 +47,20 @@ class _NewMessageWidgetState extends State<SendNewMessageWidget> {
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .get();
     senderName = tmp.data()!['userName'];
+
     Message newMessage = Message(
         senderId: FirebaseAuth.instance.currentUser!.uid,
         senderName: senderName,
         receiverId: widget.contact.id,
         message: message,
         createdAt: DateTime.now().toString());
+    await Future.delayed(Duration(seconds: 5));
+    if (mounted) {
+      setState(() {
+        textMessageController.clear();
+        message = '';
+      });
+    }
 
     print(chatroomId);
     await FirebaseFirestore.instance
@@ -61,9 +69,6 @@ class _NewMessageWidgetState extends State<SendNewMessageWidget> {
         .collection(chatroomId)
         .doc(DateTime.now().toString()) //DateTime.now().toString()
         .set(newMessage.toMap());
-
-    textMessageController.clear();
-    message = '';
   }
 
   @override
@@ -95,14 +100,17 @@ class _NewMessageWidgetState extends State<SendNewMessageWidget> {
           ),
           const SizedBox(width: 20),
           GestureDetector(
-            onTap: message == '' ? null : sendMessage,
-            child: Container(
-              padding: const EdgeInsets.all(8),
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                color: Color.fromARGB(255, 96, 24, 212),
+            onTap: message.trim().isEmpty ? null : sendMessage,
+            child: Opacity(
+              opacity: message.trim().isEmpty ? 0.4 : 1,
+              child: Container(
+                padding: const EdgeInsets.all(8),
+                decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Color.fromARGB(255, 96, 24, 212),
+                ),
+                child: const Icon(Icons.send, color: Colors.white),
               ),
-              child: const Icon(Icons.send, color: Colors.white),
             ),
           ),
         ],
