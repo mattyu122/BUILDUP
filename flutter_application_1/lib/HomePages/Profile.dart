@@ -163,7 +163,7 @@ class _ProfilePageState extends State<ProfilePage> {
             : selected == 2
                 ? "Female"
                 : selected == 3
-                    ? "Other"
+                    ? "Male/Female/Other"
                     : "",
         'tags': tagsController.text.trim(),
         'faculty': dropdownvalue1,

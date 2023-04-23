@@ -122,8 +122,13 @@ class _HomePageState extends State<HomePage> {
     } else {
       return Center(
           child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: const [
           CircularProgressIndicator(),
+          SizedBox(
+            height: 20,
+          ),
           Text("Loading to Home Page")
         ],
       ));
