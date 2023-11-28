@@ -1,16 +1,8 @@
-# flutter_application_1
+# Build Up
 
-A new Flutter project.
+A social network application for students grouping with others, joining and hosting events. 
+Users are able to have a real-time chat room once the event or group is created.
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Frontend: Flutter
+Backend: Firebase cloud service
+Database: Firestore
